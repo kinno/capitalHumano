@@ -120,7 +120,7 @@ function cargaSubProyecto(){
   var idProyecto=$("#proyec").val();
    $.ajax({
                         type:'post',
-                        url:'funciones/buscaSubPry.php',
+                        url:'../catalogos/buscaSubPry.php',
                         data:
                         {
                           idProyecto:idProyecto
@@ -614,7 +614,7 @@ var IDPERFIL=0;
                                  
 			     {
 				 type:'post',
-			         url:'procesaSoli.php',
+			         url:'../catalogos/procesaSoli.php',
                                  processData: true,
 			         data:data
 				 ,
@@ -632,7 +632,7 @@ var IDPERFIL=0;
  
  function verPerfiles(){
      $("#ventanaPerfil").dialog("open");
-     var url="libs/listarPerfiles.php";
+     var url="../catalogos/listarPerfiles.php";
     $.post(url,{},function(responseText){
         $("#contDialog").html(responseText);
         //$("#entrevistasRegistradas").find("#listaEntrevistas").dataTable();
@@ -648,7 +648,7 @@ var IDPERFIL=0;
 			    $.ajax
 			({
 			    type:'post',
-			    url:'funciones/buscarperfil.php', //le mandanos el id y nos regresa un json
+			    url:'../catalogos/buscarperfil.php', //le mandanos el id y nos regresa un json
 			    data:{id:idPerfil},
 			    error: callback_error,
 			   success: recuperarPerfil  //funci�n para recuperar los campos de la base de datos
@@ -709,7 +709,7 @@ var IDPERFIL=0;
 function cargarSolicitudes(){
     
       var randomnumber=Math.random()*11;
-            $.post("libs/listarSolicitudes.php", {
+            $.post("../catalogos/listarSolicitudes.php", {
                 randomnumber:randomnumber
             }, function(data){
                 
@@ -722,7 +722,7 @@ function detallesSolicitud(id,SESION){
     $("#ventanaSolicitud").dialog("open");
     $.ajax({
                         type:'get',
-                        url:'solicitudes.php',
+                        url:'../catalogos/solicitudes.php',
                         data:
                         {
                           ids:id,
@@ -745,7 +745,7 @@ function aceptarSolicitud(){
             $.ajax(
             {
                  type:'get',
-                 url:'acciones.php',
+                 url:'../catalogos/acciones.php',
                  data:{
                  folio:folio,
                  accion:'A' //A de aceptar la solicitud
@@ -766,7 +766,7 @@ function rechazarSolicitud(){
             $.ajax(
             {
                  type:'get',
-                 url:'acciones.php',
+                 url:'../catalogos/acciones.php',
                  data:{
                  folio:folio,
                  accion:'R' //R rechazar la  solicitud

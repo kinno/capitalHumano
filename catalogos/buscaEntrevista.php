@@ -1,5 +1,5 @@
 <?php
-include_once("../libs/libvacantes.php");
+include_once("libvacantes.php");
 $vacantes = new Vacantes();
 $numVacante = $_POST['numVacante'];
 $dato = $vacantes->entrevista_especifica($numVacante);

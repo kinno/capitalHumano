@@ -4,7 +4,7 @@ $ban;
 session_start(); 
 if(ISSET($_SESSION['id'])){
     echo '<SCRIPT LANGUAGE="javascript">
-        location.href = "htdocs/home.php";
+        location.href = "contenido/home.php";
         </SCRIPT>';	
 }
 ?>

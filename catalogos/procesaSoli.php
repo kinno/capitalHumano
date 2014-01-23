@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("funciones/funciones.php");
+require_once("funciones.php");
 //Extraemos los valores enviados por Ajax
 /*
 print_r($_POST);

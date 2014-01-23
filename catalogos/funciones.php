@@ -1,5 +1,5 @@
 <?php
-include_once("../../libs/libs.php");
+include_once("../libs/libs.php");
 $funciones= new funciones;
 $funciones->conectar();
 
@@ -125,7 +125,7 @@ function altaSolicitud($folio, $idSubproyecto,$liderProyecto, $tipoVacante, $ini
                        $horaTrabajo,$fechaRequi, $lugarTrabajo, $salarioMin, $salarioMax, $otrasPercep,$idioma1, $pHablado1, $pEscrito1, $idioma2,$pHablado2,$pEscrito2, $idioma3, $pHablado3,$pEscrito3, $idioma4,$pHablado4,$pEscrito4, $viajar, $frecueViajar,
                        $comentario,$descActividades,$estatus,$usuario)
 {
-    include_once("../../libs/mail.php");
+    include_once("../libs/mail.php");
     $mail=new mail();
   
     mysql_query("SET NAMES 'utf8'");

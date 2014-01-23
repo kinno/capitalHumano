@@ -1,5 +1,5 @@
 <?php
-include_once("libs/libvacantes.php");
+include_once("../catalogos/libvacantes.php");
 $vacantes = new Vacantes();
 $datos = $vacantes->obtener_solicitudes();
 ?>
@@ -8,12 +8,12 @@ $datos = $vacantes->obtener_solicitudes();
 <head>
 	
 	<meta charset='utf8'>
-        <link type="text/css" href="../../css/demo_table.css" rel="stylesheet" /> 
-        <link type="text/css" href="../../css/jquery-ui-1.10.3.custom.css" rel="stylesheet" /> 
-        <script type="text/javascript" language="javascript" src="../../js/jquery.js"></script>
-        <script type="text/javascript" language="javascript" src="../../js/jquery-ui-1.10.3.custom.js"></script>
-        <script type="text/javascript" language="javascript" src="../../js/jquery.dataTables.js"></script>
-        <script type="text/javascript" language="javascript" src="../../js/funcionesVacantes.js"></script>
+        <link type="text/css" href="../css/demo_table.css" rel="stylesheet" /> 
+        <link type="text/css" href="../css/jquery-ui-1.10.3.custom.css" rel="stylesheet" /> 
+        <script type="text/javascript" language="javascript" src="../js/jquery.js"></script>
+        <script type="text/javascript" language="javascript" src="../js/jquery-ui-1.10.3.custom.js"></script>
+        <script type="text/javascript" language="javascript" src="../js/jquery.dataTables.js"></script>
+        <script type="text/javascript" language="javascript" src="../js/funcionesVacantes.js"></script>
 </head>
 <body>
     <div class="ui-widget">    

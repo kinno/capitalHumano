@@ -1,7 +1,7 @@
 <?php 
 
 
-include"../../libs/libs.php"; 
+include"../libs/libs.php"; 
 
  //SE EJECUTA LA CONSULTA
 class Vacantes{
@@ -14,10 +14,12 @@ class Vacantes{
     function obtener_solicitudes(){
         $funciones= new funciones;
         $funciones->conectar();
-        $sqlB="select *,nomProyecto,descPerfil from tblsolicitud sol 
-            join tblproyecto pry on sol.idProyecto=pry.idProyecto
-            join tblperfil pfl on sol.idPerfil = pfl.idPerfil
-        where sol.statSolici=2";
+        $sqlB="select * from tblsolicitud sol
+                    left join tblsubproyecto sub on sub.idSubproyecto = sol.idSubproyecto
+                    left join tblproyecto pry on pry.idProyecto = sub.idProyecto
+                    left join tblperfil pfl on sol.idPerfil = pfl.idPerfil
+                where sol.statSolici=2;";
+       
         $queryB=mysql_query($sqlB) or die(mysql_error());
         $datos = array();
             while($fila=  mysql_fetch_array($queryB)){
@@ -71,7 +73,10 @@ class Vacantes{
         $funciones->conectar();
         $query="select vac.folSolici,vac.numVacante,vac.idCandid,pry.nomProyecto,pfl.descPerfil,rec.nomReclut,rec.appReclut,rec.apmReclut,vac.compPerfil,vac.statVacante from tblvacante vac
                     join tblsolicitud sol on vac.folSolici = sol.folSolici
-                    join tblproyecto pry on sol.idProyecto = pry.idProyecto
+                    left join
+                     tblsubproyecto sub ON sub.idSubproyecto = sol.idSubproyecto
+                    left join
+                     tblproyecto pry ON pry.idProyecto = sub.idProyecto
                     join tblperfil pfl on sol.idPerfil = pfl.idPerfil
                     join tblreclut rec on vac.idReclutador = rec.idReclut";
         $result=  mysql_query($query) or die(mysql_error());

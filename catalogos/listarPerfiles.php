@@ -7,13 +7,13 @@ if($_SESSION['rol']==1||$_SESSION['rol']==2){
   }
   else
       $permisosEspeciales=0;
-include"../../libs/libs.php"; //cambio
+include"../libs/libs.php"; //cambio
 $funciones= new funciones;
 $funciones->conectar();
 $sqlB="select * from tblperfil where fecbaja is null";
 $queryB=mysql_query($sqlB) or die(mysql_error()); //SE EJECUTA LA CONSULTA
 ?>
-<script type="text/javascript" language="javascript" src="../../js/funcionesSolicitudes.js"></script>
+<script type="text/javascript" language="javascript" src="../js/funcionesSolicitudes.js"></script>
             <table cellpadding="0" cellspacing="0" border="0" class="perfiles" id="listaPerfil">
 
                             <thead>

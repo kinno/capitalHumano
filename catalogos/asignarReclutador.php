@@ -1,5 +1,5 @@
 <?php
-include_once("../libs/libvacantes.php");
+include_once("libvacantes.php");
 $vacantes = new Vacantes();
 $folSolici = $_POST['folSolici'];
 $idReclutador = $_POST['idReclutador'];

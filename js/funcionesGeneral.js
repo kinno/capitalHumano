@@ -89,11 +89,11 @@ function menu(mnu)
         break;    
       //Solicitudes -----------------------------
       case "CatSoli":
-        obj.innerHTML = "<object type='text/html' data='cat_solicitudes/web_solicitudes.php' class='homeobj' id='obj_inx'>";
+        obj.innerHTML = "<object type='text/html' data='web_solicitudes.php' class='homeobj' id='obj_inx'>";
         break;
       case "RSoli":
 	//if (sesion==1) {
-	     obj.innerHTML = "<object type='text/html' data='requisicion_de_personal/web_requisicionPersonal.php'' class='homeobj' id='obj_inx'>";
+	     obj.innerHTML = "<object type='text/html' data='web_requisicionPersonal.php'' class='homeobj' id='obj_inx'>";
 	//}else{
 	   // obj.innerHTML = "<object data='NoTienePermisos.html' class='homeobj' id='obj_inx'>";
 	    //alert("No tiene los permisos para ingresar a este módulo");
@@ -102,10 +102,10 @@ function menu(mnu)
         break;
       //Vacantes --------------------------------
       case "cVac":
-        obj.innerHTML = "<object type='text/html' data='vacantes/vacantes.php' class='homeobj' id='obj_inx'>";
+        obj.innerHTML = "<object type='text/html' data='vacantes.php' class='homeobj' id='obj_inx'>";
         break;
     case "rCan":
-        obj.innerHTML = "<object type='text/html' data='vacantes/vacanteCandidato.php' class='homeobj' id='obj_inx'>";
+        obj.innerHTML = "<object type='text/html' data='vacanteCandidato.php' class='homeobj' id='obj_inx'>";
         break;          
     
       case "reclu":

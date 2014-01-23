@@ -13,14 +13,14 @@ if($_SESSION['rol']==1||$_SESSION['rol']==2){
     <meta charset='utf8'>
     
          <!-- Librerias de jquery --> 
-        <script src="../../js/jquery.js" type="text/javascript"></script>
-        <script src="../../js/jquery-ui-1.10.3.custom.js" type="text/javascript"></script>
-        <script src="../../js/funcionesSolicitudes.js" type="text/javascript"></script>
-        <script type="text/javascript" language="javascript" src="../../js/jquery.dataTables.js"></script>
-        <script type="text/javascript" language="javascript" src="../../js/jquery.highlight.js"></script>
+        <script src="../js/jquery.js" type="text/javascript"></script>
+        <script src="../js/jquery-ui-1.10.3.custom.js" type="text/javascript"></script>
+        <script src="../js/funcionesSolicitudes.js" type="text/javascript"></script>
+        <script type="text/javascript" language="javascript" src="../js/jquery.dataTables.js"></script>
+        <script type="text/javascript" language="javascript" src="../js/jquery.highlight.js"></script>
              <!-- Hojas de estilo-->
-         <link href="../../css/jquery-ui-1.10.3.custom.css" rel="stylesheet">
-         <link type="text/css" href="../../css/demo_table.css" rel="stylesheet" />
+         <link href="../css/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+         <link type="text/css" href="../css/demo_table.css" rel="stylesheet" />
         <!-- Estilo para el "selectable"-->
         <style>
         #feedback { font-size: 12px; }
@@ -42,7 +42,7 @@ if($_SESSION['rol']==1||$_SESSION['rol']==2){
             <div class="datGenerales" id="datGenerales" class="acor">
                 <div class="folio" id="folio" style="text-align: right; ">
                   <?php
-                   include_once("funciones/funciones.php");
+                   include_once("../catalogos/funciones.php");
                    $folio=GenFolios();
                    echo '<label for="folio">Folio: </label>';
                    echo '<input type="text" id="folios" value='.$folio.' readonly="readonly" style="text-align:center" ></input>';
@@ -53,7 +53,7 @@ if($_SESSION['rol']==1||$_SESSION['rol']==2){
                         <td align="center">
                             <label>Proyecto:</label><br/>
                             <?php
-                               include_once("funciones/funciones.php");
+                               include_once("../catalogos/funciones.php");
                                $listaProyec=ComboProyecto(); //función que devuelve un combo box con los proyectos del catálogo de proyectos
                                echo $listaProyec;
                             ?><br>
