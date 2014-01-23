@@ -1,0 +1,79 @@
+*
+{
+	font-size: 10px;
+	font-family: Verdana;
+	color: #004488;
+	background: #FFFFFF;
+	background: transparent;
+}
+
+h1 {
+	font-size: 16px;
+	font-family: Verdana;
+	font-weight: bold;
+}
+
+table.grid{
+	width: 100%;
+	border: solid;
+	border-width: 1px;
+}
+	table.grid th {
+		background: #0080C0;
+		color: #FFFFFF;
+	}
+	
+	table.grid td {
+		background: transparent;
+		padding-right: 10px;
+	}
+	
+	table.grid tr:hover {
+		border-color: #FFCC33 !important;
+		background-color: #FFCC33 !important;
+		color: #FFFFFF !important;
+	}
+	
+.gridHeaders {
+	background: #0080C0;
+	color: #FFFFFF;
+}
+
+#nav {
+	overflow:hidden;
+}
+
+div.hlist {
+	text-align: center;
+}
+
+#nav li {
+	display: inline;
+	list-style-type: none;
+	margin-right: 20px;
+}
+
+#searcher {
+	text-align: center;
+	vertical-align: middle;
+}
+	#searcher input[type="text"]
+	{
+		width: 300px;
+		font-size: 1.25em;
+		border: solid;
+		border-width: 1px;
+		border-color: #1111CC;
+		background-color: #99aaaa;
+	}
+
+	#searcher input[type="submit"]
+	{
+		font-size: 1.25em;
+		border: solid;
+		border-width: 1px;
+		border-color: #1111CC;
+		background-color: #FFFFFF;
+	}
+
+

@@ -1,0 +1,193 @@
+@charset "utf-8";
+
+.titulo{
+    border: 1px none #E8E8E8;
+    color: #666666;
+    display: block;
+    float: left;
+    padding: 10px;
+    resize: none;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    background-color: #F4F4F4;
+  }
+
+    .texto{
+	border: 1px inset #CCCCCC;
+	color: #626262;
+	display: block;
+	float: left;
+	padding: 5px;
+	resize: none;
+	width: 200px;
+	-webkit-transition: all 0.1s linear;
+	-moz-transition: all 0.1s linear;
+	background-color: #FFFFFF;
+      }
+	  
+	.texto_largo{
+	border: 1px inset #CCCCCC;
+	color: #626262;
+	display: block;
+	float: left;
+	padding: 5px;
+	-webkit-transition: all 0.1s linear;
+	-moz-transition: all 0.1s linear;
+	background-color: #FFFFFF;
+      }
+
+  .texto:focus
+  {
+	border: 2px inset #33CCFF;
+	outline: none;
+	background-color: #FFFFFF;
+  }
+  
+   .texto_largo:focus
+  {
+	border: 2px inset #33CCFF;
+	outline: none;
+	background-color: #FFFFFF;
+  }
+  
+  
+  .textarea{
+	border: 1px inset #CCCCCC;
+	color: #626262;
+	display: block;
+	float: left;
+	padding: 0px;
+	-webkit-transition: all 0.1s linear;
+	-moz-transition: all 0.1s linear;
+	background-color: #FFFFFF;
+      }
+	  
+  .textarea:focus
+  {
+	border: 2px inset #33CCFF;
+	outline: none;
+	background-color: #FFFFFF;
+  }    
+
+
+  .sel:focus
+  {
+	font-family: Georgia;
+	font-size: 16px;
+	color: #000000;
+	background-color:#E8E8E8;
+	padding: 5px;
+	border: 2 inset #3CF;
+  } 
+  
+  
+  .sel
+  {
+	font-family: Georgia;
+	font-size: 16px;
+	color: #000000;
+	background-color:#FFFFFF;
+	padding: 5px;
+	border-top-width: 1;
+	border-right-width: 1;
+	border-bottom-width: 1;
+	border-left-width: 1;
+	border-top-style: inset;
+	border-right-style: inset;
+	border-bottom-style: inset;
+	border-left-style: inset;
+	resize: none;
+	width: 200px;
+  }
+  
+  .sel_fec:focus
+  {
+	font-family: Georgia;
+	font-size: 16px;
+	color: #000000;
+	background-color:#E8E8E8;
+	padding: 5px;
+	border: 2 inset #3CF;
+  }
+  
+  .sel_fec
+  {
+	font-family: Georgia;
+	font-size: 16px;
+	color: #000000;
+	background-color:#FFFFFF;
+	padding: 5px;
+	border-top-width: 1;
+	border-right-width: 1;
+	border-bottom-width: 1;
+	border-left-width: 1;
+	border-top-style: inset;
+	border-right-style: inset;
+	border-bottom-style: inset;
+	border-left-style: inset;
+	resize: none;
+	width: 60px;
+  }
+  
+  .sel_anio:focus
+  {
+	font-family: Georgia;
+	font-size: 16px;
+	color: #000000;
+	background-color:#E8E8E8;
+	padding: 5px;
+	border: 2 inset #3CF;
+  }
+  
+  .sel_anio
+  {
+	font-family: Georgia;
+	font-size: 16px;
+	color: #000000;
+	background-color:#FFFFFF;
+	padding: 5px;
+	border-top-width: 1;
+	border-right-width: 1;
+	border-bottom-width: 1;
+	border-left-width: 1;
+	border-top-style: inset;
+	border-right-style: inset;
+	border-bottom-style: inset;
+	border-left-style: inset;
+	resize: none;
+	width: 80px;
+  }
+  
+   .button {
+    font-family: san-serif;
+    font-size: 16px;
+    font-style: normal;
+    cursor: pointer;
+    cursor: hand;
+    color: #0000A0;
+    padding: 2px;    
+  }
+
+  .button:hover {
+    font-family: san-serif;
+    font-size: 16px;
+    font-style: normal;
+    cursor: pointer;
+    cursor: hand;
+    color: #FFFFFF;
+    background-color: #99B3FF;
+    font-weight: bold;
+  }
+  
+  .resultado{
+	color: #F00;
+	background-color: #FFF;
+  }
+  
+   .resultado_ok{
+	color: #000;
+	background-color: #FFF;
+  }
+  
