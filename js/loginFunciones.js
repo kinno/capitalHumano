@@ -12,7 +12,7 @@ function validaLogin(){
 	$.post(url,{usua:NomEntUsu,paswd:PwdEntUsu},function(responseText){
                 if(responseText=='bien')
                 {
-                    window.location='htdocs/home.php';                  
+                    window.location='contenido/home.php';                  
 
                 }
                 else

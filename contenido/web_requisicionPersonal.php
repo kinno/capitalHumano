@@ -14,12 +14,14 @@ if($_SESSION['rol']==1||$_SESSION['rol']==2){
     
          <!-- Librerias de jquery --> 
         <script src="../js/jquery.js" type="text/javascript"></script>
-        <script src="../js/jquery-ui-1.10.3.custom.js" type="text/javascript"></script>
-        <script src="../js/funcionesSolicitudes.js" type="text/javascript"></script>
+        <script src="../js/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
+        
         <script type="text/javascript" language="javascript" src="../js/jquery.dataTables.js"></script>
         <script type="text/javascript" language="javascript" src="../js/jquery.highlight.js"></script>
+        <script src="../js/funcionesSolicitudes.js" type="text/javascript"></script>
+
              <!-- Hojas de estilo-->
-         <link href="../css/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+         <link href="../css/jquery-ui-1.10.4.custom.css" rel="stylesheet">
          <link type="text/css" href="../css/demo_table.css" rel="stylesheet" />
         <!-- Estilo para el "selectable"-->
         <style>
@@ -42,7 +44,7 @@ if($_SESSION['rol']==1||$_SESSION['rol']==2){
             <div class="datGenerales" id="datGenerales" class="acor">
                 <div class="folio" id="folio" style="text-align: right; ">
                   <?php
-                   include_once("../catalogos/funciones.php");
+                   include_once("../funciones/funciones.php");
                    $folio=GenFolios();
                    echo '<label for="folio">Folio: </label>';
                    echo '<input type="text" id="folios" value='.$folio.' readonly="readonly" style="text-align:center" ></input>';
@@ -53,7 +55,7 @@ if($_SESSION['rol']==1||$_SESSION['rol']==2){
                         <td align="center">
                             <label>Proyecto:</label><br/>
                             <?php
-                               include_once("../catalogos/funciones.php");
+                               include_once("../funciones/funciones.php");
                                $listaProyec=ComboProyecto(); //función que devuelve un combo box con los proyectos del catálogo de proyectos
                                echo $listaProyec;
                             ?><br>
@@ -154,7 +156,25 @@ if($_SESSION['rol']==1||$_SESSION['rol']==2){
                                             Fecha de Requisición:
                                         </td>
                                         <td>
-                                            <input type="text" id="fechaRequi" readonly="readonly" value="<?php echo date("Y-m-d"); ?>"/>
+                                            <?php
+                                            /*
+                                             * METODO PARA CALCULAR LA FECHA DE SOLICITUD DE PERSONAL
+                                             * DESPUÉS DE LAS 6PM SE REGISTRA LA SOLICITUD UN DÍA DESPUÉS
+                                             * 
+                                             */
+                                            $horaActual=strtotime(date("H:i"));
+                                            $horaValida = strtotime("18:00");
+                                            if($horaActual>$horaValida){
+                                                echo 'Despues de ';
+                                                $fechaValida = strtotime ( '+1 day' , strtotime ( date("d-m-Y") ) ) ;
+                                                $fechaValida = date ( 'd-m-Y' , $fechaValida );
+                                            }
+                                            else{
+                                                echo 'Antes de';
+                                                $fechaValida = date("d-m-Y");
+                                            }
+                                            ?>
+                                            <input type="text" id="fechaRequi" readonly="readonly" value="<?php echo $fechaValida; ?>"/>
                                         </td>
                                     </tr>
                                     <tr>
@@ -295,15 +315,14 @@ if($_SESSION['rol']==1||$_SESSION['rol']==2){
         </form>
         <span>
                 <button name="Enviar" id="enviar" onclick="envia();"/>Enviar</button>
-                <button id="restablecer" onclick="resetFormulario();"/>Restablecer</button>
-                <button name="Cancelar" />Cancelar</button>
                 <div id='res'class="ui-widget" style="float: right;width:400px;"></div>
         </span>
 
 
-        <div id="ventanaPerfil" title="Seleccionar un perfil">
-                <div id="contDialog"></div>
-          </div>
+        
 </div>
+<div id="ventanaPerfil" title="Seleccionar un perfil">
+    <div id="contDialog" ></div>
+</div>  
 </body>
 </html>

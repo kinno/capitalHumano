@@ -23,7 +23,7 @@ if($_SESSION['rol']==1||$_SESSION['rol']==2){
         <script type="text/javascript" languaje="javascript" src="../../js/funcionesUsuario.js"></script>
         <script type="text/javascript" language="javascript" src="../../js/jquery.highlight.js"></script>
         
-        <link type="text/css" href="../../css/jquery-ui-1.10.3.custom.css" rel="stylesheet" />
+        <link type="text/css" href="../../css/jquery-ui-1.10.3.customblack.css" rel="stylesheet" />
 
 
 	<script type="text/javascript">

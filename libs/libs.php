@@ -143,35 +143,7 @@
 
 
 
-        function mail($correo,$mensaje)
- 	{
-		  $mail = new PHPMailer();
-		  $mail->IsSMTP();
-		  $mail->SMTPAuth = true;
-		  $mail->SMTPSecure = "ssl";
-		  $mail->Host = "smtp.gmail.com";
-		  $mail->Port = 465;
-		  $mail->Username = "gmm1610@gmail.com";
-		  $mail->Password = "upgenia123";
-		  //$mail->SMTPDebug = 1; //añadido para mostrar información detallada de error en caso de producirse
-		  $tabla="<html><body>
-		  <tabla border><tr><td>olas</td></tr></tabla>";
-		  $tabla.="</body></html>";
-		  $mail->From = "gmm1610@gmail.com";
-		  $mail->FromName = "RH Upgenia"; //nombre de quien lo mando
-		  $mail->Subject = "Registro de Usuario";  //subjet de mail
-		  $mail->MsgHTML(utf8_decode($mensaje));//body del mail
-		  $mail->AddAddress($correo, "Destinatario"); //a quien va dirijida
-		  $mail->IsHTML(true);
-			 
-		  if(!$mail->Send()) {
-		   
-		   return false;
-		  } else {
-		  return true;
-		  }  
- 		
- 	}
+        
  }
 
 

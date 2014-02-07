@@ -24,7 +24,7 @@ echo "Cannot Send Email ";
  */
 ?>
 <link type="text/css" href="css/style.css" rel="stylesheet" /> 
-<link type="text/css" href="css/jquery-ui-1.10.3.custom.css" rel="stylesheet" /> 
+<link type="text/css" href="css/jquery-ui-1.10.3.customblack.css" rel="stylesheet" /> 
 <table border="2" class="ui-widget" cellspacing="10" cellpadding="5">
     <tr>
         <td rowspan="2"><img src="images/upgenia.png" style="width:200px;"/></td><td><h1>Sistema capital humano</h1></td>

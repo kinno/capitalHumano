@@ -1,18 +1,18 @@
 <?php
-include_once("../catalogos/libvacantes.php");
+session_start();
+include_once("../funciones/libvacantes.php");
 $vacantes = new Vacantes();
-$datos = $vacantes->obtener_vacantes();
+$datos = $vacantes->obtener_vacantes($_SESSION['id']);
 ?>
 <!doctype html>
 <html lang='es'>
 <head>
 	
 	<meta charset='utf8'>
-	<link type="text/css" href="../css/demo_table.css" rel="stylesheet" /> 
-        <link type="text/css" href="../css/style.css" rel="stylesheet" /> 
-        <link type="text/css" href="../css/jquery-ui-1.10.3.custom.css" rel="stylesheet" /> 
+	 <link type="text/css" href="../css/demo_table.css" rel="stylesheet" /> 
+        <link type="text/css" href="../css/jquery-ui-1.10.4.custom.css" rel="stylesheet" /> 
 	<script type="text/javascript" language="javascript" src="../js/jquery.js"></script>
-        <script type="text/javascript" language="javascript" src="../js/jquery-ui-1.10.3.custom.js"></script>
+        <script type="text/javascript" language="javascript" src="../js/jquery-ui-1.10.4.custom.js"></script>
         <script type="text/javascript" language="javascript" src="../js/jquery.highlight.js"></script>
         <script type="text/javascript" language="javascript" src="../js/jquery.ui.timepicker.js"></script>
 	<script type="text/javascript" language="javascript" src="../js/jquery.dataTables.js"></script>
@@ -21,47 +21,34 @@ $datos = $vacantes->obtener_vacantes();
 	
 </head>
 <body>
-	
+<div class="ui-widget">	
 <p><span class='titulo' id='candidato'>Catálogo de Vacantes</span></p>
-<article id="contenido">
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="listaVacantes">
+<article id="contenido" class="ui-widget-content">
+    <table cellpadding="0" cellspacing="0" border="0" class="solicitudes" id="listaVacantes">
   
                 <thead >
-                    <tr>
+                    <tr class="head">
                         <th>Folio</th>
 			<th>Proyecto</th>
                         <th>Perfil</th>
-                        <th>Reclutador</th>
                         <th>Complejidad</th>
-			<th>Estatus</th>
-                        <th>Candidato</th>
-			<th>Acciones</th>
+                        <th>Fecha de Solicitud</th>
+                        <th>Vacantes</th>
+			<th>Candidatos</th>			
+			<th></th>
 
                     </tr>
                 </thead>
-                <tfoot>
-                    <tr>
-                       
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-			<th></th>
-                        <th></th>
-			
-                    </tr>
-                </tfoot>
                   <tbody>
                     <?php
 
                    $i=0;
                    foreach($datos as $v)
                    {
-                               echo '<tr align=center valign=top>';
+                               echo '<tr align="center" valign="top" id="vacante'.$i.'">';
                                echo '<td id="folio'.$i.'">'.$v['folSolici'].'<input type="hidden" id="numVacante'.$i.'" value="'.$v['numVacante'].'"></td>';
                                echo '<td id="proyecto'.$i.'">'.$v['nomProyecto'].'</td>';
                                echo '<td>'.$v['descPerfil'].'</td>';
-                               echo '<td id="reclutador'.$i.'">'.$v['nomReclut'].' '.$v['appReclut'].' '.$v['apmReclut'].'</td>'; 
                                echo '<td id="complejidad'.$i.'">';
                                     if($v['compPerfil']==1)
                                         echo 'Muy Bajo';
@@ -74,42 +61,20 @@ $datos = $vacantes->obtener_vacantes();
                                     if($v['compPerfil']==5)
                                         echo 'Complejo';
                                echo  '</td>';
-                               echo '<td>';
-                                    if($v['statVacante']==1)
-                                        echo 'Cerrada';
-                                    if($v['statVacante']==2)
-                                        echo 'Proceso';
-                                    if($v['statVacante']==3)
-                                        echo 'Cancelada';
-                                    
-                               echo '</td>';
-                               echo '<td id="candid'.$i.'">';
-                                    if($v['idCandid']==''){
-                                        echo '';
-                                    $botonAgenda='';
-                                    }
-                                    else{
-                                        $datosaux=$vacantes->nombre_candidato($v['idCandid']);
-                                        echo $datosaux;
-                                        $botonAgenda='<button id="agenda" title="Agendar Entrevista" onclick="agendaEntrevista('.$i.')" ></button>';
-                                    }
-                               echo '</td>';
-                               echo '<td id="acciones'.$i.'">';
-                                    $entrevistaRegistrada=$vacantes->con_entrevista($v['numVacante']);
-                                    if($entrevistaRegistrada=='si')
-                                        $botonEntrevista='<button id="ver" title="Ver Entrevistas" onclick="buscaEntrevistas('.$i.')" ></button>';
-                                    else
-                                        $botonEntrevista = '';
-                               echo '<button id="buscar" title="Buscar Candidato" onclick="abreBusqueda('.$i.')" ></button>'.$botonEntrevista.$botonAgenda.'</td>';
-                               echo '</tr>';                                               
+                                echo '<td>'.date("d-m-Y",  strtotime($v['fecalta'])).'</td>';
+                                echo '<td>'.$v['Vacantes'].'</td>';
+                               echo '<td>0</td>';
+                               echo '<td onclick="abrirPanel('.$i.');"><span class="up">Abrir</span></td>';
+                                                                      
                                $i++;
                         }
                     ?>
                 <tbody>
             </table>
 </article>
+</div>
 <!-- Dialog de ventana emergente -->
-<div id="dialog" title="Búsqueda de Candidato">
+<div id="dialog" title="Búsqueda de Candidato" style="display:none">
     <center>
     <div id="content">
         <input type="hidden" id="vacante"/>
@@ -120,10 +85,10 @@ $datos = $vacantes->obtener_vacantes();
         ?>
             <p><span class='titulo' id='candidato'>Catálogo de Candidatos</span></p>
                     <article id="contenido">
-                        <table cellpadding="0" cellspacing="0" border="0" class="display" id="listaCandidatos">
+                        <table cellpadding="0" cellspacing="0" border="0" class="solicitudes" id="listaCandidatos">
 
                                     <thead >
-                                        <tr>
+                                        <tr class="head">
                                             <th>Id</th>
                                             <th>Nombre</th>
                                             <th>Escolaridad</th>
@@ -156,10 +121,11 @@ $datos = $vacantes->obtener_vacantes();
         
     </div>
     </center>
+    <div id="resp"></div>
 </div>
-<div id="dialogEntrevista" title="Agendar Entrevista">
+<div id="dialogEntrevista" title="Agendar Entrevista" style="display:none;">
     <center>
-     <input type="hidden" id="nVacante">
+     <input type="text" id="idVacCand">
     <div id="content">
        
             <table cellpadding="5">
@@ -168,35 +134,19 @@ $datos = $vacantes->obtener_vacantes();
                     <td>Hora de Entrevista</td>
                     <td>Entrevistador</td>
                     <td>Lugar</td>
-                    <td>Comentario</td>
-                    <td>Estatus</td>
+                    
                 </tr>
                 <tr class="content">
                     <td><input type="fecha" id="fecha" name="fecha"/></td>
                     <td><input type="hora" id="hora" name="hora" /></td>
-                    <td><select id="entrevistador" name="entrevistador">
-                            <option value="-1"></option>
-                        <?php
-                            $entrevistador=$vacantes->obtener_reclutadores();
-                            foreach ($entrevistador as $e){
-                                echo '<option value="'.$e['idReclut'].'">'.$e[nomReclut].' '.$e['appReclut'].' '.$e['apmReclut'].'</option>';
-                            }
-                        ?>
-                        </select>       
+                    <td><input type="text" id="entrevistador" name="entrevistador"/></td>
+                    <td><?php
+                               include_once("../funciones/funciones.php");
+                              $lugar=  comboLugares();
+                            echo $lugar;
+                            ?>
                     </td>
-                    <td><input type="text" id="lugar" name="lugar"/></td>
-                    <td><textarea name="comentario" form="usrform" id="comentario" style="width:250px; height: 50px;"></textarea></td>
-                    <td>
-                        <select id="est">
-                            <option></option>
-                            <option value="F">Entrevista Confirmada</option>
-                            <option value="E">Pendiente de Realizar</option>
-                            <option value="D">Cancelada por el candidato</option>
-                            <option value="C">Cancelada por el Cliente</option>
-                            <option value="B">Entrevista Reagendada</option>
-                            <option value="A">Cancelada por RH</option>
-                        </select>
-                    </td>
+                    
                 </tr>
                 <tr>
                     <td colspan="4" id="resp"></td>
@@ -207,11 +157,32 @@ $datos = $vacantes->obtener_vacantes();
     </div>
     </center>
 </div>
-<div id="entrevistasRegistradas" title="Entrevistas Registradas">
+<div id="resultadoEntrevista" title="Resultado de entrevista" style="display:none">
     <center>
     <div id="content">
-       
-           
+       <input type="hidden" id="idEntr">
+       <table>
+           <tr>
+               <td>
+                   
+                   <?php
+                        include_once("../funciones/funciones.php");
+                        $est=  comboEstatus();
+                        echo $est;
+                    ?>
+               </td>
+           </tr>
+           <tr>
+               <td>
+                   <textarea id="observaciones" placeholder="Ingrese observaciones..." style="width:250px; height: 200px;"></textarea>
+               </td>
+           </tr>
+           <tr>
+               <td>
+                   <span id="regEntrev" onclick="registrarEstatus()">Registrar</span>
+               </td> 
+           </tr>
+       </table>
     </div>
     </center>
 </div>

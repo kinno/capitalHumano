@@ -3,11 +3,11 @@
  * 
  */
 $(document).tooltip().ready(function(){ 
-    $('#inicioD').datepicker({dateFormat: 'yy-mm-dd', 
+    $('#inicioD').datepicker({dateFormat: 'dd-mm-yy', 
                             onClose: function( selectedDate ) {
                             $( "#finalD" ).datepicker( "option", "minDate", selectedDate );
       }});
-    $("#finalD").datepicker({dateFormat: 'yy-mm-dd',
+    $("#finalD").datepicker({dateFormat: 'dd-mm-yy',
                             onClose: function( selectedDate ) {
                             $( "#inicioD" ).datepicker( "option", "maxDate", selectedDate );
       }});  
@@ -26,6 +26,7 @@ $(document).tooltip().ready(function(){
       }
     });
     
+    
     $( "#slider-range" ).slider({
       range: true,
       min: 00,
@@ -36,6 +37,7 @@ $(document).tooltip().ready(function(){
         $( "#horario" ).val( ui.values[ 0 ] + " hrs. - " + ui.values[ 1 ] + " hrs." );
       }
     });
+    
     $( "#horario" ).val( $( "#slider-range" ).slider( "values", 0 ) +
       " hrs. - " + $( "#slider-range" ).slider( "values", 1 ) + " hrs." );
       
@@ -65,14 +67,15 @@ $(document).tooltip().ready(function(){
         primary: "ui-icon-search",
       },text:false}).css({'height':'20px'});
   $('#listaPerfil').dataTable( {
-       //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
-    
-        "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
-        "bAutoWidth": false
-        
-        
+      "bAutoWidth": true,
+        "bLengthChange": false,
+        "bSortCellsTop": true,
+        "sPaginationType": "full_numbers",
+        "sScrollY": "480",
+        "bScrollCollapse": true,
+        "bJQueryUI": true
     } );
-   $
+   
     $("#listaPerfil_filter").find("input:first").attr("onkeyup","resalta()");
     
    
@@ -82,7 +85,7 @@ $(document).tooltip().ready(function(){
      autoOpen: false,
      modal:true,
      width:1300,
-     height:600,
+     height:650,
      resizable:false,
       show: {
         effect: "clip",
@@ -120,7 +123,7 @@ function cargaSubProyecto(){
   var idProyecto=$("#proyec").val();
    $.ajax({
                         type:'post',
-                        url:'../catalogos/buscaSubPry.php',
+                        url:'../controlador/buscaSubPry.php',
                         data:
                         {
                           idProyecto:idProyecto
@@ -614,7 +617,7 @@ var IDPERFIL=0;
                                  
 			     {
 				 type:'post',
-			         url:'../catalogos/procesaSoli.php',
+			         url:'../controlador/procesaSoli.php',
                                  processData: true,
 			         data:data
 				 ,
@@ -632,10 +635,9 @@ var IDPERFIL=0;
  
  function verPerfiles(){
      $("#ventanaPerfil").dialog("open");
-     var url="../catalogos/listarPerfiles.php";
+     var url="../controlador/listarPerfiles.php";
     $.post(url,{},function(responseText){
         $("#contDialog").html(responseText);
-        //$("#entrevistasRegistradas").find("#listaEntrevistas").dataTable();
         
     });
  }
@@ -648,7 +650,7 @@ var IDPERFIL=0;
 			    $.ajax
 			({
 			    type:'post',
-			    url:'../catalogos/buscarperfil.php', //le mandanos el id y nos regresa un json
+			    url:'../controlador/buscarperfil.php', //le mandanos el id y nos regresa un json
 			    data:{id:idPerfil},
 			    error: callback_error,
 			   success: recuperarPerfil  //funci�n para recuperar los campos de la base de datos
@@ -709,7 +711,7 @@ var IDPERFIL=0;
 function cargarSolicitudes(){
     
       var randomnumber=Math.random()*11;
-            $.post("../catalogos/listarSolicitudes.php", {
+            $.post("../controlador/listarSolicitudes.php", {
                 randomnumber:randomnumber
             }, function(data){
                 
@@ -722,7 +724,7 @@ function detallesSolicitud(id,SESION){
     $("#ventanaSolicitud").dialog("open");
     $.ajax({
                         type:'get',
-                        url:'../catalogos/solicitudes.php',
+                        url:'../controlador/solicitudes.php',
                         data:
                         {
                           ids:id,
@@ -745,7 +747,7 @@ function aceptarSolicitud(){
             $.ajax(
             {
                  type:'get',
-                 url:'../catalogos/acciones.php',
+                 url:'../controlador/acciones.php',
                  data:{
                  folio:folio,
                  accion:'A' //A de aceptar la solicitud
@@ -766,7 +768,7 @@ function rechazarSolicitud(){
             $.ajax(
             {
                  type:'get',
-                 url:'../catalogos/acciones.php',
+                 url:'../controlador/acciones.php',
                  data:{
                  folio:folio,
                  accion:'R' //R rechazar la  solicitud
@@ -784,7 +786,10 @@ function rechazarSolicitud(){
 function listarSolicitudes(){
     $('#listaSolicitud').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
         "sPaginationType": "full_numbers", //DAMOS FORMATO A LA PAGINACION(NUMEROS)
-        "bAutoWidth": true
+        "bAutoWidth": true,
+        
+        "bScrollCollapse": true,
+        "bJQueryUI": true
     } );
     $("body").addClass('ui-widget');
     $("#contenido").addClass('ui-widget');

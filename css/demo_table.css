@@ -34,7 +34,7 @@
 	position: relative;
 /*	min-height: 302px;*/
 	clear: both;
-	_height: 302px;
+	/*height: 302px;*/
 	zoom: 1; /* Feeling sorry for IE */
 }
 

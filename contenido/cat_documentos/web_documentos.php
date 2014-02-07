@@ -15,7 +15,7 @@ if($_SESSION['rol']==1||$_SESSION['rol']==2){
 
 <!--	<link type="text/css" href="css/style.css" rel="stylesheet" /> -->
 	<link type="text/css" href="css/demo_table.css" rel="stylesheet" /> 
-        <link type="text/css" href="../../css/jquery-ui-1.10.3.custom.css" rel="stylesheet" /> 
+        <link type="text/css" href="../../css/jquery-ui-1.10.3.customblack.css" rel="stylesheet" /> 
         <link type="text/css" href="../../css/style.css" rel="stylesheet" /> 
         <script type="text/javascript" language="javascript" src="../../js/jquery.js"></script>
         <script type="text/javascript" language="javascript" src="../../js/jquery-ui-1.10.3.custom.js"></script>

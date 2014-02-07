@@ -59,9 +59,9 @@ $.ajax({
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />  
 <title>R.H.</title>
 <script src="../js/jquery.js" type="text/javascript"></script>
-<script src="../js/jquery-ui-1.10.3.custom.js" type="text/javascript"></script>
+<script src="../js/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
 <script src="../js/funcionesGeneral.js" type="text/javascript"></script>
-<link href="../css/jquery-ui-1.10.3.custom.css" rel="stylesheet" type="text/css"/>
+<link href="../css/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css"/>
 
 <!--[if lt IE 9]>
 <!--<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>-->
@@ -115,7 +115,7 @@ $.ajax({
 	{
                 width: 98%;
                 margin-top: 0px;
-                height: 80%;
+                height: 90%;
                 margin-left: auto;
                 margin-right: auto;
                 

@@ -11,10 +11,10 @@
                 
                 $mensaje = $mensaje;
                 $asunto = $subject;
-                /*
+                
                 $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
                 $cabeceras .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-                $cabeceras .= "From: info@upgeniainfo.com";
+                $cabeceras .= "From: info@upgenia.com";
                 $cabeceras .= "Bcc: $correorh";
                 $cuerpo = ' 
                             <html>
@@ -38,7 +38,7 @@
                             <center>
                             <table border="2" class="ui-widget" cellspacing="10" cellpadding="5">
                                 <tr>
-                                    <td rowspan="2"><center><img src="http://localhost/recursosHumanos/images/upgenia.png" style="width:200px;"/></center></td><td><center><h1>Sistema capital humano</h1></center></td>
+                                    <td rowspan="2"><center><img src="http://localhost/capitalHumano/images/upgenia.png" style="width:200px;"/></center></td><td><center><h1>Sistema capital humano</h1></center></td>
                                 </tr>
                                 <tr>
                                     <td><center><h2>'.$asunto.'</h2></center></td>
@@ -62,7 +62,7 @@
                     //echo "error";
                     return false;
                 }
-                */
+                /*
                     $cuerpo = ' 
                             <html>
                             <link type="text/css" href="http://localhost/recursosHumanos/css/jquery-ui-1.10.3.custom.css" rel="stylesheet" /> 
@@ -123,7 +123,7 @@
 		  }
                   return true;
                       
-                     
+                    */ 
      }
  }
 ?>

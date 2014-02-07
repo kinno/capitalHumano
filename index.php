@@ -257,10 +257,10 @@ if(ISSET($_SESSION['id'])){
     }
   </style>
   <script src="js/jquery.js" type="text/javascript"></script>
-    <script src="js/jquery-ui-1.10.3.custom.js" type="text/javascript"></script>
+    <script src="js/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/loginFunciones.js"></script>
     <link rel="stylesheet" type="text/css" href="css/estilos.css">
-    <link href="css/jquery-ui-1.10.3.custom.css" rel="stylesheet" type="text/css">
+    <link href="css/jquery-ui-1.10.3.customblack.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 

@@ -1,5 +1,5 @@
 <?php
-include_once("../catalogos/libvacantes.php");
+include_once("../funciones/libvacantes.php");
 $vacantes = new Vacantes();
 $datos = $vacantes->obtener_solicitudes();
 ?>
@@ -9,16 +9,16 @@ $datos = $vacantes->obtener_solicitudes();
 	
 	<meta charset='utf8'>
         <link type="text/css" href="../css/demo_table.css" rel="stylesheet" /> 
-        <link type="text/css" href="../css/jquery-ui-1.10.3.custom.css" rel="stylesheet" /> 
+        <link type="text/css" href="../css/jquery-ui-1.10.4.custom.css" rel="stylesheet" /> 
         <script type="text/javascript" language="javascript" src="../js/jquery.js"></script>
-        <script type="text/javascript" language="javascript" src="../js/jquery-ui-1.10.3.custom.js"></script>
+        <script type="text/javascript" language="javascript" src="../js/jquery-ui-1.10.4.custom.js"></script>
         <script type="text/javascript" language="javascript" src="../js/jquery.dataTables.js"></script>
         <script type="text/javascript" language="javascript" src="../js/funcionesVacantes.js"></script>
 </head>
 <body>
-    <div class="ui-widget">    
+    <div id="panelVacantes" class="ui-widget">    
                 <p align="center"><span class='titulo ui-corner-all'>Catálogo de Solicitudes Aprobadas</span></p>
-                <article id="contenido" class="ui-widget-content">
+                <article id="contenido" style="border:none;" class="ui-widget-content">
                     <table cellpadding="0" cellspacing="0" border="0" class="solicitudes" id="listaSolicitud">
 
                                 <thead >
@@ -52,7 +52,8 @@ $datos = $vacantes->obtener_solicitudes();
                                                     $disabled='disabled';
                                                 else        
                                                     $disabled='';
-                                               echo '<td><input type="button" value="Asignar Reclutador" onclick="abreDialog('.$i.');" '.$disabled.'></td>';
+                                               echo '<td><input type="button" value="Asignar Reclutador" onclick="abreDialog('.$i.');" '.$disabled.'>
+                                                         <button id="modificar" onclick="abrePanel('.$i.');">Modificar</button></td>';
                                               /* $folio=$reg['folSolici'];
                                                $estatus=$reg['statSolici'];
                                                echo '<tr align=justify valign=top>';
@@ -76,6 +77,9 @@ $datos = $vacantes->obtener_solicitudes();
                             </table>
                 </article>
     </div>
+    <div id="panelModificacion" class="ui-widget" style="display:none;">
+        
+    </div>   
 <div id="dialog" title="Asignar Vacante a Reclutador">
     <center>
     <div id="content">
@@ -107,7 +111,7 @@ $datos = $vacantes->obtener_solicitudes();
                             <?php
                                 $datos3 = $vacantes->obtener_reclutadores();
                                 foreach($datos3 as $r){
-                                echo '<option value="'.$r['idReclut'].'">'.$r['nomReclut'].' '.$r['appReclut'].' '.$r['apmReclut'].'</option>';
+                                echo '<option value="'.$r['idUsuario'].'">'.$r['nomUsuario'].' '.$r['appUsuario'].' '.$r['apmUsuario'].'</option>';
                                    }
                             ?>
                         </select>
@@ -115,12 +119,30 @@ $datos = $vacantes->obtener_solicitudes();
                 </tr>
                 <tr>
                     <td colspan="4" id="resp"></td>
-                    <td><button id="asigna">Asignar</button></td>
+                    <td><button id="asigna">Asignar</button>
+                        
+                    </td>
                 </tr>
             </table>
         
     </div>
     </center>
 </div>
+<div id="panelcambiarReclutador" title="Cambiar reclutador">
+    <input type="hidden" id="f">
+    <input type="hidden" id="ranterior">
+    <label for="nvoReclutador">Cambiar vacantes a: </label>
+    <select id="nvoReclutador">
+        <option>Seleccione reclutador...</option>   
+    <?php
+        $datos3 = $vacantes->obtener_reclutadores();
+        foreach($datos3 as $r){
+        echo '<option value="'.$r['idUsuario'].'">'.$r['nomUsuario'].' '.$r['appUsuario'].' '.$r['apmUsuario'].'</option>';
+           }
+    ?>
+    </select>
+    <span class="guardar" onclick="cambiarReclutador();">Asignar</span>
+    <div id="msje"></div>
+</div>    
 </body>
 </html>

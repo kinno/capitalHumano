@@ -13,7 +13,7 @@ $datos=$vacantes->consulta_entrevista();
 <script type='text/javascript' src='../js/funcionesCalendario.js'></script>
 <script type='text/javascript' src='../js/jquery.qtip-1.0.0-rc3.js'></script>
 <link rel='stylesheet' type='text/css' href='../css/fullcalendar.css' />
-<link rel='stylesheet' type='text/css' href='../../css/jquery-ui-1.10.3.custom.css' />
+<link rel='stylesheet' type='text/css' href='../../css/jquery-ui-1.10.3.customblack.css' />
 
 </head>
 <body>
