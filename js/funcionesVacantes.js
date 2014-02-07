@@ -214,12 +214,15 @@ function abrirPanel(obj){
         $(this).find("div").toggle("blind",function(){$(this).parents(".activo:first").remove();},1000);
     });
    
-    $("#vacante"+obj).after("<tr class='activo'><td colspan='8'><input type='hidden' id='idVacante"+obj+"' class='vacante' /><div id='panel"+obj+"' class='ui-corner-all' style='padding-bottom:15px; height:250px;background-color:#CCCCCC;display:none;'></div></td></tr>");
+    $("#vacante"+obj).after("<tr class='activo'><td colspan='8'><input type='hidden' id='idVacante"+obj+"' class='vacante' /><div id='panel"+obj+"' class='ui-corner-all' style='padding-bottom:15px; height:250px;background-color:#FCFDFD;display:none;'></div></td></tr>");
      $("#idVacante"+obj).val($("#folio"+obj).text());
-    var url="../controlador/menuCandidatos.php";
+    var url="../controlador/menuCandidatosVC.php";
     $.post(url,{},
             function(responseText){
                 $("#panel"+obj).html(responseText);
+                $("#r1").button({icons:{primary:"ui-icon-person"}});
+                $("#r2").button({icons:{primary:"ui-icon-calendar"}});
+                $("#radios").buttonset();
             });
    
     $("#panel"+obj).toggle("fold",1000);
@@ -227,7 +230,7 @@ function abrirPanel(obj){
 
 function listarCandidatos(){
     folioVacante =$("#menuCandidatos").parent().parent().parent().children("input:first").val();
-     var url="../controlador/buscaCandidatos.php";
+     var url="../controlador/buscaCandidatosVC.php";
     $.post(url,{folioVacante:folioVacante},
             function(responseText){
                 $("#containerCandidatos").html(responseText);
@@ -286,7 +289,7 @@ function buscaEntrevistas(idVacCand){
     }else{
     $("#mnuEntrev").remove();
     $("#entrev").html('');
-     var url="../controlador/buscaEntrevista.php";
+     var url="../controlador/buscaEntrevistaVC.php";
     $.post(url,{idVacCand:idVacCand},
             function(responseText){
                 

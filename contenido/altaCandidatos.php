@@ -38,7 +38,7 @@
 
                                         </tr>
                                         <tr>
-                                            <td><input type="text" id="fechaNCandid" name="fechaNCandid"/></td>
+                                            <td><input type="text" id="fechaNCandid" name="fechaNCandid" placeholder="dd-mm-aaaa"/></td>
                                             <td><input type="text" id="nacionalidadCandid" name="nacionalidadCandid"/></td>
                                             <td>
                                                 <label for="generoCandidato">Género: </label>

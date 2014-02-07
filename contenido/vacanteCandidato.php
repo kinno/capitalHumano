@@ -9,7 +9,7 @@ $datos = $vacantes->obtener_vacantes($_SESSION['id']);
 <head>
 	
 	<meta charset='utf8'>
-	 <link type="text/css" href="../css/demo_table.css" rel="stylesheet" /> 
+	<link type="text/css" href="../css/demo_table.css" rel="stylesheet" /> 
         <link type="text/css" href="../css/jquery-ui-1.10.4.custom.css" rel="stylesheet" /> 
 	<script type="text/javascript" language="javascript" src="../js/jquery.js"></script>
         <script type="text/javascript" language="javascript" src="../js/jquery-ui-1.10.4.custom.js"></script>
@@ -23,7 +23,7 @@ $datos = $vacantes->obtener_vacantes($_SESSION['id']);
 <body>
 <div class="ui-widget">	
 <p><span class='titulo' id='candidato'>Catálogo de Vacantes</span></p>
-<article id="contenido" class="ui-widget-content">
+<article id="contenido" class="ui-widget-content" style="border:none;">
     <table cellpadding="0" cellspacing="0" border="0" class="solicitudes" id="listaVacantes">
   
                 <thead >
