@@ -30,6 +30,22 @@ function cargarCandidatos(){
                 $(".modificarCandidato").button({icons:{primary:"ui-icon-contact"}});
                 $(".detalleCandidato").button({icons:{primary:"ui-icon-clipboard"}});
                 $(".btnsDA").buttonset();
+                $("#detalleCandidato").dialog({
+                                            autoOpen: false,
+                                            modal:true,
+                                            width:1300,
+                                            height:650,
+                                            resizable:false,
+                                             show: {
+                                               effect: "clip",
+                                               duration: 500
+                                             },
+                                             hide: {
+                                               effect: "clip",
+                                               duration: 500
+                                             }  
+                                          });
+               //$(".ui-dialog-titlebar").css("height","10px");
                 
                  $('#listaCandidatos').dataTable( { 
                     "sPaginationType": "full_numbers",
@@ -37,6 +53,15 @@ function cargarCandidatos(){
                     "bAutoWidth": true
                     });
             });
+}
+
+function detalleCandidato(idCandid){
+    var url="../controlador/detallesCandidato.php";
+    $.post(url,{idCandid:idCandid},function(responseText){
+        $("#contenedor").html(responseText);
+    });
+    $("#detalleCandidato").dialog("open");
+    
 }
 
 function guardarCandidato(){

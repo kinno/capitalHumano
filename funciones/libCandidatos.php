@@ -35,19 +35,36 @@
         }
         
         function obtener_candidatos(){
-        $funciones = new funciones();
-        $funciones->conectar();
-        $query="select * from tblcandidato 
-                    left join tblcandidatoda on tblcandidatoda.idCandid = tblcandidato.idCandid
-                    left join tblcandidatodp on tblcandidatodp.idCandid = tblcandidato.idCandid
-                    left join tblcandidatoest on tblcandidatoest.idCandid = tblcandidato.idCandid;";
-        $result=  mysql_query($query) or die(mysql_error());
-        $datos=array();
-        while($fila=  mysql_fetch_array($result)){
-            $datos[]=$fila;
+            $funciones = new funciones();
+            $funciones->conectar();
+            $query="select * from tblcandidato 
+                        left join tblcandidatoda on tblcandidatoda.idCandid = tblcandidato.idCandid
+                        left join tblcandidatodp on tblcandidatodp.idCandid = tblcandidato.idCandid
+                        left join tblcandidatoest on tblcandidatoest.idCandid = tblcandidato.idCandid;";
+            $result=  mysql_query($query) or die(mysql_error());
+            $datos=array();
+            while($fila=  mysql_fetch_array($result)){
+                $datos[]=$fila;
+            }
+            return $datos;
         }
-        return $datos;
-    }
+        
+        function detalles_candidato($idCandid){
+            $funciones = new funciones();
+            $funciones->conectar();
+            $query="select * from tblcandidato 
+                        left join tblcandidatoda on tblcandidatoda.idCandid = tblcandidato.idCandid
+                        left join tblcandidatodp on tblcandidatodp.idCandid = tblcandidato.idCandid
+                        left join tblcandidatoest on tblcandidatoest.idCandid = tblcandidato.idCandid
+                    where tblcandidato.idCandid=".$idCandid;
+            echo $query;
+            /*$result=  mysql_query($query) or die(mysql_error());
+            $datos=array();
+            while($fila=  mysql_fetch_array($result)){
+                $datos[]=$fila;
+            }
+            return $datos;*/
+        }
         
         
     }

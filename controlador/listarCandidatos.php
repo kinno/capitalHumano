@@ -36,9 +36,8 @@ $datos=$candidato->obtener_candidatos();
         ?>
     <tbody>
 </table>
-<div class="overlay-container">
-  <center>
-    <div class="window-container zoomin" id='mostrar'>         
+<div id="detalleCandidato" class="overlay-container">
+    <div id="contenedor">
+        
     </div>
-  </center>
 </div>
