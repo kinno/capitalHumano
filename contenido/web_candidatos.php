@@ -14,13 +14,11 @@
 </head>
 <body>
     <div class="ui-widget">
-        <p align="center"><span class='titulo ui-corner-all' id='candidato'>Catálogo de candidatos</span></p>
+        <p align="center"><span class='titulo ui-corner-all'>Catálogo de candidatos</span></p>
         <article id="contenido" style="border:none;" class="ui-widget-content">
         </article>    
-    </div>
-    
-    <div id="nuevoCandidato" title="Agregar nuevo vacante">
-            <div id="contDialog"></div>
+        <article id="contenidoAgregar" style="display:none;border:none" class="ui-widget-content">
+        </article>    
     </div>
 </body>
 </html>

@@ -63,8 +63,9 @@ $datos = $vacantes->obtener_vacantes($_SESSION['id']);
                                echo  '</td>';
                                 echo '<td>'.date("d-m-Y",  strtotime($v['fecalta'])).'</td>';
                                 echo '<td>'.$v['Vacantes'].'</td>';
-                               echo '<td>0</td>';
-                               echo '<td onclick="abrirPanel('.$i.');"><span class="up">Abrir</span></td>';
+                                $numCandidatos = $vacantes->num_candidatosAsignados($v['folSolici']);
+                               echo '<td>'.$numCandidatos[0].'</td>';
+                               echo '<td class="btnsVac"><span style="height:15px;" class="modif" title="Modificar estatus de vacante"></span><span style="height:15px;" onclick="abrirPanel('.$i.');" class="up" title="Abrir panel"></span></td>';
                                                                       
                                $i++;
                         }
@@ -89,12 +90,12 @@ $datos = $vacantes->obtener_vacantes($_SESSION['id']);
 
                                     <thead >
                                         <tr class="head">
-                                            <th>Id</th>
+                                            
                                             <th>Nombre</th>
                                             <th>Escolaridad</th>
-                                            <th>Residencia</th>
                                             <th>Conocimientos</th>
-                                            <th colspan=2>Acciones</th>
+                                            <th>Último estatus</th>
+                                            <th>Acciones</th>
 
                                         </tr>
                                     </thead>
@@ -105,12 +106,12 @@ $datos = $vacantes->obtener_vacantes($_SESSION['id']);
                                        foreach($datos2 as $v)
                                        {
                                                    echo '<tr align=center valign=top>';
-                                                   echo '<td id="idCandid'.$i.'">'.$v['idCandid'].'</td>';
-                                                   echo '<td id="candidato'.$i.'">'.$v['nomCandid'].' '.$v['appCandid'].' '.$v['apmCandid'].'</td>';
-                                                   echo '<td id="escolaridad"'.$i.'>'.$v['idEscolar'].'</td>';
-                                                   echo '<td id="residencia'.$i.'"></td>'; 
-                                                   echo '<td id="conocimientos'.$i.'">'.$v['conCandid'].'</td>';
-                                                   echo '<td><button onclick="asignarCandidato('.$i.')">Registrar Candidato</button></td>';
+                                                  
+                                                   echo '<td id="candidato'.$i.'"><input type="hidden" id="idCandid'.$i.'" value="'.$v['idCandid'].'"/>'.$v['nomCandid'].' '.$v['appCandid'].' '.$v['apmCandid'].'</td>';
+                                                   echo '<td id="escolaridad"'.$i.'>'.$v['carreraCandid'].'</td>';
+                                                   echo '<td id="conocimientos'.$i.'">'.$v['conocimientosCandid'].'</td>';
+                                                   echo '<td id="conocimientos'.$i.'" style="background-color: '.$v['estatus'].'">'.$v['descEstatus'].'</td>';
+                                                   echo '<td class="btnsDA"><button class="detalleCandidato" onclick="detalleCandidato('.$v['idCandid'].')" style="height:20px; width:30px;" title="Ver detalle"><button class="asignarCandidato" onclick="asignarCandidato('.$i.')" style="height:20px; width:30px;" title="Asignar candidato"></button></td>';
                                                    echo '</tr>';
                                                    $i++;
                                             }
@@ -125,7 +126,7 @@ $datos = $vacantes->obtener_vacantes($_SESSION['id']);
 </div>
 <div id="dialogEntrevista" title="Agendar Entrevista" style="display:none;">
     <center>
-     <input type="text" id="idVacCand">
+     <input type="hidden" id="idVacCand">
     <div id="content">
        
             <table cellpadding="5">

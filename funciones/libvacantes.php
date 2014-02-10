@@ -29,6 +29,21 @@ class Vacantes{
             return $datos;
     }
     
+    function obtener_candidatos(){
+        $funciones = new funciones();
+        $funciones->conectar();
+        $query="select * from tblcandidato 
+                    left join tblcandidatoda on tblcandidatoda.idCandid = tblcandidato.idCandid
+                    left join tblcandidatodp on tblcandidatodp.idCandid = tblcandidato.idCandid
+                    left join tblcandidatoest on tblcandidatoest.idCandid = tblcandidato.idCandid;";
+        $result=  mysql_query($query) or die(mysql_error());
+        $datos=array();
+        while($fila=  mysql_fetch_array($result)){
+            $datos[]=$fila;
+        }
+        return $datos;
+    }
+    
     function obtener_numasignadas($folio){
         $funciones = new funciones();
         $funciones->conectar();
@@ -186,6 +201,7 @@ class Vacantes{
         $funciones->conectar();
         $query="SELECT * FROM relvaccand
                     left join tblcandidato on tblcandidato.idCandid = relvaccand.idCandid
+                    left join tblcandidatodp on tblcandidatodp.idCandid = tblcandidato.idCandid
                 WHERE relvaccand.folSolici = ".$folio;
         $result=  mysql_query($query) or die(mysql_error());
             $datos=array();
@@ -195,18 +211,20 @@ class Vacantes{
             return $datos;
     }
     
-    function obtener_candidatos(){
+    function num_candidatosAsignados($folio){
         $funciones = new funciones();
         $funciones->conectar();
-        $query="select * from tblcandidato";
+        $query="SELECT count(folSolici) FROM bdrh.relvaccand
+                    where folSolici = ".$folio." and fecbaja is null;";
         $result=  mysql_query($query) or die(mysql_error());
-        $datos=array();
-        while($fila=  mysql_fetch_array($result)){
-            $datos[]=$fila;
-        }
-        return $datos;
+            
+            while($fila=  mysql_fetch_array($result)){
+                $datos=$fila;
+            }
+            return $datos;
     }
     
+
     function nombre_candidato($idCandid){
         $funciones = new funciones();
         $funciones->conectar();

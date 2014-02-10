@@ -113,7 +113,7 @@ function menu(mnu)
         break;     
       //Candidatos ------------------------------
       case "cand":
-        obj.innerHTML = "<object type='text/html' data='cadidatos/web_candidatos.php' class='homeobj' id='obj_inx'>";
+        obj.innerHTML = "<object type='text/html' data='web_candidatos.php' class='homeobj' id='obj_inx'>";
         break;          
       //busqueda de candidatos
       case "busCandi":

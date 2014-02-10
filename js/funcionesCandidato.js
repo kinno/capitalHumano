@@ -1,18 +1,41 @@
 $(document).tooltip().ready(function(){
-    $('#acordeon').accordion({
-         heightStyle: "content"
-        });
-     $("#enviar").button({icons:{primary:"ui-icon-disk"}});   
+     
 });
+
+function abrirpanelAgregar(){
+    $.post("../contenido/altaCandidatos.php",{},function(data){
+              $("#contenidoAgregar").html(data);
+               $("#contenidoAgregar").find('#acordeon').accordion({
+                    heightStyle: "content"
+                   });
+               $("#enviar").button({icons:{primary:"ui-icon-disk"}}); 
+               $("#back").button({icons:{primary:"ui-icon-arrowthick-1-w"}}); 
+               $("#btnsC").buttonset();
+              $("#contenido").toggle('slide',function(){
+                  $("#contenidoAgregar").toggle('slide');
+              });
+            });
+}
+
+function abrirpanelListar(){
+    $("#contenidoAgregar").toggle('slide',function(){
+                  $("#contenido").toggle('slide');
+              });
+}
 
 function cargarCandidatos(){
      $.post("../controlador/listarCandidatos.php",{},function(data){
               $("#contenido").html(data);
-             $('#listaCand').dataTable( { 
+                $("#nuevoCandidato").button({icons:{primary:"ui-icon-person"}});
+                $(".modificarCandidato").button({icons:{primary:"ui-icon-contact"}});
+                $(".detalleCandidato").button({icons:{primary:"ui-icon-clipboard"}});
+                $(".btnsDA").buttonset();
+                
+                 $('#listaCandidatos').dataTable( { 
                     "sPaginationType": "full_numbers",
                     "bJQueryUI": true,
                     "bAutoWidth": true
-                });
+                    });
             });
 }
 

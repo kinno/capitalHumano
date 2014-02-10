@@ -1,4 +1,4 @@
-<!doctype html>
+<!--<!doctype html>
 <html>
 <head>
       <meta charset='utf8'>
@@ -10,6 +10,7 @@
         <script type="text/javascript" language="javascript" src="../js/funcionesCandidato.js"></script>
 </head>
 <body>
+-->
         <div id="conteiner" class="ui-widget">    
             <p align=center><span class='titulo ui-corner-all'>Registro de candidato</span></p> 
             <center>
@@ -208,19 +209,47 @@
                         </tr>
                     </table>
                       
+                </div>
+                
+                <h3>Estatus</h3>  
+                <div id="estatusCandidato">
+                    
+                    <table>
+                        <tr>
+                            <td>
+                                <fieldset>
+                                    <legend>Descripción de estatus</legend>
+                                    <textarea id="estatusCandid" name="estatusCandid" style="width:500px; height: 200px;"></textarea>
+                                </fieldset>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="colorEstatus">Estatus: </label>
+                                <select id="colorEstatus" name="colorEstatus">
+                                    <option>Seleccione...</option>
+                                    <option value="#F00" style="background-color: #F00;">No volver a marcar</option>
+                                    <option value="#EDEF7D" style="background-color: #EDEF7D;">Potencial</option>
+                                    <option value="#6CE26C" style="background-color: #6CE26C;">Finalista</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                      
                 </div>  
                 
             </div>   
                     </form> 
             </center>
-            
-            <span>
-                    <span id="enviar" onclick="guardarCandidato();"/>Guardar</span>
-                    
-            </span>
+            <div id="btnsC">
+                    <span id="enviar" onclick="guardarCandidato();">Guardar</span>
+                    <span id="back" onclick="abrirpanelListar();">Regresar</span>           
+            </div>       
     </div>
     <div id='res'class="ui-widget ui-corner-all" style="display:none;background-color:#D5E8F6; height: 500px;">
         
     </div>
+<!--
 </body>
 </html>
+-->

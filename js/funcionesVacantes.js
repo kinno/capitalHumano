@@ -13,7 +13,10 @@ $(document).tooltip().ready(function(){
   $("#contenido").find("#ver").button({icons: {
         primary: "ui-icon-note"
       }});
-  $("#contenido").find(".up").button();
+  $("#contenido").find(".up").button({icons:{primary:"ui-icon-arrowthick-2-n-s"}});
+  $("#contenido").find(".modif").button({icons:{primary:"ui-icon-gear"}});
+  $("#contenido").find(".btnsVac").buttonset();
+  
    $('#listaSolicitud,#listaCandidatos,#listaVacantes').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
         "sPaginationType": "full_numbers",
         "bJQueryUI": true
@@ -26,6 +29,7 @@ $(document).tooltip().ready(function(){
      width:550,
      height:150,
      resizable:false,
+     draggable:false,
       show: {
         effect: "clip",
         duration: 500
@@ -42,6 +46,7 @@ $(document).tooltip().ready(function(){
      width:900,
      height:400,
      resizable:false,
+     draggable:false,
       show: {
         effect: "clip",
         duration: 500
@@ -55,10 +60,14 @@ $(document).tooltip().ready(function(){
   $("#panelcambiarReclutador").dialog({
      autoOpen: false,
      modal:true,
+     draggable:false,
      height:100
   });
    
     $(".guardar").button();
+    $(".asignarCandidato").button({icons:{primary:"ui-icon-person"}});
+    $(".detalleCandidato").button({icons:{primary:"ui-icon-clipboard"}});
+    $(".btnsDA").buttonset();
    
 });
 
@@ -199,7 +208,7 @@ function abreBusqueda(aux){
        
         $("#dialog").dialog({
             width:1200,
-            height:800,
+            height:800
         });
         $("#vacante").val($("#numVacante"+aux).val());
         $("#fila").val(aux);
@@ -266,13 +275,15 @@ function listarEntrevistas(){
 }
 
 function asignarCandidato(aux){
-   var idCandid = $("#idCandid"+aux).html();
+   var idCandid = $("#idCandid"+aux).val();
    var numVacante = $("#vacante").val();
    //var candidato = $("#candidato"+aux).html();
    //var fila = $("#fila").val();
     var url="../controlador/asignarCandidato.php";
+    
         $.post(url,{idCandid:idCandid,numVacante:numVacante,folioVacante:folioVacante},
             function(responseText){
+                
                 if(responseText==='ok'){
                     $("#resp").html('Datos guardados!');
                     listarCandidatos();

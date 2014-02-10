@@ -24,23 +24,30 @@
                 $sqldp="insert into tblcandidatodp
                             values(".$id['idCandid'].",'".$tbjoactualCandid."','".$pretensionesCandid."','".$conocimientosCandid."','".$areasintCandid."','".$areasexpCandid."','".$viajasCandid."')";
                 mysql_query($sqldp);
+                
+                $sqlest="insert into tblcandidatoest
+                            values(".$id['idCandid'].",'".$estatusCandid."','".$colorEstatus."')";
+                mysql_query($sqlest);
                 echo 'ok';
             }else{
                 die(mysql_error());
             }
         }
         
-        function obtenerCandidatos(){
-            $funciones = new funciones();
-            $funciones->conectar();
-            $sql = "Select * from tblcandidato";
-            $resultado = mysql_query($sql) or die(mysql_error());
-            $datos = array();
-            while($fila=  mysql_fetch_array($resultado)){
-                $datos[]=$fila;                
-            }
-            return $datos;
+        function obtener_candidatos(){
+        $funciones = new funciones();
+        $funciones->conectar();
+        $query="select * from tblcandidato 
+                    left join tblcandidatoda on tblcandidatoda.idCandid = tblcandidato.idCandid
+                    left join tblcandidatodp on tblcandidatodp.idCandid = tblcandidato.idCandid
+                    left join tblcandidatoest on tblcandidatoest.idCandid = tblcandidato.idCandid;";
+        $result=  mysql_query($query) or die(mysql_error());
+        $datos=array();
+        while($fila=  mysql_fetch_array($result)){
+            $datos[]=$fila;
         }
+        return $datos;
+    }
         
         
     }
