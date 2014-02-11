@@ -111,7 +111,7 @@ $datos = $vacantes->obtener_vacantes($_SESSION['id']);
                                                    echo '<td id="escolaridad"'.$i.'>'.$v['carreraCandid'].'</td>';
                                                    echo '<td id="conocimientos'.$i.'">'.$v['conocimientosCandid'].'</td>';
                                                    echo '<td id="conocimientos'.$i.'" style="background-color: '.$v['estatus'].'">'.$v['descEstatus'].'</td>';
-                                                   echo '<td class="btnsDA"><button class="detalleCandidato" onclick="detalleCandidato('.$v['idCandid'].')" style="height:20px; width:30px;" title="Ver detalle"><button class="asignarCandidato" onclick="asignarCandidato('.$i.')" style="height:20px; width:30px;" title="Asignar candidato"></button></td>';
+                                                   echo '<td class="btnsDA"><button class="detalleCandidato" onclick="detallesCandidato('.$v['idCandid'].')" style="height:20px; width:30px;" title="Ver detalle"><button class="asignarCandidato" onclick="asignarCandidato('.$i.')" style="height:20px; width:30px;" title="Asignar candidato"></button></td>';
                                                    echo '</tr>';
                                                    $i++;
                                             }
@@ -186,6 +186,11 @@ $datos = $vacantes->obtener_vacantes($_SESSION['id']);
        </table>
     </div>
     </center>
+</div>
+<div id="detalleCandidato" title="Detalle de candidato" class="overlay-container">
+    <div id="condetalle">
+        
+    </div>
 </div>
 </body>
 </html>

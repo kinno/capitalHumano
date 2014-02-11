@@ -165,12 +165,12 @@ if($_SESSION['rol']==1||$_SESSION['rol']==2){
                                             $horaActual=strtotime(date("H:i"));
                                             $horaValida = strtotime("18:00");
                                             if($horaActual>$horaValida){
-                                                echo 'Despues de ';
+                                                
                                                 $fechaValida = strtotime ( '+1 day' , strtotime ( date("d-m-Y") ) ) ;
                                                 $fechaValida = date ( 'd-m-Y' , $fechaValida );
                                             }
                                             else{
-                                                echo 'Antes de';
+                                                
                                                 $fechaValida = date("d-m-Y");
                                             }
                                             ?>

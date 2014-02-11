@@ -57,13 +57,13 @@
                         left join tblcandidatodp on tblcandidatodp.idCandid = tblcandidato.idCandid
                         left join tblcandidatoest on tblcandidatoest.idCandid = tblcandidato.idCandid
                     where tblcandidato.idCandid=".$idCandid;
-            echo $query;
-            /*$result=  mysql_query($query) or die(mysql_error());
+            $query;
+            $result=  mysql_query($query) or die(mysql_error());
             $datos=array();
             while($fila=  mysql_fetch_array($result)){
                 $datos[]=$fila;
             }
-            return $datos;*/
+            return $datos;
         }
         
         

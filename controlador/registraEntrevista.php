@@ -1,7 +1,7 @@
 <?php
 session_start();
 $idUsuario = $_SESSION['id'];
-include_once("libvacantes.php");
+include_once("../funciones/libvacantes.php");
 $vacantes = new Vacantes();
 $idVacCand = $_POST['idVacCand'];
 $fecEntrev= $_POST['fecha'];

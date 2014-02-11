@@ -7,7 +7,7 @@ $dato = $vacantes->entrevista_especifica($idVacCand);
     if(count($dato)>0){
         echo '
                 <table cellpadding="0" cellspacing="0" border="0">
-                        <tr>
+                        <tr style="text-align:center;">
                             <td></td>
                             <td>Fecha y hora</td>
                             <td>Lugar</td>
@@ -21,8 +21,8 @@ $dato = $vacantes->entrevista_especifica($idVacCand);
                        {
                                    echo '<tr align=center valign=top>';
                                    echo '<td><span class="resEntrev" onclick="abrirResultados('.$v['idEntrev'].');" title="Registrar resultado"></span></td>';
-                                   echo '<td>'.$v['fecEntrev'].'</td>';
-                                   echo '<td>'.$v['titulolugar'].'</td>';
+                                   echo '<td style="width:110px">'.$v['fecEntrev'].'</td>';
+                                   echo '<td style="width:110px">'.$v['titulolugar'].'</td>';
                                    echo '<td>'.$v['nomEentrev'].'</td>';
                                    echo '<td>'.$v['descEstatus'].'</td>';
                                    echo '<td>'.$v['ObsEntrev'].'</td>';

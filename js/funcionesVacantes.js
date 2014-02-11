@@ -68,6 +68,22 @@ $(document).tooltip().ready(function(){
     $(".asignarCandidato").button({icons:{primary:"ui-icon-person"}});
     $(".detalleCandidato").button({icons:{primary:"ui-icon-clipboard"}});
     $(".btnsDA").buttonset();
+    
+    $("#detalleCandidato").dialog({
+                                            autoOpen: false,
+                                            modal:true,
+                                            width:1300,
+                                            height:450,
+                                            resizable:false,
+                                             show: {
+                                               effect: "clip",
+                                               duration: 500
+                                             },
+                                             hide: {
+                                               effect: "clip",
+                                               duration: 500
+                                             }  
+                                          });
    
 });
 
@@ -272,6 +288,22 @@ function listarEntrevistas(){
      else{
          $("#containerEntrevistas").toggle('drop');
      }
+}
+
+function detallesCandidato(idCandid){
+
+
+    var url="../controlador/detallesCandidato.php";
+    $.post(url,{idCandid:idCandid},function(responseText){
+        $("#condetalle").html(responseText);
+        $( "#tabs" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
+        $( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
+        $("#tabs").find("input,textarea").each(function(){
+            $(this).addClass("datos").attr('readonly','true');
+        });
+    });
+    $("#detalleCandidato").dialog("open");
+    
 }
 
 function asignarCandidato(aux){

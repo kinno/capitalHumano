@@ -36,7 +36,7 @@ $datos=$candidato->obtener_candidatos();
         ?>
     <tbody>
 </table>
-<div id="detalleCandidato" class="overlay-container">
+<div id="detalleCandidato" title="Detalle de candidato" class="overlay-container">
     <div id="contenedor">
         
     </div>

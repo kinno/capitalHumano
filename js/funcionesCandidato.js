@@ -34,7 +34,7 @@ function cargarCandidatos(){
                                             autoOpen: false,
                                             modal:true,
                                             width:1300,
-                                            height:650,
+                                            height:450,
                                             resizable:false,
                                              show: {
                                                effect: "clip",
@@ -59,6 +59,11 @@ function detalleCandidato(idCandid){
     var url="../controlador/detallesCandidato.php";
     $.post(url,{idCandid:idCandid},function(responseText){
         $("#contenedor").html(responseText);
+        $( "#tabs" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
+        $( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
+        $("#tabs").find("input,textarea").each(function(){
+            $(this).addClass("datos").attr('readonly','true');
+        });
     });
     $("#detalleCandidato").dialog("open");
     

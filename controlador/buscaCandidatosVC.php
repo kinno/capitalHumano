@@ -12,7 +12,7 @@ echo '<div style="margin-left:150px;">
         ';
                 if(count($dato)>0){
                 foreach ($dato as $k => $v) {
-                    echo '<tr><td>'.$v['nomCandid'].' '.$v['appCandid'].' '.$v['nomCandid'].'</td><td>'.$v['conocimientosCandid'].'</td></tr>';
+                    echo '<tr><td>'.$v['nomCandid'].' '.$v['appCandid'].' '.$v['apmCandid'].'</td><td>'.$v['conocimientosCandid'].'</td></tr>';
                 }
                 }
                 else{
