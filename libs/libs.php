@@ -1,10 +1,4 @@
 <?php
-//*********************************************************************
-//Nombre: clase funciones.
-//Funcion del Modulo: Guadar la funciones que se ocuparan.
-//Fecha: 06/05/2013
-//Relizo: Ricardo Lugo Recillas
-//*********************************************************************	
 
  class funciones {
 
@@ -12,7 +6,7 @@
  	{
 	 	$host = "localhost";
 		$user = "root";
-		$passwd ="admin123";
+		$passwd ="admin";
 		$db = "bdrh";
 		$conexion=mysql_connect($host,$user,$passwd,$db) or die(mysql_error());
                 mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'", $conexion);

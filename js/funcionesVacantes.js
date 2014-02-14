@@ -292,15 +292,17 @@ function listarEntrevistas(){
 
 function detallesCandidato(idCandid){
 
-
     var url="../controlador/detallesCandidato.php";
     $.post(url,{idCandid:idCandid},function(responseText){
+        
         $("#condetalle").html(responseText);
+        $("#condetalle").find("#edit").hide();
         $( "#tabs" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
         $( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
         $("#tabs").find("input,textarea").each(function(){
             $(this).addClass("datos").attr('readonly','true');
         });
+        
     });
     $("#detalleCandidato").dialog("open");
     

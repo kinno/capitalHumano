@@ -2,6 +2,7 @@
 session_start();
 include '../funciones/libCandidatos.php';
 $candidato = new Candidato();
-$dato = $candidato->registrarCandidato($_POST, $_SESSION['id']);
+$dato = $candidato->modificarCandidato($_POST, $_SESSION['id']);
+print_r($_POST);
 echo $dato;
 ?>

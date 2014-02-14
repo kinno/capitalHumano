@@ -35,7 +35,13 @@ class Vacantes{
         $query="select * from tblcandidato 
                     left join tblcandidatoda on tblcandidatoda.idCandid = tblcandidato.idCandid
                     left join tblcandidatodp on tblcandidatodp.idCandid = tblcandidato.idCandid
-                    left join tblcandidatoest on tblcandidatoest.idCandid = tblcandidato.idCandid;";
+                    left join tblcandidatoest on tblcandidatoest.idCandid = tblcandidato.idCandid
+                where tblcandidato.idCandid in (
+                                                select idCandid from tblcandidatorl
+                                                left join tblresreferencia on tblresreferencia.idReferencia = tblcandidatorl.idReferencia
+                                                where tblresreferencia.idReferencia is not null
+                                                group by tblcandidatorl.idCandid
+                                                )";
         $result=  mysql_query($query) or die(mysql_error());
         $datos=array();
         while($fila=  mysql_fetch_array($result)){

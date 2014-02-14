@@ -158,8 +158,16 @@
                                 </select>
                             </td>
                             <td>
-                                <label for="pretensionesCandid">Pretensiones económicas: </label>
-                                $<input type="text" id="pretensionesCandid" name="pretensionesCandid" />
+                                <label for="salarioCandid">Último salario: </label>
+                                $<input type="text" id="salarioCandid" name="salarioCandid" />
+                            </td>
+                            <td>
+                                <label for="pretensionesminCandid">Pretensiones min: </label>
+                                $<input type="text" id="pretensionesminCandid" name="pretensionesminCandid" />
+                            </td>
+                            <td>
+                                <label for="pretensionesmaxCandid">Pretensiones max: </label>
+                                $<input type="text" id="pretensionesmaxCandid" name="pretensionesmaxCandid"/>
                             </td>
                             <td>
                                 <label for="viajasCandid">¿Disponibilidad de viajar?: </label>
@@ -171,7 +179,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="3">
+                            <td colspan="5">
                                 <table style="width:100%">
                                     <tr>
                                         <td>
@@ -202,13 +210,24 @@
                 
                 <h3>Referencias Laborales</h3>  
                 <div id="referenciasLaborales">
-                    
-                    <table>
-                        <tr>
-                            <td></td>
+                   <fieldset style="width:550px;text-align: left;">
+                        <legend>Datos la(s) referencia(s)</legend>
+                        <span id="nvaReferencia" style="height: 15px; width: 30px; float: right;" onclick="nuevaReferencia();" title="Agregar otra referencia"></span>
+                        
+                    <table style="padding:5px;" cellspacing="5" id="tblref">
+                        <tr id="r1">
+                            <td><input type="text" id="nomrefCandid1" name="nomrefCandid1" style="width:250px"/></td>
+                            <td><input type="text" id="telrefCandid1" name="telrefCandid1" style="width:150px;"/></td>
+                            <td><input type="text" id="relrefCandid1" name="relrefCandid1" style="width:250px;"/></td>
+                            <td><span class="eliminaReferencia" id="e1" onclick="eliminaReferencia()" style=""></span></td>
+                        </tr>
+                        <tr id="nope" style="text-align: center;">
+                            <td>Nombre de referencia</td>
+                            <td>Teléfono de referencia</td>
+                            <td>Relación entre candidato y referencia</td>
                         </tr>
                     </table>
-                      
+                    </fieldset>
                 </div>
                 
                 <h3>Estatus</h3>  
@@ -228,9 +247,9 @@
                                 <label for="colorEstatus">Estatus: </label>
                                 <select id="colorEstatus" name="colorEstatus">
                                     <option>Seleccione...</option>
-                                    <option value="#F00" style="background-color: #F00;">No volver a marcar</option>
-                                    <option value="#EDEF7D" style="background-color: #EDEF7D;">Potencial</option>
-                                    <option value="#6CE26C" style="background-color: #6CE26C;">Finalista</option>
+                                    <option value="No volver a marcar" style="background-color: #F00;">No volver a marcar</option>
+                                    <option value="Potencial" style="background-color: #EDEF7D;">Potencial</option>
+                                    <option value="Finalista" style="background-color: #6CE26C;">Finalista</option>
                                 </select>
                             </td>
                         </tr>
@@ -239,6 +258,7 @@
                 </div>  
                 
             </div>   
+                    <input type="hidden" id="numReferencias" name="numReferencias"/>
                     </form> 
             </center>
             <div id="btnsC">

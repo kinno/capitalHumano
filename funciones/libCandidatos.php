@@ -1,5 +1,6 @@
 <?php
     include"../libs/libs.php"; 
+
     class Candidato{
         
         function Candidato(){
@@ -22,12 +23,90 @@
                 mysql_query($sqlda);
                 
                 $sqldp="insert into tblcandidatodp
-                            values(".$id['idCandid'].",'".$tbjoactualCandid."','".$pretensionesCandid."','".$conocimientosCandid."','".$areasintCandid."','".$areasexpCandid."','".$viajasCandid."')";
+                            values(".$id['idCandid'].",'".$tbjoactualCandid."','".$pretensionesminCandid."','".$pretensionesmaxCandid."','".$salarioCandid."','".$conocimientosCandid."','".$areasintCandid."','".$areasexpCandid."','".$viajasCandid."')";
                 mysql_query($sqldp);
                 
                 $sqlest="insert into tblcandidatoest
                             values(".$id['idCandid'].",'".$estatusCandid."','".$colorEstatus."')";
                 mysql_query($sqlest);
+                
+                for($i=1;$i<=$numReferencias;$i++){
+                    
+                    $sqlref="insert into tblcandidatorl
+                            values(null,".$id['idCandid'].",'".$datos['nomrefCandid'.$i]."','".$datos['telrefCandid'.$i]."','".$datos['relrefCandid'.$i]."')"; 
+                    mysql_query($sqlref);
+                }
+                echo 'ok';
+            }else{
+                die(mysql_error());
+            }
+        }
+        
+        function modificarCandidato($datos,$idUsuario){
+            extract($datos);
+            $funciones = new funciones();
+            $funciones->conectar();
+            
+            $sql="UPDATE tblcandidato
+                        set nomCandid='".$nomCandid."',
+                            appCandid='".$appCandid."',
+                            apmCandid='".$apmCandid."',
+                            genCandid='".$generoCandidato."',
+                            fecNCandid='".$fechaNCandid."',
+                            entidadCandid='".$entidadCandid."',
+                            municipioCandid='".$municipioCandid."',
+                            cpCandid='".$cpCandid."',
+                            coloniaCandid='".$coloniaCandid."',
+                            domCandid='".$domCandid."',
+                            celCandid='".$celCandid."',
+                            telCandid='".$telCandid."',
+                            mailCandid='".$mailCandid."',
+                            nacionalidadCandid='".$nacionalidadCandid."',
+                            idUsuario=".$idUsuario." 
+                    WHERE idCandid=".$idCandid."
+                        ";
+            if(mysql_query($sql)){
+               
+                $sqlda="
+                        UPDATE tblcandidatoda
+                             set carreraCandid='".$carreraCandid."',
+                                    nlvestudiosCandid='".$nvlestudiosCandid."',
+                                    otros='".$otros."',
+                                    idiomasCandid='".$idiomas."'
+                            WHERE idCandid=".$idCandid."
+                        ";
+                
+                mysql_query($sqlda);
+                
+                $sqldp="
+                        UPDATE tblcandidatodp
+                             set tbjoactualCandid='".$tbjoactualCandid."',
+                                    pretensionesminCandid='".$pretensionesminCandid."',
+                                    pretensionesmaxCandid='".$pretensionesmaxCandid."',
+                                    ultimosalarioCandid='".$salarioCandid."',
+                                    conocimientosCandid='".$conocimientosCandid."',
+                                    areasintCandid='".$areasintCandid."',
+                                    areasexpCandid='".$areasexpCandid."',
+                                    viajasCandid='".$viajasCandid."'
+                            WHERE idCandid=".$idCandid."
+                        ";
+                
+                mysql_query($sqldp);
+                
+                $sqlest="
+                        UPDATE tblcandidatoest
+                            set descEstatus ='".$estatusCandid."'
+                        WHERE idCandid=".$idCandid."       
+                        ";
+
+                mysql_query($sqlest);
+                
+                /*for($i=1;$i<=$numReferencias;$i++){
+                    
+                    $sqlref="insert into tblcandidatorl
+                            values(null,".$id['idCandid'].",'".$datos['nomrefCandid'.$i]."','".$datos['telrefCandid'.$i]."','".$datos['relrefCandid'.$i]."')"; 
+                    mysql_query($sqlref);
+                }*/
                 echo 'ok';
             }else{
                 die(mysql_error());
@@ -64,6 +143,35 @@
                 $datos[]=$fila;
             }
             return $datos;
+        }
+        
+        function referencias_candidato($idCandid){
+            $funciones = new funciones();
+            $funciones->conectar();
+            $query="select * from tblcandidatorl 
+                    where idCandid=".$idCandid;
+            $query;
+            $result=  mysql_query($query) or die(mysql_error());
+            $datos=array();
+            while($fila=  mysql_fetch_array($result)){
+                $datos[]=$fila;
+            }
+            return $datos;
+        }
+        
+        function resultado_referencia($idReferencia){
+            $funciones = new funciones();
+            $funciones->conectar();
+            $query="select * from tblresreferencia 
+                    where idReferencia=".$idReferencia;
+            $query;
+            $result=  mysql_query($query) or die(mysql_error());
+            $datos=array();
+            while($fila=  mysql_fetch_array($result)){
+                $datos[]=$fila;
+            }
+            return $datos;
+            
         }
         
         

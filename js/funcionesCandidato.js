@@ -1,3 +1,4 @@
+var i =1;
 $(document).tooltip().ready(function(){
      
 });
@@ -14,6 +15,8 @@ function abrirpanelAgregar(){
               $("#contenido").toggle('slide',function(){
                   $("#contenidoAgregar").toggle('slide');
               });
+              $("#nvaReferencia").button({icons:{primary:"ui-icon-plus"}});
+              $(".eliminaReferencia").button({icons:{primary:"ui-icon-close"}});
             });
 }
 
@@ -61,16 +64,23 @@ function detalleCandidato(idCandid){
         $("#contenedor").html(responseText);
         $( "#tabs" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
         $( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
-        $("#tabs").find("input,textarea").each(function(){
-            $(this).addClass("datos").attr('readonly','true');
+        $("#tabs").find("input,textarea,select").each(function(){
+            $(this).addClass("datos").attr('disabled','true').addClass("ui-corner-all");
         });
+        $("#edit").button();
+        $("#guardar").button({icons:{primary:"ui-icon-disk"}});
+        $(".regResultados").button({icons:{primary:"ui-icon-pencil"}});
+        $(".guardarResultados").button({icons:{primary:"ui-icon-disk"}});
+        
     });
+        
     $("#detalleCandidato").dialog("open");
     
 }
 
 function guardarCandidato(){
     var ban= true;
+    $("#numReferencias").val(i);
     $("#fdatosPersonales").find("input,textarea,select").each(function(){
         if($(this).val()==""){
             $(this).focus();
@@ -95,8 +105,7 @@ function guardarCandidato(){
     
     if(ban){
    
-    /*var datosAcademicos = $("#fdatosAcademicos").serialize();
-    var datosProfesionales = $("#fdatosProfesionales").serialize();*/
+    
     
     var url="../controlador/registrarCandidato.php";
     $.post(url,$("#fdatosPersonales").serialize(),function(responseText){
@@ -115,9 +124,9 @@ function guardarCandidato(){
             $("#res").html('<div style="font-size: 45px; text-align: center; padding-top:200px;"><img style="width:100px;" src="../img/tache.png" /> ¡Ocurrio un error!</div>');
             $("#conteiner").toggle('slide');
             $("#res").toggle('slide');
-            $("#conteiner").find("input,select,textarea").each(function(){
-                $(this).val('');
-            });
+//            $("#conteiner").find("input,select,textarea").each(function(){
+//                $(this).val('');
+//            });
             setTimeout(function(){
                 $("#res").toggle('slide');
                 $("#conteiner").toggle('slide');
@@ -127,4 +136,79 @@ function guardarCandidato(){
     });
     
     }
+}
+
+function nuevaReferencia(){
+    i++;
+    var nueva =$("#r1").clone();
+    $("#tblref").find("tr:last").before(nueva).prev("tr").attr("id","r"+i);;
+    $("#r"+i).find("#nomrefCandid1").attr({"id":"nomrefCandid"+i,"name":"nomrefCandid"+i}).val('');
+    $("#r"+i).find("#telrefCandid1").attr({"id":"telrefCandid"+i,"name":"telrefCandid"+i}).val('');
+    $("#r"+i).find("#relrefCandid1").attr({"id":"relrefCandid"+i,"name":"relrefCandid"+i}).val('');
+    $("#r"+i).find("#e1").attr({"id":"e"+i}).show();
+    $("#e"+(i-1)).hide();
+    
+}
+
+function eliminaReferencia(){
+    $("#r"+i).remove();
+    i--;
+    if(i!=1){
+    $("#e"+i).show();
+    }
+    
+}
+
+function abrirResultados(idReferencia,id){
+    
+   var url="../controlador/registrarCandidato.php";
+   $.post(url,{},function(responseText){
+        $("#fieldset"+id).find(".regResultados").hide();
+        $("#fieldset"+id).find(".guardarResultados").show();
+        $("#fieldset"+id).append(responseText).find("#panelResultados").toggle('fold'); 
+   });   
+}
+
+function abrirCampos(){
+   
+    $("#tabs").find("input,textarea,select").each(function(){
+        $(this).removeAttr("disabled").css("background-color","#FFF");
+    });
+    $("#edit").toggle("slide",function(){
+        $("#guardar").toggle("slide");
+    });  
+    
+}
+
+function actualizarCampos(){
+    
+    var url="../controlador/modificarCandidato.php";
+    $.post(url,$("#datosPersonales").serialize(),function(responseText){
+        $("#tabs").before(responseText);
+        if(responseText=='ok'){
+            $("#res").html('<div style="font-size: 45px; text-align: center; padding-top:200px;"><img style="width:100px;" src="../img/paloma.png" /> ¡Candidato registrado!</div>');
+            $("#conteiner").toggle('slide',function(){$("#res").toggle('slide');});
+            $("#conteiner").find("input,select,textarea").each(function(){
+                $(this).val('');
+            });
+            setTimeout(function(){
+                $("#res").toggle('slide',function(){$("#conteiner").toggle('slide');});
+            },4000);
+            $( "#acordeon" ).accordion({ active: 0 });
+            
+        }else{
+            $("#res").html('<div style="font-size: 45px; text-align: center; padding-top:200px;"><img style="width:100px;" src="../img/tache.png" /> ¡Ocurrio un error!</div>');
+            $("#conteiner").toggle('slide');
+            $("#res").toggle('slide');
+//            $("#conteiner").find("input,select,textarea").each(function(){
+//                $(this).val('');
+//            });
+            setTimeout(function(){
+                $("#res").toggle('slide');
+                $("#conteiner").toggle('slide');
+            },4000);
+            $( "#acordeon" ).accordion({ active: 0 });
+        }
+    });
+    
 }

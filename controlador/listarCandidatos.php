@@ -11,7 +11,10 @@ $datos=$candidato->obtener_candidatos();
 
             <th>Nombre</th>
             <th>Escolaridad</th>
-            <th>Conocimientos</th>
+            <th>Grado</th>
+            <th>Último salario</th>
+            <th>Pretensiones min</th>
+            <th>Pretensiones max</th>
             <th>Último estatus</th>
             <th>Acciones</th>
 
@@ -27,7 +30,10 @@ $datos=$candidato->obtener_candidatos();
 
                    echo '<td id="candidato'.$i.'"><input type="hidden" id="idCandid'.$i.'" value="'.$v['idCandid'].'"/>'.$v['nomCandid'].' '.$v['appCandid'].' '.$v['apmCandid'].'</td>';
                    echo '<td id="escolaridad"'.$i.'>'.$v['carreraCandid'].'</td>';
-                   echo '<td id="conocimientos'.$i.'">'.$v['conocimientosCandid'].'</td>';
+                   echo '<td id="estudios'.$i.'">'.$v['nlvestudiosCandid'].'</td>';
+                   echo '<td id="salario'.$i.'">$'.$v['ultimosalarioCandid'].'</td>';
+                   echo '<td id="pmin'.$i.'">$'.$v['pretensionesminCandid'].'</td>';
+                   echo '<td id="pmax'.$i.'">$'.$v['pretensionesmaxCandid'].'</td>';
                    echo '<td id="conocimientos'.$i.'" style="background-color: '.$v['estatus'].'">'.$v['descEstatus'].'</td>';
                    echo '<td class="btnsDA"><button class="detalleCandidato" onclick="detalleCandidato('.$v['idCandid'].')" style="height:20px; width:30px;" title="Ver detalle"><button class="modificarCandidato" onclick="modificarCandidato('.$i.')" style="height:20px; width:30px;" title="Modificar datos"></button></td>';
                    echo '</tr>';

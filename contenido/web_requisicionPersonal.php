@@ -159,11 +159,11 @@ if($_SESSION['rol']==1||$_SESSION['rol']==2){
                                             <?php
                                             /*
                                              * METODO PARA CALCULAR LA FECHA DE SOLICITUD DE PERSONAL
-                                             * DESPUÉS DE LAS 6PM SE REGISTRA LA SOLICITUD UN DÍA DESPUÉS
+                                             * DESPUÉS DE LAS 4PM SE REGISTRA LA SOLICITUD UN DÍA DESPUÉS
                                              * 
                                              */
                                             $horaActual=strtotime(date("H:i"));
-                                            $horaValida = strtotime("18:00");
+                                            $horaValida = strtotime("16:00");
                                             if($horaActual>$horaValida){
                                                 
                                                 $fechaValida = strtotime ( '+1 day' , strtotime ( date("d-m-Y") ) ) ;
