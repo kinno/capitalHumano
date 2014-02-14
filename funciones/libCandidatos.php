@@ -164,7 +164,7 @@
             $funciones->conectar();
             $query="select * from tblresreferencia 
                     where idReferencia=".$idReferencia;
-            $query;
+            
             $result=  mysql_query($query) or die(mysql_error());
             $datos=array();
             while($fila=  mysql_fetch_array($result)){
@@ -173,7 +173,18 @@
             return $datos;
             
         }
-        
-        
+        function guardar_resultadosReferencia($datos){
+            extract($datos);
+            $funciones = new funciones();
+            $funciones->conectar();
+            $sql="insert into tblresreferencia values (null,".$idsReferencia.",'".$periodoInicio."','".$periodoFinal."','".$sueldoPercibido."','".$motivoSalida."','".$ultimoPuesto."','".$recontratar."','".$comentarios."',".$responsabilidad.",".$asistencia.",".$puntualidad.",".$actitud.",".$compromiso.",".$honestidad.",".$relacion.",".$iniciativa.",".$lealtad.",".$apego.")";
+            
+            if(mysql_query($sql)){
+                echo 'ok';
+            }else{
+                echo 'error';
+            }
+        }
+  
     }
 ?>

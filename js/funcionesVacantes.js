@@ -299,13 +299,19 @@ function detallesCandidato(idCandid){
         $("#condetalle").find("#edit").hide();
         $( "#tabs" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
         $( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
-        $("#tabs").find("input,textarea").each(function(){
+        $("#tabs").find("input,textarea,select").each(function(){
             $(this).addClass("datos").attr('readonly','true');
+        });
+        $("#condetalle").find(".show").each(function(){
+            $(this).button({icons:{primary:"ui-icon-circle-triangle-s"}});
         });
         
     });
     $("#detalleCandidato").dialog("open");
     
+}
+function mostrarResultados(aux){
+    $("#panelResultados"+aux).toggle('blind');
 }
 
 function asignarCandidato(aux){

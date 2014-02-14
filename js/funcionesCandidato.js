@@ -3,6 +3,8 @@ $(document).tooltip().ready(function(){
      
 });
 
+
+
 function abrirpanelAgregar(){
     $.post("../contenido/altaCandidatos.php",{},function(data){
               $("#contenidoAgregar").html(data);
@@ -71,6 +73,7 @@ function detalleCandidato(idCandid){
         $("#guardar").button({icons:{primary:"ui-icon-disk"}});
         $(".regResultados").button({icons:{primary:"ui-icon-pencil"}});
         $(".guardarResultados").button({icons:{primary:"ui-icon-disk"}});
+        $(".show").button({icons:{primary:"ui-icon-circle-triangle-s"}});
         
     });
         
@@ -160,13 +163,70 @@ function eliminaReferencia(){
 }
 
 function abrirResultados(idReferencia,id){
-    
-   var url="../controlador/registrarCandidato.php";
+   
+   var url="../controlador/registroResultado.php";
    $.post(url,{},function(responseText){
         $("#fieldset"+id).find(".regResultados").hide();
-        $("#fieldset"+id).find(".guardarResultados").show();
+        
         $("#fieldset"+id).append(responseText).find("#panelResultados").toggle('fold'); 
+        $("#fieldset"+id).find("#idsReferencia").val(idReferencia);
+        $("input[type=fecha]").datepicker( {
+                                            changeMonth: true,
+                                            changeYear: true,
+                                            showButtonPanel: true,
+                                            dateFormat: 'MM yy',
+                                            onClose: function(dateText, inst) { 
+                                                var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                                                var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                                                $(this).datepicker('setDate', new Date(year, month, 1));                                              
+                                                
+                                            }
+                                        });
+        
+                $("#panelResultados").find(".guardarResultados").button({icons:{primary:"ui-icon-disk"}});
    });   
+}
+
+function registrarResultados(obj){
+   
+    
+    var url="../controlador/guardarResultadosCandidato.php";
+    $.post(url,$("#resultadoReferencia").serialize(),function(responseText){
+        if(responseText=='ok'){
+            $("#respResultados").html('<div style="font-size: 45px; text-align: center;"><img style="width:100px;" src="../img/paloma.png" /> ¡Resultados registrados!</div>');
+            $(obj).parent().parent().parent().parent().parent().toggle('slide',function(){
+                $("#respResultados").toggle('slide');
+                setTimeout(function(){
+                detalleCandidato($("#candidatoActivo").val());
+                setTimeout(function(){
+                    $( "#tabs" ).tabs({active:3});
+                },50);
+            },2000);
+            
+            });
+        }else{
+            $("#respResultados").html('<div style="font-size: 45px; text-align: center;"><img style="width:100px;" src="../img/tache.png" /> ¡Ocurrio un error!</div>');
+            $(obj).parent().parent().parent().parent().parent().toggle('slide',function(){
+                $("#respResultados").toggle('slide');
+                setTimeout(function(){
+                detalleCandidato($("#candidatoActivo").val());
+                setTimeout(function(){
+                    $( "#tabs" ).tabs({active:3});
+                },50);
+            },2000);
+            
+            });
+        }
+            
+        
+         });
+         
+   
+        
+}
+
+function mostrarResultados(aux){
+    $("#panelResultados"+aux).toggle('blind');
 }
 
 function abrirCampos(){
@@ -183,21 +243,22 @@ function abrirCampos(){
 function actualizarCampos(){
     
     var url="../controlador/modificarCandidato.php";
-    $.post(url,$("#datosPersonales").serialize(),function(responseText){
-        $("#tabs").before(responseText);
+    $.post(url,$("#fdatosPersonales").serialize(),function(responseText){
+
+
         if(responseText=='ok'){
-            $("#res").html('<div style="font-size: 45px; text-align: center; padding-top:200px;"><img style="width:100px;" src="../img/paloma.png" /> ¡Candidato registrado!</div>');
-            $("#conteiner").toggle('slide',function(){$("#res").toggle('slide');});
-            $("#conteiner").find("input,select,textarea").each(function(){
-                $(this).val('');
-            });
-            setTimeout(function(){
-                $("#res").toggle('slide',function(){$("#conteiner").toggle('slide');});
-            },4000);
-            $( "#acordeon" ).accordion({ active: 0 });
+            cargarCandidatos();
+            $("#contenido").effect("bounce");
+            $("#msjRespuesta").html('<div style="font-size: 45px; text-align: center; padding-top:100px;"><img style="width:100px;" src="../img/paloma.png" /> ¡Candidato actualizado!</div>');
+            $("#contenedor").toggle('slide',function(){$("#msjRespuesta").toggle('slide');});
+             setTimeout(function(){
+                $("#msjRespuesta").toggle('slide');
+                $("#contenedor").toggle('slide',function(){$("#detalleCandidato").dialog("close");});
+                
+            },2000);
             
         }else{
-            $("#res").html('<div style="font-size: 45px; text-align: center; padding-top:200px;"><img style="width:100px;" src="../img/tache.png" /> ¡Ocurrio un error!</div>');
+            /*$("#res").html('<div style="font-size: 45px; text-align: center; padding-top:200px;"><img style="width:100px;" src="../img/tache.png" /> ¡Ocurrio un error!</div>');
             $("#conteiner").toggle('slide');
             $("#res").toggle('slide');
 //            $("#conteiner").find("input,select,textarea").each(function(){
@@ -207,7 +268,7 @@ function actualizarCampos(){
                 $("#res").toggle('slide');
                 $("#conteiner").toggle('slide');
             },4000);
-            $( "#acordeon" ).accordion({ active: 0 });
+            $( "#acordeon" ).accordion({ active: 0 });*/
         }
     });
     

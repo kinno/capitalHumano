@@ -53,7 +53,8 @@ foreach ($dato as $k => $v) {
     }
     
     echo '
-<form id="datosPersonales">        
+<input type="hidden" id="candidatoActivo" value="'.$idCandid.'"/>        
+<form id="fdatosPersonales">        
 <div id="tabs">
   <ul>
     <li><a href="#tabs-1">Datos personales</a></li>
@@ -199,15 +200,15 @@ foreach ($dato as $k => $v) {
                 </td>
                 <td>
                     <label for="salarioCandid">Último salario: </label>
-                    <input type="text" id="salarioCandid" name="salarioCandid" value="$'.$v['ultimosalarioCandid'].'"/>
+                    <input type="text" id="salarioCandid" name="salarioCandid" value="'.$v['ultimosalarioCandid'].'"/>
                 </td>
                 <td>
                     <label for="pretensionesminCandid">Pretensiones min: </label>
-                    <input type="text" id="pretensionesminCandid" name="pretensionesminCandid" value="$'.$v['pretensionesminCandid'].'"/>
+                    <input type="text" id="pretensionesminCandid" name="pretensionesminCandid" value="'.$v['pretensionesminCandid'].'"/>
                 </td>
                 <td>
                     <label for="pretensionesmaxCandid">Pretensiones max: </label>
-                    <input type="text" id="pretensionesmaxCandid" name="pretensionesmaxCandid" value="$'.$v['pretensionesmaxCandid'].'"/>
+                    <input type="text" id="pretensionesmaxCandid" name="pretensionesmaxCandid" value="'.$v['pretensionesmaxCandid'].'"/>
                 </td>
                 <td>
                     <label for="viajasCandid">¿Disponibilidad de viajar?: </label>
@@ -257,15 +258,12 @@ foreach ($dato as $k => $v) {
                             <center>
                             <table style="padding:5px;" cellspacing="5">
                                 <tr>
-                                    <td><input type="text" value="'.$r['nomrefCandid'].'" style="width:250px"/></td>
+                                    <td><center><input type="text" id="nomrefCandid" name="nomrefCandid" value="'.$r['nomrefCandid'].'" style="width:250px"/></center></td>
                                     <td>
-                                        <input type="text" value="'.$r['telrefCandid'].'"/>
+                                        <center><input type="text" id="telrefCandid" name="telrefCandid" value="'.$r['telrefCandid'].'"/></center>
                                     </td>
                                     <td>
-                                        <input type="text" value="'.$r['relrefCandid'].'"/>
-                                    </td>
-                                    <td>
-                                        <span></span>
+                                        <center><input type="text" id="relrefCandid" name="relrefCandid" value="'.$r['relrefCandid'].'"/></center>
                                     </td>
                                 </tr>
                                 <tr style="text-align: center;">
@@ -276,16 +274,111 @@ foreach ($dato as $k => $v) {
                                 ';
                         $resultadosReferencia=$candidato->resultado_referencia($r['idReferencia']);
                         if(count($resultadosReferencia)==0){
-                            echo '<tr><td colspan="3"> <input type="button" onclick="abrirResultados('.$r['idReferencia'].','.$i.');" value="+"/>
+                            echo '<tr><td colspan="3"> <span class="regResultados" onclick="abrirResultados('.$r['idReferencia'].','.$i.');">Registrar Resultado</span>
                                         </td></tr>';
-                            /**
-                             * CHECAR PORQUE SE ENVIA EL FORMULARIO CON CUALQUIER BOTON!!!!
-                             * <span class="regResultados" onclick="abrirResultados('.$r['idReferencia'].','.$i.');">Registrar Resultado</span>
-                                       <span class="guardarResultados" onclick="registrarResultados()" style="display:none;">Guardar</span>
-                             */
+                        }else{
+                         echo '   <tr><td colspan="3"><span class="show" onclick="mostrarResultados('.$i.');" title="Mostrar/ocultar resultados"></span>
+                                        </td></tr>';
                         }
                         foreach ($resultadosReferencia as $k => $rr) {
-                            /*Resultados de la consulta*/
+                           echo '
+                               <tr>
+                               <td colspan="3">
+                                <div id="panelResultados'.$i.'" style="display:none; border:1px solid #A6C9E2; background-color: #EAF5FE;" class="ui-corner-all">
+                                    <input type="hidden" id="idsReferencia" name="idsReferencia"/>
+                                    <table style="width:100%">
+                                        <tr>
+                                            <td style="width:60%;">
+                                                <fieldset >
+                                                    <legend>Datos laborales</legend>
+                                                    <center>
+                                                    <table style="padding: 5px;">
+                                                        <tr>
+                                                            <td>Periodo que laboró:</td><td> De <input type="fecha" id="periodoInicio" name="periodoInicio" class="ui-corner-all" value="'.$rr['periodoInicio'].'"/> a: <input type="fecha" id="periodoFinal" name="periodoFinal" class="ui-corner-all" value="'.$rr['periodoFinal'].'"/></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Sueldo que percibía:</td><td> $<input type="text" id="sueldoPercibido" name="sueldoPercibido" class="ui-corner-all" value="'.$rr['sueldoPercibido'].'"/> pesos mensuales</td>
+                                                        </tr>
+                                                        <tr>
+                        <td>Motivo de salida:</td><td> <textarea id="motivoSalida" name="motivoSalida" style="width:295px;" class="ui-corner-all" placeholder="Ingrese motivo de salida">'.$rr['motivoSalida'].'</textarea></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Último puesto:</td><td><input type="text" id="ultimoPuesto" name="ultimoPuesto" class="ui-corner-all" value="'.$rr['ultimoPuesto'].'"/>
+                                                                Volver a contratar: <input type="text" value="'.$rr['recontratar'].'"/>                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Comentarios acerca <br/> del desempeño:</td><td> <textarea id="comentarios" name="comentarios" style="width:295px; height: 50px" class="ui-corner-all" placeholder="Comentarios">'.$rr['comentarios'].'</textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                    </center>
+                                                </fieldset>
+                                            </td>
+                                            <td>
+                                                <fieldset>
+                                                    <legend>Evaluación</legend>
+                                                    <table style="padding: 5px; text-align: left;">
+                                                        <tr>
+                                                            <td>Responsabilidad:</td>
+                                                            <td>
+                                                               <input type="text" style="width:20px;" value="'.$rr['responsabilidad'].'"/>
+                                                            </td>
+                                                            <td>Asistencia:</td>
+                                                            <td>
+                                                                <input type="text" style="width:20px;" value="'.$rr['asistencia'].'"/>
+                                                            </td>
+                                                        <tr>
+                                                            <td>Puntualidad:</td>
+                                                            <td>
+                                                                <input type="text" style="width:20px;" value="'.$rr['puntualidad'].'"/>
+                                                            </td>
+
+                                                            <td>Actitud con compañeros:</td>
+                                                            <td>
+                                                                <input type="text" style="width:20px;" value="'.$rr['actitud'].'"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Compromiso:</td>
+                                                            <td>
+                                                                <input type="text" style="width:20px;" value="'.$rr['compromiso'].'"/>
+                                                            </td>
+
+                                                            <td>Honestidad:</td>
+                                                            <td>
+                                                               <input type="text" style="width:20px;" value="'.$rr['honestidad'].'"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Relación con superiores:</td>
+                                                            <td>
+                                                               <input type="text" style="width:20px;" value="'.$rr['relacion'].'"/>
+                                                            </td>
+
+                                                            <td>Iniciativa:</td>
+                                                            <td>
+                                                                <input type="text" style="width:20px;" value="'.$rr['iniciativa'].'"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Lealtad:</td>
+                                                            <td>
+                                                                <input type="text" style="width:20px;" value="'.$rr['lealtad'].'"/>
+                                                            </td>
+
+                                                            <td>Apego a políticas y procedimientos:</td>
+                                                            <td>
+                                                                <input type="text" style="width:20px;" value="'.$rr['apego'].'"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </fieldset>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                </td>
+                                </tr>
+                                ';
                         }
                         echo '</table>
                               </center>
@@ -315,6 +408,7 @@ foreach ($dato as $k => $v) {
 </form>
 <span id="edit" onclick="abrirCampos();">Editar información</span>
 <span id="guardar" onclick="actualizarCampos();" style="display:none">Guardar</span>
+
 ';
 }
 ?>

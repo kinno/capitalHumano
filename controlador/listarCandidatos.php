@@ -46,4 +46,7 @@ $datos=$candidato->obtener_candidatos();
     <div id="contenedor">
         
     </div>
+    <div id="msjRespuesta" style="display:none;">
+        
+    </div>
 </div>

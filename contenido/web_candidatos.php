@@ -7,6 +7,7 @@
         <script type="text/javascript" language="javascript" src="../js/jquery.js"></script>
         <script type="text/javascript" language="javascript" src="../js/jquery-ui-1.10.4.custom.js"></script>
         <script type="text/javascript" language="javascript" src="../js/jquery.dataTables.js"></script>
+        <script type="text/javascript" language="javascript" src="../js/jquery.ui.datepicker-es.js"></script>
         <script type="text/javascript" language="javascript" src="../js/funcionesCandidato.js"></script>
 <script>
             cargarCandidatos();
