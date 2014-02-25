@@ -622,7 +622,31 @@ var IDPERFIL=0;
 			         data:data
 				 ,
                                   success:function(data){
-                                  $('#res').css("with","auto").html(data);
+                                            if(data=='ok'){
+                                                  $("#panelResp").html('<div style="font-size: 45px; text-align: center; padding-top:200px;"><img style="width:100px;" src="../img/paloma.png" /> ¡Solicitud registrada!</div>');
+                                                  $("#panelRequisicion").toggle('slide',function(){$("#panelResp").toggle('slide');});
+                                                  /*$("#conteiner").find("input,select,textarea").each(function(){
+                                                      $(this).val('');
+                                                  });*/
+                                                  setTimeout(function(){
+                                                      $("#panelResp").toggle('slide',function(){$("#panelRequisicion").toggle('slide');});
+                                                  },4000);
+                                                  setTimeout(function(){location.reload();},2000);
+
+
+                                              }else{
+                                                  $("#panelResp").html('<div style="font-size: 45px; text-align: center; padding-top:200px;"><img style="width:100px;" src="../img/tache.png" /> ¡Ocurrio un error!</div>');
+                                                  $("#panelRequisicion").toggle('slide');
+                                                  $("#panelResp").toggle('slide');
+                                      //            $("#conteiner").find("input,select,textarea").each(function(){
+                                      //                $(this).val('');
+                                      //            });
+                                                  setTimeout(function(){
+                                                      $("#panelResp").toggle('slide');
+                                                      $("#panelRequisicion").toggle('slide');
+                                                  },4000);
+                                                  setTimeout(function(){location.reload();},3000);
+                                              }
                                   },
                                   error:function(){
                                   alert('Error intentelo m�s tarde');

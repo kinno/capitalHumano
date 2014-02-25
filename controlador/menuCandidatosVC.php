@@ -6,8 +6,8 @@
     <div id='menuCandidatos' style='width:150px; margin-left:15px; float: left;'>
         <div class="ui-corner-all" style="background-color: #87B6DA;text-align: center;font-size: 12px;font-weight: bold; padding:15px;">
             <div id="radios">  
-            <input type="radio" id="r1" name="radio" onclick="listarCandidatos();" /><label for="r1">Candidatos</label>
-            <input type="radio" id="r2" name="radio" onclick="listarEntrevistas();"/><label for="r2">Entrevistas</label>
+            <span class="btnCandidatos" onclick="listarCandidatos();">Candidatos</span>
+            <span class="btnEntrevistas" onclick="listarEntrevistas();">Entrevistas</span>
             </div>
         </div> 
     </div>

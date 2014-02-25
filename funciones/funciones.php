@@ -157,7 +157,7 @@ function altaSolicitud($folio, $idSubproyecto,$liderProyecto, $tipoVacante, $ini
         
         if($mail->enviarMail($correo, $mensaje, $subject, $correorh['mailUsuario']))
         {
-            echo "Solicitud Registrada";
+            echo "ok";
         }else{
         echo "No se envío el correo";
         }

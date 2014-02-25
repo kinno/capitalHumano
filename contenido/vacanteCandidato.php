@@ -21,7 +21,7 @@ $datos = $vacantes->obtener_vacantes($_SESSION['id']);
 	
 </head>
 <body>
-<div class="ui-widget">	
+<div class="ui-widget" id="contentVC">	
 <p><span class='titulo' id='candidato'>Catálogo de Vacantes</span></p>
 <article id="contenido" class="ui-widget-content" style="border:none;">
     <table cellpadding="0" cellspacing="0" border="0" class="solicitudes" id="listaVacantes">
@@ -35,6 +35,7 @@ $datos = $vacantes->obtener_vacantes($_SESSION['id']);
                         <th>Fecha de Solicitud</th>
                         <th>Vacantes</th>
 			<th>Candidatos</th>			
+			<th>Contratados</th>			
 			<th></th>
 
                     </tr>
@@ -45,7 +46,21 @@ $datos = $vacantes->obtener_vacantes($_SESSION['id']);
                    $i=0;
                    foreach($datos as $v)
                    {
-                               echo '<tr align="center" valign="top" id="vacante'.$i.'">';
+                        $cerrar = false;
+                       $numContratados=0;
+                       $contratados = $vacantes->obtener_contratados($v['folSolici'], $_SESSION['id']);
+                       //var_dump($contratados);
+                       foreach ($contratados as $k => $val) {
+                           $numContratados = $val['contratados'];
+                       }
+                       if($numContratados == $v['Vacantes']){
+                           $cerrar=true;
+                           $color = "style='background-color:#0ECE1B'";
+                       }else if($numContratados <= $v['Vacantes']){
+                           $color = "style='background-color:#FBEC88'";
+                       }
+                       
+                               echo '<tr '.$color.' align="center" valign="top" id="vacante'.$i.'">';
                                echo '<td id="folio'.$i.'">'.$v['folSolici'].'<input type="hidden" id="numVacante'.$i.'" value="'.$v['numVacante'].'"></td>';
                                echo '<td id="proyecto'.$i.'">'.$v['nomProyecto'].'</td>';
                                echo '<td>'.$v['descPerfil'].'</td>';
@@ -63,9 +78,17 @@ $datos = $vacantes->obtener_vacantes($_SESSION['id']);
                                echo  '</td>';
                                 echo '<td>'.date("d-m-Y",  strtotime($v['fecalta'])).'</td>';
                                 echo '<td>'.$v['Vacantes'].'</td>';
-                                $numCandidatos = $vacantes->num_candidatosAsignados($v['folSolici']);
+                                $numCandidatos = $vacantes->num_candidatosAsignados($v['folSolici'],$_SESSION['id']);
                                echo '<td>'.$numCandidatos[0].'</td>';
-                               echo '<td class="btnsVac"><span style="height:15px;" class="modif" title="Modificar estatus de vacante"></span><span style="height:15px;" onclick="abrirPanel('.$i.');" class="up" title="Abrir panel"></span></td>';
+                               echo '<td>'.$numContratados.'</td>';
+                               echo '<td class="btnsVac">';
+                               if($cerrar){
+                                   echo '<span style="height:15px;" onclick="cerrarVacante('.$i.','.$_SESSION['id'].');" class="cerrar" title="Cerrar la vacante"></span>';
+                               }else{
+                                   echo '<span style="height:15px;" onclick="cancelarVacante('.$i.','.$_SESSION['id'].');" class="cancelar" title="Cancelar la vacante"></span>';
+                               }
+                               echo '
+                               <span style="height:15px;" onclick="abrirPanel('.$i.');" class="up" title="Abrir panel"></span></td>';
                                                                       
                                $i++;
                         }
@@ -74,6 +97,9 @@ $datos = $vacantes->obtener_vacantes($_SESSION['id']);
             </table>
 </article>
 </div>
+<div id="respVC" class="ui-widget" style="display:none">
+
+</div>    
 <!-- Dialog de ventana emergente -->
 <div id="dialog" title="Búsqueda de Candidato" style="display:none">
     <center>

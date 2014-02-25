@@ -26,6 +26,7 @@ function abrirpanelListar(){
     $("#contenidoAgregar").toggle('slide',function(){
                   $("#contenido").toggle('slide');
               });
+              //setTimeout(function(){alert();cargarCandidatos();},2500);
 }
 
 function cargarCandidatos(){
@@ -119,9 +120,10 @@ function guardarCandidato(){
                 $(this).val('');
             });
             setTimeout(function(){
-                $("#res").toggle('slide',function(){$("#conteiner").toggle('slide');});
+                $("#res").toggle('slide',function(){$("#contenido").toggle('slide');});
             },4000);
-            $( "#acordeon" ).accordion({ active: 0 });
+            setTimeout(function(){cargarCandidatos(); $("#contenidoAgregar").hide();},2000);
+            
             
         }else{
             $("#res").html('<div style="font-size: 45px; text-align: center; padding-top:200px;"><img style="width:100px;" src="../img/tache.png" /> ¡Ocurrio un error!</div>');

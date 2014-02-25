@@ -51,19 +51,7 @@ $(function(){
                         menu3.on('mouseleave',function(){menu3.hide();});
                         return false;
                     });
-      $("#catalogos").button().hover(function() {
-                        $(this).parent().nextAll("ul").hide();
-                        var menu4 = $(this).parent().next().next().next().next().show().position({
-                            my: "left top",
-                            at: "left bottom",
-                            of: this
-                        });
-                        $(window).one("click", function() {
-                            menu4.hide();
-                        });
-                        menu4.on('mouseleave',function(){menu4.hide();});
-                        return false;
-                    });
+      $("#catalogos").button();
      $("#agenda").button();
      $("#reportes").button();
      $("#salir").button().click(function() {
@@ -120,24 +108,12 @@ function menu(mnu)
         obj.innerHTML = "<object type='text/html' data='cadidatos/busqueda/acordeon.php' class='homeobj' id='obj_inx'>";
         break;                            
       //Catálogos -------------------------------
-      case "usu":
-        obj.innerHTML = "<object type='text/html' data='usuarios/index.php' class='homeobj'  id='obj_inx'>";
-        break;               
-      case "perfil":
-        obj.innerHTML = "<object type='text/html' data='cat_perfiles/web_perfil.php' class='homeobj' id='obj_inx'>";
-        break;
-      case "doc":
-        obj.innerHTML = "<object type='text/html' data='cat_documentos/web_documentos.php' class='homeobj' id='obj_inx'>";
-        break;
-      case "esc":
-        obj.innerHTML = "<object type='text/html' data='cat_escolaridad/web_Esc.php' class='homeobj' id='obj_inx'>";
-        break;            
-      case "pry":
-        obj.innerHTML = "<object type='text/html' data='cat_proyectos/web_proy.php' class='homeobj' id='obj_inx'>";
-        break;
+      case "catalogos":
+      obj.innerHTML = "<object type='text/html' data='web_catalogos.php' class='homeobj'  id='obj_inx'>";
+        break;   
       //Agenda -------------------------------
       case "agenda":
-        obj.innerHTML = "<object type='text/html' data='calendario/agenda.php' class='homeobj'  id='obj_inx'>";
+        obj.innerHTML = "<object type='text/html' data='web_agenda.php' class='homeobj'  id='obj_inx'>";
         break;                 
           
 			//case "reclut":

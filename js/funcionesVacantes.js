@@ -14,7 +14,8 @@ $(document).tooltip().ready(function(){
         primary: "ui-icon-note"
       }});
   $("#contenido").find(".up").button({icons:{primary:"ui-icon-arrowthick-2-n-s"}});
-  $("#contenido").find(".modif").button({icons:{primary:"ui-icon-gear"}});
+  $("#contenido").find(".cancelar").button({icons:{primary:"ui-icon-cancel"}});
+  $("#contenido").find(".cerrar").button({icons:{primary:"ui-icon-check"}});
   $("#contenido").find(".btnsVac").buttonset();
   
    $('#listaSolicitud,#listaCandidatos,#listaVacantes').dataTable( { //CONVERTIMOS NUESTRO LISTADO DE LA FORMA DEL JQUERY.DATATABLES- PASAMOS EL ID DE LA TABLA
@@ -175,6 +176,37 @@ function cambiarReclutador(){
     }
 }
 
+function cerrarVacante(aux,idUsuario){
+    if(confirm("¿Cerrar la vacante para éste reclutador?")){
+    var folSolici=$("#folio"+aux).text();
+        var url="../controlador/cerrarVacanteVC.php";
+        $.post(url,{folSolici:folSolici,idUsuario:idUsuario},function(responseText){
+           if(responseText=='ok'){
+               $("#respVC").html('<div style="font-size: 45px; text-align: center; padding-top:200px;"><img style="width:100px;" src="../img/paloma.png" /> ¡Vacante cerrada con éxito!</div>');
+               $("#contentVC").toggle('slide',function(){$("#respVC").toggle('slide'); setTimeout(function(){location.reload()},4000);
+               });
+           }else{
+               alert('Error');
+           } 
+        });
+    }
+}
+
+function cancelarVacante(aux,idUsuario){
+    if(confirm("¿Cancelar la vacante para éste reclutador?")){
+    var folSolici=$("#folio"+aux).text();
+        var url="../controlador/cancelarVacanteVC.php";
+        $.post(url,{folSolici:folSolici,idUsuario:idUsuario},function(responseText){
+           if(responseText=='ok'){
+               $("#respVC").html('<div style="font-size: 45px; text-align: center; padding-top:200px;"><img style="width:100px;" src="../img/tache.png" /> ¡Vacante cancelada!</div>');
+               $("#contentVC").toggle('slide',function(){$("#respVC").toggle('slide'); setTimeout(function(){location.reload()},4000)});
+           }else{
+               alert('Error');
+           } 
+        });
+    }
+}
+
 function abrePanel(aux){
     var folSolici=$("#folio"+aux).html();
     
@@ -239,15 +271,18 @@ function abrirPanel(obj){
         $(this).find("div").toggle("blind",function(){$(this).parents(".activo:first").remove();},1000);
     });
    
-    $("#vacante"+obj).after("<tr class='activo'><td colspan='8'><input type='hidden' id='idVacante"+obj+"' class='vacante' /><div id='panel"+obj+"' class='ui-corner-all' style='padding-bottom:15px; height:250px;background-color:#FCFDFD;display:none;'></div></td></tr>");
+    $("#vacante"+obj).after("<tr class='activo'><td colspan='9'><input type='hidden' id='idVacante"+obj+"' class='vacante' /><div id='panel"+obj+"' class='ui-corner-all' style='padding-bottom:15px; height:250px;background-color:#FCFDFD;display:none;'></div></td></tr>");
      $("#idVacante"+obj).val($("#folio"+obj).text());
     var url="../controlador/menuCandidatosVC.php";
     $.post(url,{},
             function(responseText){
                 $("#panel"+obj).html(responseText);
-                $("#r1").button({icons:{primary:"ui-icon-person"}});
-                $("#r2").button({icons:{primary:"ui-icon-calendar"}});
-                $("#radios").buttonset();
+                $("#panel"+obj).find(".btnCandidatos").each(function(){
+                    $(this).button({icons:{primary:"ui-icon-person"}});
+                });
+                $("#panel"+obj).find(".btnEntrevistas").each(function(){
+                    $(this).button({icons:{primary:"ui-icon-calendar"}});
+                });
             });
    
     $("#panel"+obj).toggle("fold",1000);
@@ -275,7 +310,7 @@ function listarCandidatos(){
 }
 function listarEntrevistas(){
     folioVacante =$("#menuCandidatos").parent().parent().parent().children("input:first").val();
-     var url="../controlador/buscaVacanteCandidato.php";
+     var url="../controlador/buscaVC.php";
     $.post(url,{folioVacante:folioVacante},
             function(responseText){
                 $("#containerEntrevistas").html(responseText);
@@ -319,7 +354,7 @@ function asignarCandidato(aux){
    var numVacante = $("#vacante").val();
    //var candidato = $("#candidato"+aux).html();
    //var fila = $("#fila").val();
-    var url="../controlador/asignarCandidato.php";
+    var url="../controlador/asignarCandidatoVC.php";
     
         $.post(url,{idCandid:idCandid,numVacante:numVacante,folioVacante:folioVacante},
             function(responseText){
@@ -345,9 +380,13 @@ function buscaEntrevistas(idVacCand){
             function(responseText){
                 
                 $("#entrev").html(responseText);
-                $("#divCandidatos").append('<div id="mnuEntrev" style="margin-top:5px;display:none;"><span id="nvaEntrevista" onclick="agendaEntrevista();">Agendar entrevista</span></div>');
+                $("#divCandidatos").append('<div id="mnuEntrev" style="margin-top:5px;display:none;"><center><span id="nvaEntrevista" style="height:20px" onclick="agendaEntrevista();" title="Agendar entrevista"></span><span id="contratar" style="height:20px" onclick="estadoCandidato(1);" title="Contratado"></span><span id="posible" style="height:20px" onclick="estadoCandidato(2);" title="Rechazado pero candidato a otra vacante"></span><span id="rechazar" style="height:20px" onclick="estadoCandidato(3);" title="Rechazado"></span></center></div>');
                  $("#mnuEntrev").toggle('size');
                 $("#nvaEntrevista").button({icons:{primary: "ui-icon-calendar"}});
+                $("#contratar").button({icons:{primary: "ui-icon-check"}});
+                $("#posible").button({icons:{primary: "ui-icon-alert"}});
+                $("#rechazar").button({icons:{primary: "ui-icon-cancel"}});
+                $("#mnuEntrev").buttonset();
                 $(".resEntrev").each(function(){
                     $(this).button({icons:{primary:"ui-icon-pencil"}});
                 });
@@ -388,7 +427,7 @@ function registraEntrevista(){
         var entrevistador=$("#entrevistador").val();
         var lugar=$("#lugarTrabajo").val();
        
-        var url="../controlador/registraEntrevista.php"
+        var url="../controlador/registraEntrevistaVC.php"
         $.post(url,{idVacCand:idVacCand,fecha:fecha,hora:hora,entrevistador:entrevistador,lugar:lugar},function(responseText){
             
             if(responseText=='ok'){
@@ -403,6 +442,23 @@ function registraEntrevista(){
     }
     else{
         return false;
+    }
+}
+
+function estadoCandidato(estado){
+    var vacCand = $("#cndidatos").val();
+    if(confirm("¿Desea cambiar la situación del candidato?")){
+        var url="../controlador/estadoVC.php";
+        $.post(url,{vacCand:vacCand,estado:estado},function(responseText){
+            
+            if(responseText=='ok'){
+                location.reload();
+            }
+            else{
+                
+                alert("Ocurrio un error!");
+            }
+        });
     }
 }
 
@@ -427,7 +483,7 @@ function registrarEstatus(){
     var idEntrev = $("#idEntr").val();
     var est = $("#staent").val();
     var observaciones = $("#observaciones").val();
-    var url="../controlador/registraEstatus.php";
+    var url="../controlador/registraEstatusVC.php";
         $.post(url,{idEntrev:idEntrev,est:est,observaciones:observaciones},function(responseText){
             if(responseText=='ok'){
                 $("#cndidatos").change();
@@ -439,16 +495,11 @@ function registrarEstatus(){
             }
         });
 }
-/*function buscaEntrevistas(fila){
-    var numVacante=$("#numVacante"+fila).val();
-    var url="functions/buscaEntrevista.php";
-    
-    $("#entrevistasRegistradas").dialog("open");
-    $.post(url,{numVacante:numVacante},function(responseText){
-        $("#entrevistasRegistradas").find("#content").html(responseText);
-        //$("#entrevistasRegistradas").find("#listaEntrevistas").dataTable();
-        
+
+function desactivaOpciones(){
+    $("#mnuEntrev").toggle("slide");
+    $("#containerEntrevistas").find(".resEntrev").each(function(){
+        $(this).toggle('slide');
     });
-    
-}*/
+}
 

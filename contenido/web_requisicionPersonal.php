@@ -35,7 +35,7 @@ if($_SESSION['rol']==1||$_SESSION['rol']==2){
  
 </head>
 <body>
-<div class="ui-widget">    
+<div class="ui-widget" id="panelRequisicion">    
         <p align=center><span class='titulo ui-corner-all'>Requisición de Personal</span></p> 
         <form id="solicitud">
         <center>
@@ -321,6 +321,7 @@ if($_SESSION['rol']==1||$_SESSION['rol']==2){
 
         
 </div>
+<div class="ui-widget" id="panelResp" style="display:none"></div>
 <div id="ventanaPerfil" title="Seleccionar un perfil">
     <div id="contDialog" ></div>
 </div>  

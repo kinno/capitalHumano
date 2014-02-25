@@ -34,7 +34,7 @@ if($SESION==4){//Lider de proyecto
 
 
 
-$sqlB="select * from tblsolicitud $consulta";
+$sqlB="select * from tblsolicitud $consulta ";
 $queryB=mysql_query($sqlB) or die(mysql_error()); //SE EJECUTA LA CONSULTA
 ?>
  
