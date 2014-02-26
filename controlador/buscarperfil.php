@@ -2,7 +2,7 @@
 $idPerfil=$_POST['id']; //recuperamos el id
 	 	$host = "localhost";
 		$user = "root";
-		$passwd ="admin";
+		$passwd ="admin123";
 		$db = "bdrh";
 		$conexion=mysql_connect($host,$user,$passwd,$db) or die(mysql_error());
 		$selecDB=mysql_select_db($db,$conexion)or die(mysql_error());

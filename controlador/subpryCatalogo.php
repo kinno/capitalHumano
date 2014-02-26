@@ -14,4 +14,4 @@ $idProyecto = $_POST['idProyecto'];
         ?>
     </table>
 </div>
-<center><span id="nvoSubproyecto" title="Agregar subproyecto" onclick="nuevoSubproyecto(<?echo $idProyecto;?>);">Agregar subproyecto</span></center>
+<center><span id="nvoSubproyecto" title="Agregar subproyecto" onclick="nuevoSubproyecto(<?php echo $idProyecto;?>);">Agregar subproyecto</span></center>

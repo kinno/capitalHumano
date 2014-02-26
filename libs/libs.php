@@ -6,7 +6,7 @@
  	{
 	 	$host = "localhost";
 		$user = "root";
-		$passwd ="admin";
+		$passwd ="admin123";
 		$db = "bdrh";
 		$conexion=mysql_connect($host,$user,$passwd,$db) or die(mysql_error());
                 mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'", $conexion);

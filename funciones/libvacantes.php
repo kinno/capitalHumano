@@ -135,7 +135,7 @@ class Vacantes{
                         tblperfil pfl ON sol.idPerfil = pfl.idPerfil
                             join
                         tblusuarios usr ON vac.idReclutador = usr.idUsuario
-                    where vac.fecbaja is null and usr.idUsuario =".$idUsuario."
+                    where vac.fecbaja is null and vac.statVacante <> 1 and usr.idUsuario =".$idUsuario."
                     group by folSolici, usr.idUsuario";
         
         $result=  mysql_query($query) or die(mysql_error());
@@ -202,7 +202,13 @@ class Vacantes{
             $funciones->conectar();
             $query="update tblvacante set statVacante = 3,fecbaja = now() where folSolici =".$folSolici;
             $queryB="update tblsolicitud set fecbaja = now() where folSolici =".$folSolici;
-                   mysql_query($queryB);
+            $queryC="UPDATE relvaccand
+                        left join tblentrevista on tblentrevista.idVacCand = relvaccand.idVacCand
+                        set tblentrevista.statEntrev = 1
+                        where relvaccand.folSolici=".$folSolici
+                        ;
+                                           mysql_query($queryB);
+                                           mysql_query($queryC);
            if(mysql_query($query)){
                 $resultado='ok';
                 return $resultado;
@@ -424,7 +430,7 @@ class Vacantes{
                 left join tblperfil on tblperfil.idPerfil = tblsolicitud.idPerfil
                 left join tblcandidato on tblcandidato.idCandid = relvaccand.idCandid
                 left join tbllugares on tbllugares.idlugar = tblentrevista.lugarEntrev
-                where tblentrevista.idUsuario =".$idUsuario;
+                where tblentrevista.statEntrev not in(1,2,3,7) and tblentrevista.idUsuario =".$idUsuario;
         
         $result=  mysql_query($query) or die(mysql_error());
         $datos=array();
@@ -476,7 +482,7 @@ class Vacantes{
                     $folSolici = $value['folSolici'];
                 }
                 
-                $queryC = "select numVacante from tblvacante where folSolici = ".$folSolici." and idReclutador = ".$idUsuario." and fecbaja is null
+                $queryC = "select numVacante from tblvacante where folSolici = ".$folSolici." and idReclutador = ".$idUsuario." and fecbaja is null and idCandid is null
                             limit 1";
                 ChromePhp::log($queryC);
                 $result2=mysql_query($queryC) or die(mysql_error());
