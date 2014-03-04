@@ -119,7 +119,7 @@
             $query="select * from tblcandidato 
                         left join tblcandidatoda on tblcandidatoda.idCandid = tblcandidato.idCandid
                         left join tblcandidatodp on tblcandidatodp.idCandid = tblcandidato.idCandid
-                        left join tblcandidatoest on tblcandidatoest.idCandid = tblcandidato.idCandid;";
+                        left join tblcandidatoest on tblcandidatoest.idCandid = tblcandidato.idCandid";
             $result=  mysql_query($query) or die(mysql_error());
             $datos=array();
             while($fila=  mysql_fetch_array($result)){
@@ -178,6 +178,18 @@
             $funciones = new funciones();
             $funciones->conectar();
             $sql="insert into tblresreferencia values (null,".$idsReferencia.",'".$periodoInicio."','".$periodoFinal."','".$sueldoPercibido."','".$motivoSalida."','".$ultimoPuesto."','".$recontratar."','".$comentarios."',".$responsabilidad.",".$asistencia.",".$puntualidad.",".$actitud.",".$compromiso.",".$honestidad.",".$relacion.",".$iniciativa.",".$lealtad.",".$apego.")";
+            
+            if(mysql_query($sql)){
+                echo 'ok';
+            }else{
+                echo 'error';
+            }
+        }
+        
+        function cambiar_estatus($idCandid){
+            $funciones = new funciones();
+            $funciones->conectar();
+            $sql="Update tblcandidatoest set estatus=4 where idCandid=".$idCandid;
             
             if(mysql_query($sql)){
                 echo 'ok';

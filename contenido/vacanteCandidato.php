@@ -85,7 +85,7 @@ $datos = $vacantes->obtener_vacantes($_SESSION['id']);
                                if($cerrar){
                                    echo '<span style="height:15px;" onclick="cerrarVacante('.$i.','.$_SESSION['id'].');" class="cerrar" title="Cerrar la vacante"></span>';
                                }else{
-                                   echo '<span style="height:15px;" onclick="cancelarVacante('.$i.','.$_SESSION['id'].');" class="cancelar" title="Cancelar la vacante"></span>';
+                                   echo '<span style="height:15px;" onclick="panelCancelar('.$i.','.$_SESSION['id'].');" class="cancelar" title="Cancelar la vacante"></span>';
                                }
                                echo '
                                <span style="height:15px;" onclick="abrirPanel('.$i.');" class="up" title="Abrir panel"></span></td>';
@@ -223,6 +223,18 @@ $datos = $vacantes->obtener_vacantes($_SESSION['id']);
     <div id="condetalle">
         
     </div>
+</div>
+<div id="panelCancelar">
+    <input type="hidden" id="folioCancelar" />
+    <input type="hidden" id="usuarioCancelar" />
+    <label for="usrCancelar">Vacante cancelada por:</label>
+    <select id="usrCancelar">
+        <option>Seleccione...</option>
+        <option value="Capital humano">Capital Humano</option>
+        <option value="Cliente">Cliente</option>
+    </select>
+    <textarea id="obsCancelar" style="width:210px; height: 100px;" placeholder="Observaciones"></textarea>
+    <span id="aceptar" onclick="cancelarVacante()">Cancelar</span>
 </div>
 </body>
 </html>

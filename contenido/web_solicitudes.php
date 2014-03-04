@@ -7,6 +7,7 @@
         <link type="text/css" href="../css/jquery-ui-1.10.4.custom.css" rel="stylesheet" /> 
         <script type="text/javascript" language="javascript" src="../js/jquery.js"></script>
         <script type="text/javascript" language="javascript" src="../js/jquery-ui-1.10.4.custom.js"></script>
+        <script type="text/javascript" language="javascript" src="../js/jquery.ui.timepicker.js"></script>
         <script type="text/javascript" language="javascript" src="../js/jquery.dataTables.js"></script>
         <script type="text/javascript" language="javascript" src="../js/funcionesSolicitudes.js"></script>
         

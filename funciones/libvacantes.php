@@ -36,12 +36,14 @@ class Vacantes{
                     left join tblcandidatoda on tblcandidatoda.idCandid = tblcandidato.idCandid
                     left join tblcandidatodp on tblcandidatodp.idCandid = tblcandidato.idCandid
                     left join tblcandidatoest on tblcandidatoest.idCandid = tblcandidato.idCandid
-                where tblcandidato.idCandid in (
+                where tblcandidatoest.estatus not in(1,3) and 
+                        tblcandidato.idCandid in (
                                                 select idCandid from tblcandidatorl
                                                 left join tblresreferencia on tblresreferencia.idReferencia = tblcandidatorl.idReferencia
                                                 where tblresreferencia.idReferencia is not null
                                                 group by tblcandidatorl.idCandid
-                                                )";
+                                                ) 
+                                                ";
         $result=  mysql_query($query) or die(mysql_error());
         $datos=array();
         while($fila=  mysql_fetch_array($result)){
@@ -74,12 +76,13 @@ class Vacantes{
         return $datos;
     }
     
-    function asignar_reclutadores($folSolici,$idReclutador,$compPerfil,$statVacante){
+    function asignar_reclutadores($folSolici,$idReclutador,$statVacante){
          
         $funciones = new funciones();
         $funciones->conectar();
-        $query = "insert into tblvacante (folSolici,idReclutador,compPerfil,statVacante,fecalta)
-                    values ('$folSolici',$idReclutador,$compPerfil,$statVacante,now())";
+        $query = "insert into tblvacante (folSolici,idReclutador,statVacante,fecalta)
+                    values ('$folSolici',$idReclutador,$statVacante,now())";
+        ChromePhp::log($query);
         if(mysql_query($query)){
             $resultado='ok';
             return $resultado;
@@ -197,10 +200,10 @@ class Vacantes{
             }
     }
     
-    function cancelar_vacante($folSolici,$idUsuario){
+    function cancelar_vacante($folSolici,$idUsuario,$descCancela,$obsCancela){
         $funciones = new funciones();
             $funciones->conectar();
-            $query="update tblvacante set statVacante = 3,fecbaja = now() where folSolici =".$folSolici;
+            $query="update tblvacante set statVacante = 3,fecbaja = now(),descCancela='".$descCancela."', obsCancela='".$obsCancela."' where folSolici =".$folSolici;
             $queryB="update tblsolicitud set fecbaja = now() where folSolici =".$folSolici;
             $queryC="UPDATE relvaccand
                         left join tblentrevista on tblentrevista.idVacCand = relvaccand.idVacCand
@@ -459,7 +462,7 @@ class Vacantes{
     function estado_candidato($idVacCand,$estado,$idUsuario){
         $funciones = new funciones();
             $funciones->conectar();
-            $query="update relvaccand set estatus = ".$estado." where idVacCand =".$idVacCand;
+            $query="update relvaccand set estatus = ".$estado.", fecbaja= now() where idVacCand =".$idVacCand;
             ChromePhp::log($query);
             if(mysql_query($query)){
                 echo 'ok';
@@ -496,6 +499,9 @@ class Vacantes{
                 $queryD = "update tblvacante set idCandid= ".$idCandid." where numVacante=".$numVacante;
                 ChromePhp::log($queryD);
                 mysql_query($queryD);
+                
+                $queryE="update tblcandidatoest set estatus = ".$estado." where idCandid=".$idCandid;
+                mysql_query($queryE);
             }
     }
     

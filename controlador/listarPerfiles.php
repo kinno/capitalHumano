@@ -18,12 +18,12 @@ $queryB=mysql_query($sqlB) or die(mysql_error()); //SE EJECUTA LA CONSULTA
 
                             <thead >
                                 <tr>
-                                    <th >Descripción del Perfil</th>
                                     <th >Perfil</th>
+                                    <!--<th >Perfil</th>
                                     <th >Funciones</th>
                                     <th >Habilidades</th>
-                                    <th >Conocimientos</th>
-                                    <th >Acciones</th> <!-- Campo de acciones para el cat�logo -->
+                                    <th >Conocimientos</th> -->
+                                    <th >Acciones</th> 
                                 </tr>
                             </thead>
 
@@ -38,10 +38,10 @@ $queryB=mysql_query($sqlB) or die(mysql_error()); //SE EJECUTA LA CONSULTA
                                          $id=$reg['idPerfil'];
                                            echo '<tr>';
                                            echo '<td style="font-size:20px;">'.$reg['descPerfil'].'</td>';
-                                           echo '<td >'.$reg['perfPerfil'].'</td>';
+                                           /*echo '<td >'.$reg['perfPerfil'].'</td>';
                                            echo '<td >'.$reg['funcPerfil'].'</td>';
                                            echo '<td >'.$reg['habPerfil'].'</td>';
-                                           echo '<td >'.$reg['conocPerfil'].'</td>';
+                                           echo '<td >'.$reg['conocPerfil'].'</td>';*/
                                            echo '<td><span class="seleccionar" onclick="recuperaPerfil('.$id.') " title="Seleccionar"></span>
                                                  </td>';
                                            echo '</tr>';

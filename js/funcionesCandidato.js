@@ -33,7 +33,7 @@ function cargarCandidatos(){
      $.post("../controlador/listarCandidatos.php",{},function(data){
               $("#contenido").html(data);
                 $("#nuevoCandidato").button({icons:{primary:"ui-icon-person"}});
-                $(".modificarCandidato").button({icons:{primary:"ui-icon-contact"}});
+                $(".modificarCandidato").button({icons:{primary:"ui-icon-check"}});
                 $(".detalleCandidato").button({icons:{primary:"ui-icon-clipboard"}});
                 $(".btnsDA").buttonset();
                 $("#detalleCandidato").dialog({
@@ -274,4 +274,15 @@ function actualizarCampos(){
         }
     });
     
+}
+
+function cambiarEstatus(idCandid){
+    if(confirm("¿Desea el estatus de contratado a disponible?")){
+        var url="../controlador/liberaCandidato.php";
+        $.post(url,{idCandid:idCandid},function(responseText){
+            if(responseText=='ok'){
+                location.reload();
+            }
+        });
+    }
 }

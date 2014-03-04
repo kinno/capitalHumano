@@ -247,9 +247,8 @@
                                 <label for="colorEstatus">Estatus: </label>
                                 <select id="colorEstatus" name="colorEstatus">
                                     <option>Seleccione...</option>
-                                    <option value="No volver a marcar" style="background-color: #F00;">No volver a marcar</option>
-                                    <option value="Potencial" style="background-color: #EDEF7D;">Potencial</option>
-                                    <option value="Finalista" style="background-color: #6CE26C;">Finalista</option>
+                                    <option value="3" style="background-color: #F00;">No volver a marcar</option>
+                                    <option value="4" style="background-color: #a2d0f2;">Potencial</option>
                                 </select>
                             </td>
                         </tr>

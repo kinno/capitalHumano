@@ -41,7 +41,7 @@ $datos = $vacantes->obtener_solicitudes();
                                                echo '<tr align=center valign=top>';
                                                echo '<td id="folio'.$i.'">'.$v['folSolici'].'</td>';
                                                echo '<td id="proyecto'.$i.'">'.$v['nomProyecto'].'</td>';
-                                               echo '<td>'.$v['descPerfil'].'</td>';
+                                               echo '<td><input type="hidden" id="comp'.$i.'" value="'.$v['compPerfil'].'"/>'.$v['descPerfil'].'</td>';
                                                echo '<td id="numPuestos'.$i.'">'.$v['numVSolici'].'</td>';
                                                $datos2=$vacantes->obtener_numasignadas($v['folSolici']);
                                                foreach($datos2 as $num){
@@ -95,14 +95,8 @@ $datos = $vacantes->obtener_solicitudes();
                 <tr align="center">
                     <td id="folioVacante"></td>
                     <td id="proyectoVacante"></td>
-                    <td>
-                        <select id="complejidad">
-                            <option value="1">Muy Bajo</option>
-                            <option value="2">Bajo</option>
-                            <option value="3">Medio</option>
-                            <option value="4">Avanzado</option>
-                            <option value="5">Complejo</option>
-                        </select>
+                    <td id="complejidad">
+                        
                     </td>
                     <td id="puestosVacante"><input id="spinner" name="spinner" value="1" readonly/></td>
                     <td id="ReclutadorVacante">

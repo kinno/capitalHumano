@@ -295,7 +295,7 @@ $.ajax({
     ?>
 </div>    
 <div style="position: absolute; right:5px; margin-top: -40px;">
-        <img src="img/upgenia_head.png" width="50%" style="float: right;"></img>
+        <img src="../img/upgenia_head.png" width="50%" style="float: right;"></img>
     </div>    
 <div id="container" style="margin-top:35px;">
     <table width="1325px">
@@ -346,41 +346,10 @@ $.ajax({
         </tr>
         
     </table>
-    <!--
-	<ul id="mnuindex">
-		  <li onclick="javascript:menu('inicio');">Inicio</li>
-      <li>Solicitudes <!--menú de solicitudes--
-	<ul class="submenu">
-		 <li onclick="javascript:menu('RSoli');">Requisición de Personal</li>
-		 <li onclick="javascript:menu('CatSoli');">Catálogo de Solicitudes</li>
-		
-	</ul>
-      </li>
-    
-      <li onclick="javascript:menu('vacante');">Vacantes</li>
-      <li>Candidatos <!-- menú de candidatos->
-          <ul class="submenu">
-              <li onClick="javascript:menu('cand');">Candidatos</li>              
-              <li onclick="javascript:menu('busCandi');">Busqueda</li>
-          </ul>
-      </li>
-		  <li>Cat&aacute;logos <!-- menú de catálogos->
-			   <ul class="submenu">
-              <li onClick="javascript:menu('usu');">Usuarios</li>              
-              <li onclick="javascript:menu('perfil');">Perfiles</li>
-              <li onclick="javascript:menu('doc');">Documentos</li>
-              <li onclick="javascript:menu('esc');">Escolaridad</li>
-              <li onclick="javascript:menu('pry');">Proyectos</li>
-	     
-			   </ul>
-      </li>
-      <li onclick="javascript:menu('agenda');">Agenda</li>
-      <li ><a href='out.php'>Salir</a></li>
-	</ul>
-    -->
+   
 </div>
 <div class="home" id="div_hom" style="background: #FFFFFF;">
-    <center><img src="img/upgenia.png" style="margin-top: 160px; margin-left: auto; margin-right: auto;"/></center>
+    <center><img src="../img/upgenia.png" style="margin-top: 160px; margin-left: auto; margin-right: auto;"/></center>
 </div>    
 <div class="overlay-container">
      <center>

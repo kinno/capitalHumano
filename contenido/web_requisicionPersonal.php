@@ -15,7 +15,7 @@ if($_SESSION['rol']==1||$_SESSION['rol']==2){
          <!-- Librerias de jquery --> 
         <script src="../js/jquery.js" type="text/javascript"></script>
         <script src="../js/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
-        
+        <script src="../js/jquery.ui.timepicker.js" type="text/javascript"></script>
         <script type="text/javascript" language="javascript" src="../js/jquery.dataTables.js"></script>
         <script type="text/javascript" language="javascript" src="../js/jquery.highlight.js"></script>
         <script src="../js/funcionesSolicitudes.js" type="text/javascript"></script>
@@ -138,10 +138,15 @@ if($_SESSION['rol']==1||$_SESSION['rol']==2){
                                     <tr>
                                         <td>Horario de Trabajo:</td>
                                         <td>
-                                            <p>
+                                              <p>
                                                 <input type="text" id="horario" style="border: 0; color: #f6931f; font-weight: bold; text-align: center;" />
                                               </p>
-                                              <div id="slider-range"></div>
+                                              
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            De: <input type="hora" id="hInicio"> A:<input type="hora" id="hFin">
                                         </td>
                                     </tr>
                                 </table>

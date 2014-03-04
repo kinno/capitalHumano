@@ -27,7 +27,7 @@ $(document).tooltip().ready(function(){
     });
     
     
-    $( "#slider-range" ).slider({
+    /*$( "#slider-range" ).slider({
       range: true,
       min: 00,
       max: 24,
@@ -40,11 +40,24 @@ $(document).tooltip().ready(function(){
     
     $( "#horario" ).val( $( "#slider-range" ).slider( "values", 0 ) +
       " hrs. - " + $( "#slider-range" ).slider( "values", 1 ) + " hrs." );
-      
+      */
        $("#nVacante").spinner(
            {min:1,
             max:99}
            ).css("width",'20px');
+    $("#hInicio").timepicker({
+        defaultTime: '09:00',
+            onSelect: function(){
+                $("#horario").val($(this).val()+" hrs.");
+            }
+        });        
+    $("#hFin").timepicker({
+        defaultTime: '18:00',
+            onSelect: function(){
+                var Horario = $("#horario").val();
+                $("#horario").val(Horario+" - "+$(this).val()+" hrs.");
+            }
+        });        
        
     $(".spinnerPorcentaje").spinner({min:0,max:100,step:10});
     

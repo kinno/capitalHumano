@@ -85,6 +85,15 @@ $(document).tooltip().ready(function(){
                                                duration: 500
                                              }  
                                           });
+                                          
+    $("#panelCancelar").dialog({
+                                            autoOpen: false,
+                                            modal:true,
+                                            draggable:false,
+                                            height:200,
+                                            width:250,
+                                            title: 'Cancelar vacante'
+                                         });
    
 });
 
@@ -95,11 +104,23 @@ function resalta(valor){
 }
 
 function abreDialog(aux){
+   if($("#comp"+aux).val()==1)
+       var descComp='Muy bajo';
+   if($("#comp"+aux).val()==2)
+       var descComp='Bajo';
+   if($("#comp"+aux).val()==3)
+       var descComp='Medio';
+   if($("#comp"+aux).val()==4)
+       var descComp='Avanzado';
+   if($("#comp"+aux).val()==5)
+       var descComp='Complejo';
+   
    var max=($("#numPuestos"+aux).html()-$("#numFaltantes"+aux).html());
    $("#dialog").find("td").addClass('ui-corner-all');
    
    $("#folioVacante").html($("#folio"+aux).html());
    $("#proyectoVacante").html($("#proyecto"+aux).html());
+   $("#complejidad").html(descComp);
    $("#spinner").spinner(
            {min:1,
             max:max}
@@ -192,11 +213,22 @@ function cerrarVacante(aux,idUsuario){
     }
 }
 
-function cancelarVacante(aux,idUsuario){
+function panelCancelar(aux,idUsuario){
+   $("#folioCancelar").val($("#folio"+aux).text());
+   $("#usuarioCancelar").val(idUsuario);
+   $("#aceptar").button({icons:{primary:'ui-icon-cancel'}});
+   $("#panelCancelar").dialog('open');
+}
+
+function cancelarVacante(){
     if(confirm("¿Cancelar la vacante para éste reclutador?")){
-    var folSolici=$("#folio"+aux).text();
+        $("#panelCancelar").dialog('close');
+    var folSolici=$("#folioCancelar").val();
+    var idUsuario = $("#usuarioCancelar").val();
+    var descCancela=$("#usrCancelar").val();
+    var obsCancela=$("#obsCancelar").val();
         var url="../controlador/cancelarVacanteVC.php";
-        $.post(url,{folSolici:folSolici,idUsuario:idUsuario},function(responseText){
+        $.post(url,{folSolici:folSolici,idUsuario:idUsuario,descCancela:descCancela,obsCancela:obsCancela},function(responseText){
            if(responseText=='ok'){
                $("#respVC").html('<div style="font-size: 45px; text-align: center; padding-top:200px;"><img style="width:100px;" src="../img/tache.png" /> ¡Vacante cancelada!</div>');
                $("#contentVC").toggle('slide',function(){$("#respVC").toggle('slide'); setTimeout(function(){location.reload()},4000)});
