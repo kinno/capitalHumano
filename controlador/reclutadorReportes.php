@@ -1,5 +1,6 @@
 <?php
 include_once '../funciones/libreportes.php';
+if($_POST['periodo']==1){
 $reportes = new Reportes();
 $dato = $reportes->totalvacantes_reclutador($_POST['idReclutador']);
 $dato3 = $reportes->canceladas_reclutador($_POST['idReclutador']);
@@ -55,3 +56,8 @@ $dato6 = $reportes->rechazados_reclutador($_POST['idReclutador']);
         ?>
     
 </table>
+<?php
+}else{
+    echo 'Reporte por periodos';
+}
+    ?>
