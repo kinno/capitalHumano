@@ -35,6 +35,8 @@ function desplegarProyectos(){
         
         $("#consultaReporte").button({icons:{primary:'ui-icon-document-b'}});
         
+     
+        
     });
     
     
@@ -89,7 +91,7 @@ function abrePeriodoR(opcion){
 
 function panelProyecto(){
     $("#btnPeriodo").buttonset();
-    $("#idProyectos").val('');
+    $(".idProyectos:checked").attr('checked',false);
     $("#rProyecto").html('');
     $("input[type=fecha]").val('');
     $("#fechas").hide();
@@ -106,7 +108,7 @@ function panelProyecto(){
 
 function panelReclutador(){
     $("#btnPeriodoR").buttonset();
-    $("#idReclutador").val('');
+    $(".idReclutador:checked").attr('checked',false);
     $("#rReclutador").html('');
      $("input[type=fecha]").val('');
     $("#fechasR").hide();
@@ -122,9 +124,9 @@ function panelReclutador(){
 
 function reporteProyectos(){
    //Validaciones 
-    if($("#idProyectos").val()==''){
+    if($(".idProyectos:checked").val()==undefined){
         alert("Seleccione un proyecto");
-        $("#idProyectos").focus();
+        $(".idProyectos:first").focus();
         return false;
     }
    if($("input[name=radio1]:checked").val()==undefined){
@@ -157,9 +159,17 @@ function reporteProyectos(){
         
         }
     }
-    var idProyecto = $("#idProyectos").val();
+    var idProyecto = [];
+    $(".idProyectos:checked").each(function(){
+        idProyecto.push($(this).val());
+    });
+    var nomProyecto = [];
+    $(".idProyectos:checked").each(function(){
+        nomProyecto.push($(this).next('span').html());
+    });
+    
     var url="../controlador/proyectoReportes.php";
-    $.post(url,{idProyecto:idProyecto,periodo:periodo,inicio:inicio,final:final},function(data){
+    $.post(url,{idProyecto:idProyecto,nomProyecto:nomProyecto,periodo:periodo,inicio:inicio,final:final},function(data){
         $("#rProyecto").html(data);
     });
     $("#rProyecto").toggle('slide');
@@ -168,7 +178,7 @@ function reporteProyectos(){
 
 function reporteReclutador(){
     
-     if($("#idReclutador").val()==''){
+     if($(".idReclutador:checked").val()==undefined){
         alert("Seleccione un reclutador");
         $("#idReclutador").focus();
         return false;
@@ -201,9 +211,16 @@ function reporteReclutador(){
          final=$("#periodoFinalR").val();
         }
     }
-    var idReclutador = $("#idReclutador").val();
+    var idReclutador = [];
+    $(".idReclutador:checked").each(function(){
+        idReclutador.push($(this).val());
+    });
+    var nomReclutador = [];
+    $(".idReclutador:checked").each(function(){
+        nomReclutador.push($(this).next("span").html());
+    });
     var url="../controlador/reclutadorReportes.php";
-    $.post(url,{idReclutador:idReclutador,periodo:periodo,inicio:inicio,final:final},function(data){
+    $.post(url,{idReclutador:idReclutador,nomReclutador:nomReclutador,periodo:periodo,inicio:inicio,final:final},function(data){
         $("#rReclutador").html(data);
     });
     $("#rReclutador").toggle('slide');

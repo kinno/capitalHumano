@@ -1,9 +1,8 @@
 <?php
 include_once '../libs/libs.php';
-include_once '../funciones/ChromePhp.php';
+//include '../funciones/ChromePhp.php';
 class Reportes{
     function Reportes(){
-        
     }
   // FUNCIONES PARA REPORTES VACANTES - RECLUTADOR ANUALES //  
     function totalvacantes_reclutador($idReclutador){
@@ -62,7 +61,7 @@ class Reportes{
                             and tblproyecto.idProyecto = ".$idProyecto."
                     group by idmes , tblproyecto.idProyecto) as t1 ON t1.idmes = tblmeses.idmes
                 group by tblmeses.idmes , t1.idProyecto";
-        ChromePhp::log($sql);
+//        ChromePhp::log($sql);
         $result = mysql_query($sql) or die(mysql_error());
         $datos = array();
         while($fila = mysql_fetch_array($result)){
@@ -91,7 +90,7 @@ class Reportes{
                             and tblvacante.descCancela is not null
                     group by idmes) as t1 ON t1.idmes = tblmeses.idmes
                 group by tblmeses.idmes";
-        ChromePhp::log($sql);
+//        ChromePhp::log($sql);
         $result = mysql_query($sql) or die(mysql_error());
         $datos = array();
         while($fila = mysql_fetch_array($result)){
@@ -122,7 +121,7 @@ class Reportes{
                             tblentrevista.idUsuario = ".$idReclutador."
                         group by idmes) as t1 ON t1.idmes = tblmeses.idmes
                     group by tblmeses.idmes";
-        ChromePhp::log($sql);
+//        ChromePhp::log($sql);
         $result = mysql_query($sql) or die(mysql_error());
         $datos = array();
         while($fila = mysql_fetch_array($result)){
@@ -152,7 +151,7 @@ class Reportes{
                             relvaccand.idUsuario = ".$idReclutador." and relvaccand.estatus=1
                         group by idmes) as t1 ON t1.idmes = tblmeses.idmes
                     group by tblmeses.idmes";
-        ChromePhp::log($sql);
+//        ChromePhp::log($sql);
         $result = mysql_query($sql) or die(mysql_error());
         $datos = array();
         while($fila = mysql_fetch_array($result)){
@@ -182,7 +181,7 @@ class Reportes{
                             relvaccand.idUsuario = ".$idReclutador." and relvaccand.estatus in(2,3)
                         group by idmes) as t1 ON t1.idmes = tblmeses.idmes
                     group by tblmeses.idmes";
-        ChromePhp::log($sql);
+//        ChromePhp::log($sql);
         $result = mysql_query($sql) or die(mysql_error());
         $datos = array();
         while($fila = mysql_fetch_array($result)){
@@ -209,7 +208,7 @@ class Reportes{
                                     where tblproyecto.idProyecto=".$idProyecto."
                                 ) as t1 ON t1.idmes = tblmeses.idmes
                     group by tblmeses.idmes";
-        ChromePhp::log($sql);
+//        ChromePhp::log($sql);
         $result = mysql_query($sql) or die(mysql_error());
         $datos = array();
         while($fila = mysql_fetch_array($result)){
@@ -235,7 +234,7 @@ class Reportes{
                                 where tblproyecto.idProyecto=".$idProyecto." and tblvacante.idReclutador = ".$idReclutador."
                             ) as t1 ON t1.idmes = tblmeses.idmes
                     group by tblmeses.idmes";
-        ChromePhp::log($sql);
+//        ChromePhp::log($sql);
         $result = mysql_query($sql) or die(mysql_error());
         $datos = array();
         while($fila = mysql_fetch_array($result)){
@@ -268,7 +267,7 @@ class Reportes{
                         where tblproyecto.idProyecto = ".$idProyecto." 
                         group by idmes) as t1 ON t1.idmes = tblmeses.idmes
                 group by tblmeses.idmes";
-        ChromePhp::log($sql);
+//        ChromePhp::log($sql);
         $result = mysql_query($sql) or die(mysql_error());
         $datos = array();
         while($fila = mysql_fetch_array($result)){
@@ -297,7 +296,7 @@ class Reportes{
                             and tblvacante.descCancela is not null
                     group by idmes) as t1 ON t1.idmes = tblmeses.idmes
                 group by tblmeses.idmes";
-        ChromePhp::log($sql);
+//        ChromePhp::log($sql);
         $result = mysql_query($sql) or die(mysql_error());
         $datos = array();
         while($fila = mysql_fetch_array($result)){
@@ -330,7 +329,7 @@ class Reportes{
                         and relvaccand.estatus=1
                         group by idmes) as t1 ON t1.idmes = tblmeses.idmes
                     group by tblmeses.idmes";
-        ChromePhp::log($sql);
+//        ChromePhp::log($sql);
         $result = mysql_query($sql) or die(mysql_error());
         $datos = array();
         while($fila = mysql_fetch_array($result)){
@@ -364,7 +363,7 @@ class Reportes{
                             and relvaccand.estatus in (2 , 3)
                     group by idmes) as t1 ON t1.idmes = tblmeses.idmes
                 group by tblmeses.idmes";
-        ChromePhp::log($sql);
+//        ChromePhp::log($sql);
         $result = mysql_query($sql) or die(mysql_error());
         $datos = array();
         while($fila = mysql_fetch_array($result)){
@@ -384,137 +383,19 @@ class Reportes{
     
    // FUNCIONES PARA REPORTES VACANTES - RECLUTADOR POR PERIODO // 
    
-    function totalvacantes_proyectosP($idProyecto,$inicio,$final){
-         $funciones = new funciones();
-        $funciones->conectar();
-        $sql="select count(tblvacante.folSolici) as total
-		from tblsolicitud
-                    left join tblvacante on tblvacante.folSolici = tblsolicitud.folSolici
-                    left join tblsubproyecto on tblsubproyecto.idSubproyecto = tblsolicitud.idSubproyecto
-                    left join tblproyecto on tblproyecto.idProyecto = tblsubproyecto.idProyecto
-                where tblproyecto.idProyecto=".$idProyecto." and iniSolici between '".date("Y-m-d",strtotime($inicio))."' and '".date("Y-m-d",strtotime($final))."';";
-        ChromePhp::log($sql);
-        $result = mysql_query($sql) or die(mysql_error());
-        $datos = array();
-        while($fila = mysql_fetch_array($result)){
-            $datos[]=$fila;
-        }
-        return $datos;
-    }
-    
-    function vacantesreclutador_proyectosP($idProyecto,$idReclutador){
-        $funciones = new funciones();
+    function totalvacantes_reclutadorP($idReclutador,$inicio,$final){
+        $funciones = new funciones;
         $funciones->conectar();
         $sql="select 
-                    tblmeses.descmes, ifnull(total, 0) as total
+                    count(tblvacante.folSolici) as total,                         
+                    idReclutador
                 from
-                    tblmeses
-                        left join
-                    (select count(tblvacante.folSolici) as total,idmes,descmes 
-                            from tblmeses
-                                left join tblsolicitud on month(tblsolicitud.iniSolici) = tblmeses.idmes
-                                left join tblvacante on tblvacante.folSolici = tblsolicitud.folSolici
-                                left join tblsubproyecto on tblsubproyecto.idSubproyecto = tblsolicitud.idSubproyecto
-                                left join tblproyecto on tblproyecto.idProyecto = tblsubproyecto.idProyecto
-                                where tblproyecto.idProyecto=".$idProyecto." and tblvacante.idReclutador = ".$idReclutador."
-                            ) as t1 ON t1.idmes = tblmeses.idmes
-                    group by tblmeses.idmes";
-        ChromePhp::log($sql);
-        $result = mysql_query($sql) or die(mysql_error());
-        $datos = array();
-        while($fila = mysql_fetch_array($result)){
-            $datos[]=$fila;
-        }
-        return $datos;
-    }
-    
-    function enviados_proyectosP($idProyecto){
-        $funciones = new funciones();
-        $funciones->conectar();
-        $sql="select 
-                        tblmeses.descmes, ifnull(enviados, 0) as enviados
-                from
-                        tblmeses
-                                left join
-                        (select 
-                                count(DISTINCT tblentrevista.idVacCand) as enviados,
-                                        idmes,
-                                        descmes
-
-                        from
-                                tblmeses
-                        left join tblentrevista ON month(tblentrevista.fecalta) = tblmeses.idmes
-                        left join relvaccand ON relvaccand.idVacCand = tblentrevista.idVacCand
-                        left join tblvacante ON tblvacante.folSolici = relvaccand.folSolici
-                        left join tblsolicitud on tblsolicitud.folSolici = tblvacante.folSolici
-                        left join tblsubproyecto on tblsubproyecto.idSubproyecto = tblsolicitud.idSubproyecto
-                        left join tblproyecto on tblproyecto.idProyecto = tblsubproyecto.idProyecto
-                        where tblproyecto.idProyecto = ".$idProyecto." 
-                        group by idmes) as t1 ON t1.idmes = tblmeses.idmes
-                group by tblmeses.idmes";
-        ChromePhp::log($sql);
-        $result = mysql_query($sql) or die(mysql_error());
-        $datos = array();
-        while($fila = mysql_fetch_array($result)){
-            $datos[]=$fila;
-        }
-        return $datos;
-    }
-    
-    function canceladas_proyectosP($idProyecto){
-        $funciones = new funciones();
-        $funciones->conectar();
-        $sql="select 
-                    tblmeses.descmes, ifnull(canceladas, 0) as canceladas
-                from
-                    tblmeses
-                        left join
-                    (select 
-                        count(tblvacante.folSolici) as canceladas, idmes, descmes
-                    from
-                        tblmeses
-                    left join tblsolicitud ON month(tblsolicitud.iniSolici) = tblmeses.idmes
-                    left join tblvacante ON tblvacante.folSolici = tblsolicitud.folSolici
-					left join tblsubproyecto on tblsubproyecto.idSubproyecto = tblsolicitud.idSubproyecto
-					left join tblproyecto on tblproyecto.idProyecto = tblsubproyecto.idProyecto
-					where tblproyecto.idProyecto=".$idProyecto."
-                            and tblvacante.descCancela is not null
-                    group by idmes) as t1 ON t1.idmes = tblmeses.idmes
-                group by tblmeses.idmes";
-        ChromePhp::log($sql);
-        $result = mysql_query($sql) or die(mysql_error());
-        $datos = array();
-        while($fila = mysql_fetch_array($result)){
-            $datos[]=$fila;
-        }
-        return $datos;
-    }
-    
-    function contratados_proyectosP($idProyecto){
-        $funciones = new funciones();
-        $funciones->conectar();
-        $sql="select 
-                        tblmeses.descmes, ifnull(contratados, 0) as contratados
-                    from
-                        tblmeses
-                            left join
-                        (select 
-                            count(DISTINCT relvaccand.estatus) as contratados,
-                                idmes,
-                                descmes
-
-                        from
-                            tblmeses
-                        left join relvaccand ON month(relvaccand.fecbaja) = tblmeses.idmes
-                        left join tblvacante ON tblvacante.folSolici = relvaccand.folSolici
-                        left join tblsolicitud on tblsolicitud.folSolici = tblvacante.folSolici
-                        left join tblsubproyecto on tblsubproyecto.idSubproyecto = tblsolicitud.idSubproyecto
-                        left join tblproyecto on tblproyecto.idProyecto = tblsubproyecto.idProyecto
-                        where tblproyecto.idProyecto = ".$idProyecto." 
-                        and relvaccand.estatus=1
-                        group by idmes) as t1 ON t1.idmes = tblmeses.idmes
-                    group by tblmeses.idmes";
-        ChromePhp::log($sql);
+                    tblsolicitud
+                left join tblvacante ON tblvacante.folSolici = tblsolicitud.folSolici
+                where
+                    idReclutador =".$idReclutador." and
+                    iniSolici between '".date("Y-m-d",strtotime($inicio))."' and '".date("Y-m-d",strtotime($final))."'
+                ";
         $result = mysql_query($sql) or die(mysql_error());
         $datos = array();
         while($fila = mysql_fetch_array($result)){
@@ -524,31 +405,242 @@ class Reportes{
         
     }
     
-    function rechazados_proyectosP($idProyecto){
+    function totalproyecto_reclutadorP($idReclutador,$idProyecto,$inicio,$final){
         $funciones = new funciones();
         $funciones->conectar();
         $sql="select 
-                    tblmeses.descmes, ifnull(rechazados, 0) as rechazados
-                from
-                    tblmeses
-                        left join
-                    (select 
-                        count(DISTINCT relvaccand.estatus) as rechazados,
-                            idmes,
-                            descmes
+                    tblproyecto.idProyecto,
+                    nomProyecto,
+                    count(tblvacante.folSolici) as total
+                from tblsolicitud
+                left join tblsubproyecto ON tblsubproyecto.idSubproyecto = tblsolicitud.idSubproyecto
+                left join tblproyecto ON tblproyecto.idProyecto = tblsubproyecto.idProyecto
+                left join tblvacante ON tblvacante.folSolici = tblsolicitud.folSolici
+                where
+                    tblvacante.idReclutador = ".$idReclutador."
+                    and tblproyecto.idProyecto = ".$idProyecto."
+                    and tblvacante.fecalta between '".date("Y-m-d",strtotime($inicio))."' and '".date("Y-m-d",strtotime($final))."'
+                    ";
+//        ChromePhp::log($sql);
+        $result = mysql_query($sql) or die(mysql_error());
+        $datos = array();
+        while($fila = mysql_fetch_array($result)){
+            $datos[]=$fila;
+        }
+        return $datos;
+        
+    }
+    
+    function canceladas_reclutadorP($idReclutador,$inicio,$final){
+        $funciones = new funciones();
+        $funciones->conectar();
+        $sql="select 
+                        count(tblvacante.folSolici) as canceladas
                     from
-                        tblmeses
-                    left join relvaccand ON month(relvaccand.fecbaja) = tblmeses.idmes
-                    left join tblvacante ON tblvacante.folSolici = relvaccand.folSolici
-                    left join tblsolicitud ON tblsolicitud.folSolici = tblvacante.folSolici
-                    left join tblsubproyecto ON tblsubproyecto.idSubproyecto = tblsolicitud.idSubproyecto
-                    left join tblproyecto ON tblproyecto.idProyecto = tblsubproyecto.idProyecto
+                        tblsolicitud
+                    left join tblvacante ON tblvacante.folSolici = tblsolicitud.folSolici
                     where
-                        tblproyecto.idProyecto = ".$idProyecto."
-                            and relvaccand.estatus in (2 , 3)
-                    group by idmes) as t1 ON t1.idmes = tblmeses.idmes
-                group by tblmeses.idmes";
-        ChromePhp::log($sql);
+                        tblvacante.idReclutador = ".$idReclutador."
+                            and tblvacante.descCancela is not null
+                            and tblvacante.fecbaja between '".date("Y-m-d",strtotime($inicio))."' and '".date("Y-m-d",strtotime($final))."'
+                    ";
+//        ChromePhp::log($sql);
+        $result = mysql_query($sql) or die(mysql_error());
+        $datos = array();
+        while($fila = mysql_fetch_array($result)){
+            $datos[]=$fila;
+        }
+        return $datos;
+        
+    }
+    
+    
+    function enviados_reclutadorP($idReclutador,$inicio,$final){
+        $funciones = new funciones();
+        $funciones->conectar();
+        $sql="select 
+                    count(DISTINCT tblentrevista.idVacCand) as enviados,
+                    idUsuario
+                from tblentrevista
+                where
+                    tblentrevista.idUsuario = ".$idReclutador."
+                    and tblentrevista.fecalta between '".date("Y-m-d",strtotime($inicio))."' and '".date("Y-m-d",strtotime($final))."'    
+                        ";
+//        ChromePhp::log($sql);
+        $result = mysql_query($sql) or die(mysql_error());
+        $datos = array();
+        while($fila = mysql_fetch_array($result)){
+            $datos[]=$fila;
+        }
+        return $datos;
+        
+    }
+    
+    function contratados_reclutadorP($idReclutador ,$inicio,$final){
+        $funciones = new funciones();
+        $funciones->conectar();
+        $sql="select 
+                    count(DISTINCT relvaccand.estatus) as contratados,
+                    idUsuario
+                from
+                    relvaccand
+                where
+                    relvaccand.idUsuario = ".$idReclutador." and relvaccand.estatus=1
+                    and relvaccand.fecbaja between '".date("Y-m-d",strtotime($inicio))."' and '".date("Y-m-d",strtotime($final))."'     
+                        ";
+//        ChromePhp::log($sql);
+        $result = mysql_query($sql) or die(mysql_error());
+        $datos = array();
+        while($fila = mysql_fetch_array($result)){
+            $datos[]=$fila;
+        }
+        return $datos;
+        
+    }
+
+    function rechazados_reclutadorP($idReclutador ,$inicio,$final){
+        $funciones = new funciones();
+        $funciones->conectar();
+        $sql="select 
+                    count(DISTINCT relvaccand.estatus) as rechazados,
+                    idUsuario
+                from
+                    relvaccand
+                where
+                    relvaccand.idUsuario = ".$idReclutador." and relvaccand.estatus in(2,3)
+                        and relvaccand.fecbaja between '".date("Y-m-d",strtotime($inicio))."' and '".date("Y-m-d",strtotime($final))."'
+                        ";
+//        ChromePhp::log($sql);
+        $result = mysql_query($sql) or die(mysql_error());
+        $datos = array();
+        while($fila = mysql_fetch_array($result)){
+            $datos[]=$fila;
+        }
+        return $datos;
+        
+    }
+    
+    function totalvacantes_proyectosP($idProyecto,$inicio,$final){
+         $funciones = new funciones();
+        $funciones->conectar();
+        $sql="select count(tblvacante.folSolici) as total
+		from tblsolicitud
+                    left join tblvacante on tblvacante.folSolici = tblsolicitud.folSolici
+                    left join tblsubproyecto on tblsubproyecto.idSubproyecto = tblsolicitud.idSubproyecto
+                    left join tblproyecto on tblproyecto.idProyecto = tblsubproyecto.idProyecto
+                where tblproyecto.idProyecto=".$idProyecto." and iniSolici between '".date("Y-m-d",strtotime($inicio))."' and '".date("Y-m-d",strtotime($final))."';";
+//        ChromePhp::log($sql);
+        $result = mysql_query($sql) or die(mysql_error());
+        $datos = array();
+        while($fila = mysql_fetch_array($result)){
+            $datos[]=$fila;
+        }
+        return $datos;
+    }
+    
+    function vacantesreclutador_proyectosP($idProyecto,$idReclutador,$inicio,$final){
+        $funciones = new funciones();
+        $funciones->conectar();
+        $sql="select count(tblvacante.folSolici) as total
+                            from tblsolicitud
+                                left join tblvacante on tblvacante.folSolici = tblsolicitud.folSolici
+                                left join tblsubproyecto on tblsubproyecto.idSubproyecto = tblsolicitud.idSubproyecto
+                                left join tblproyecto on tblproyecto.idProyecto = tblsubproyecto.idProyecto
+                                where tblproyecto.idProyecto=".$idProyecto." and tblvacante.idReclutador = ".$idReclutador."
+                                    and tblvacante.fecalta between '".date("Y-m-d",strtotime($inicio))."' and '".date("Y-m-d",strtotime($final))."'";
+//        ChromePhp::log($sql);
+        $result = mysql_query($sql) or die(mysql_error());
+        $datos = array();
+        while($fila = mysql_fetch_array($result)){
+            $datos[]=$fila;
+        }
+        return $datos;
+    }
+    
+    function enviados_proyectosP($idProyecto,$inicio,$final){
+        $funciones = new funciones();
+        $funciones->conectar();
+        $sql="select 
+                        count(DISTINCT tblentrevista.idVacCand) as enviados
+                from tblentrevista
+                left join relvaccand ON relvaccand.idVacCand = tblentrevista.idVacCand
+                left join tblvacante ON tblvacante.folSolici = relvaccand.folSolici
+                left join tblsolicitud on tblsolicitud.folSolici = tblvacante.folSolici
+                left join tblsubproyecto on tblsubproyecto.idSubproyecto = tblsolicitud.idSubproyecto
+                left join tblproyecto on tblproyecto.idProyecto = tblsubproyecto.idProyecto
+                where tblproyecto.idProyecto = ".$idProyecto." and tblentrevista.fecalta between '".date("Y-m-d",strtotime($inicio))."' and '".date("Y-m-d",strtotime($final))."'"; 
+
+//        ChromePhp::log($sql);
+        $result = mysql_query($sql) or die(mysql_error());
+        $datos = array();
+        while($fila = mysql_fetch_array($result)){
+            $datos[]=$fila;
+        }
+        return $datos;
+    }
+    
+    function canceladas_proyectosP($idProyecto,$inicio,$final){
+        $funciones = new funciones();
+        $funciones->conectar();
+        $sql="select 
+                        ifnull(count(tblvacante.folSolici),0) as canceladas
+                    from
+                        tblsolicitud
+                    left join tblvacante ON tblvacante.folSolici = tblsolicitud.folSolici
+					left join tblsubproyecto on tblsubproyecto.idSubproyecto = tblsolicitud.idSubproyecto
+					left join tblproyecto on tblproyecto.idProyecto = tblsubproyecto.idProyecto
+					where tblproyecto.idProyecto=".$idProyecto." and tblvacante.fecbaja between '".date("Y-m-d",strtotime($inicio))."' and '".date("Y-m-d",strtotime($final))."'
+                            and tblvacante.descCancela is not null
+                    ";
+//        ChromePhp::log($sql);
+        $result = mysql_query($sql) or die(mysql_error());
+        $datos = array();
+        while($fila = mysql_fetch_array($result)){
+            $datos[]=$fila;
+        }
+        return $datos;
+    }
+    
+    function contratados_proyectosP($idProyecto,$inicio,$final){
+        $funciones = new funciones();
+        $funciones->conectar();
+        $sql="select 
+                    count(DISTINCT relvaccand.estatus) as contratados   
+                from
+                   relvaccand
+                left join tblvacante ON tblvacante.folSolici = relvaccand.folSolici
+                left join tblsolicitud on tblsolicitud.folSolici = tblvacante.folSolici
+                left join tblsubproyecto on tblsubproyecto.idSubproyecto = tblsolicitud.idSubproyecto
+                left join tblproyecto on tblproyecto.idProyecto = tblsubproyecto.idProyecto
+                where tblproyecto.idProyecto = ".$idProyecto." and relvaccand.fecbaja between '".date("Y-m-d",strtotime($inicio))."' and '".date("Y-m-d",strtotime($final))."'
+                and relvaccand.estatus=1
+                       ";
+        //ChromePhp::log($sql);
+        $result = mysql_query($sql) or die(mysql_error());
+        $datos = array();
+        while($fila = mysql_fetch_array($result)){
+            $datos[]=$fila;
+        }
+        return $datos;
+        
+    }
+    
+    function rechazados_proyectosP($idProyecto,$inicio,$final){
+        $funciones = new funciones();
+        $funciones->conectar();
+        $sql="select 
+                    count(DISTINCT relvaccand.estatus) as rechazados
+                from relvaccand
+                left join tblvacante ON tblvacante.folSolici = relvaccand.folSolici
+                left join tblsolicitud ON tblsolicitud.folSolici = tblvacante.folSolici
+                left join tblsubproyecto ON tblsubproyecto.idSubproyecto = tblsolicitud.idSubproyecto
+                left join tblproyecto ON tblproyecto.idProyecto = tblsubproyecto.idProyecto
+                where
+                    tblproyecto.idProyecto = ".$idProyecto."
+                        and relvaccand.fecbaja between '".date("Y-m-d",strtotime($inicio))."' and '".date("Y-m-d",strtotime($final))."'
+                        and relvaccand.estatus in (2 , 3)
+                    ";
+       //ChromePhp::log($sql);
         $result = mysql_query($sql) or die(mysql_error());
         $datos = array();
         while($fila = mysql_fetch_array($result)){
@@ -584,4 +676,4 @@ class Reportes{
         return $datos;
     }
 }
-?>
+

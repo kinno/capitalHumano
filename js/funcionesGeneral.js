@@ -111,6 +111,9 @@ function menu(mnu)
       case "catalogos":
       obj.innerHTML = "<object type='text/html' data='web_catalogos.php' class='homeobj'  id='obj_inx'>";
         break;   
+      case "reportes":
+      obj.innerHTML = "<object type='text/html' data='web_reportes.php' class='homeobj'  id='obj_inx'>";
+        break;   
       //Agenda -------------------------------
       case "agenda":
         obj.innerHTML = "<object type='text/html' data='web_agenda.php' class='homeobj'  id='obj_inx'>";

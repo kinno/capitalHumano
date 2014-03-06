@@ -309,7 +309,7 @@ $.ajax({
                         <button id="candidatos" style="margin-right: -.3em;">Candidatos</button>
                         <button id="catalogos" onClick="menu('catalogos');" style="margin-right: -.3em;">Catálogos</button>
                         <button id="agenda" onClick="menu('agenda');" style="margin-right: -.3em;">Agenda</button>
-                        <button id="reportes" style="margin-right: -.3em;" onclick="cambiaHtml('reportesView.php');">Reportes</button>
+                        <button id="reportes" onClick="menu('reportes');" style="margin-right: -.3em;" onclick="cambiaHtml('reportesView.php');">Reportes</button>
                         <button id="salir" style="margin-right: -.3em;">Salir</button>
                     </div>
                     <ul style="width: 150px;text-align: left;position: absolute;">
