@@ -23,11 +23,13 @@
         <!--<div id="divGeneral" style="display:none"></div>-->
         <div id="divProyecto" style="display:none">
             <div id="selectProyecto" class="ui-widget"></div>
-            <div id="rProyecto" class="ui-widget ui-widget-content ui-corner-all" style="display:none; margin-top: 15px;"></div>
+            <div id="rProyecto" class="ui-widget ui-widget-content ui-corner-all" style="display:none; margin-top: 15px; padding:5px;"></div>
+            
         </div>
         <div id="divReclutador" style="display:none">
+            
             <div id="selectReclutadores" class="ui-widget"></div>
-            <div id="rReclutador" class="ui-widget ui-widget-content ui-corner-all" style="display:none; margin-top: 15px;"></div>
+            <div id="rReclutador" class="ui-widget ui-widget-content ui-corner-all" style="display:none; margin-top: 15px; padding:5px;"></div>
         </div>
     </div>
 </body>

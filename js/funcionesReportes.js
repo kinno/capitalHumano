@@ -171,6 +171,7 @@ function reporteProyectos(){
     var url="../controlador/proyectoReportes.php";
     $.post(url,{idProyecto:idProyecto,nomProyecto:nomProyecto,periodo:periodo,inicio:inicio,final:final},function(data){
         $("#rProyecto").html(data);
+        $("#exprt").button({icons:{primary:'ui-icon-arrowthickstop-1-s'}});
     });
     $("#rProyecto").toggle('slide');
     bandR=true;
@@ -225,4 +226,9 @@ function reporteReclutador(){
     });
     $("#rReclutador").toggle('slide');
     bandR=true;
+}
+
+function exportar(){
+    var url="../libs/generaExcel.php";
+    window.open(url,'_blank');
 }
