@@ -3,17 +3,17 @@ include_once '../funciones/libCatalogos.php';
 $proyectos = new Catalogos();
 $datos = $proyectos->despliega_proyectos();
 ?>
-<div style="margin-left: 25%;">
-<div style="margin-top: 15px; float: left">
-    <fieldset>
+<div>
+<div style="margin-top: 15px; float: left; margin-left: 23%">
+    <fieldset style="max-width: 290px;">
         <legend>Proyectos</legend>
-    
+        <ul style="margin:0px; padding:0px;">
     <?php
         foreach ($datos as $k => $v) {
-            echo '<input type="checkbox" class="idProyectos" value="'.$v['idProyecto'].'" /><span>'.$v['nomProyecto'].'</span>';
+            echo '<li style="display:inline; margin: 0px 5px;"><div style="display:inline-block;"><input type="checkbox" id="pry'.$v['idProyecto'].'" class="idProyectos" value="'.$v['idProyecto'].'" />&nbsp;<span>'.$v['nomProyecto'].'</span></div></li>';
         }
     ?>
-    
+        </ul>
     </fieldset>    
 </div>   
 <div id="btnPeriodo" style="float:left; margin-left: 15px; margin-top: 15px;"><span>Periodo: </span><input type="radio" value="1" id="rAnual" name="radio1" onclick="abrePeriodo(1)"/><label for="rAnual">Anual</label><input type="radio" value="2" id="rPeriodo" name="radio1" onclick="abrePeriodo(2)"/><label for="rPeriodo">Periodo</label></div>

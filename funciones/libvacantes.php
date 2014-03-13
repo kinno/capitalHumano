@@ -7,7 +7,7 @@ include"../libs/libs.php";
  //SE EJECUTA LA CONSULTA
 class Vacantes{
     
-    
+  
     function Vacantes(){
         
     }

@@ -3,10 +3,11 @@ session_start();
 include_once '../funciones/libreportes.php';
 $_SESSION['pAnual']=array();
 $_SESSION['pPeriodo']=array();
+ echo '<span style="float:right" class="exprt" onclick="exportar(\'proyecto\');">Exportar</span>';
 if($_POST['periodo']==1){
     $reportes = new Reportes();
     $reclutador = $reportes->obtiene_reclutadores();
-    echo '<span style="float:right" id="exprt" onclick="exportar();">Exportar</span>';
+   
 for($i=0;$i<count($_POST['idProyecto']);$i++){
 $dato = $reportes->totalvacantes_proyectos($_POST['idProyecto'][$i]);
 $dato3 = $reportes->canceladas_proyectos($_POST['idProyecto'][$i]);
@@ -89,7 +90,7 @@ $dato4 = $reportes->enviados_proyectosP($_POST['idProyecto'][$i], $_POST['inicio
 $dato5 = $reportes->contratados_proyectosP($_POST['idProyecto'][$i], $_POST['inicio'], $_POST['final']);
 $dato6 = $reportes->rechazados_proyectosP($_POST['idProyecto'][$i], $_POST['inicio'], $_POST['final']);
 ?>
-<table width="100%" class="ui-widget ui-widget-content" style="padding:5px; ftext-align: center;">
+<table width="100%" class="ui-widget ui-widget-content" style="padding:5px; text-align: center;">
     <tr class="ui-state-default"><td style="text-align: center"><?php echo $_POST['nomProyecto'][$i];?></td><td style="text-align: center"><?php echo 'Periodo del '.$_POST['inicio'].' al '.$_POST['final']?></td></tr>
     <tr style="text-align: center">
         <?php
@@ -147,7 +148,7 @@ $dato6 = $reportes->rechazados_proyectosP($_POST['idProyecto'][$i], $_POST['inic
 <?php
  }
 }
-echo '<pre>';
-print_r($_SESSION);
-echo '</pre>';
+//echo '<pre>';
+//print_r($_SESSION);
+//echo '</pre>';
 ?>

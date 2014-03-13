@@ -14,6 +14,9 @@ $datos=$catalogos->despliega_proyectos();
     font-weight: bold;
     background-color: #D4E7F6;
     }
+    #proyectos td{
+        max-width: 150px;
+    }
 </style>
     <table id="proyectos" class="ui-widget-content ui-widget ui-corner-all" border="1" cellspacing="1" style="padding:10px;text-align: center; float: left;">
             <tr class="head ui-state-default"><td style="font-size: 19px; padding:10px;" colspan="2">Proyecto:</td></tr>
