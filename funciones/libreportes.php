@@ -1,6 +1,6 @@
 <?php
 include_once '../libs/libs.php';
-//include '../funciones/ChromePhp.php';
+include '../funciones/ChromePhp.php';
 class Reportes{
     function Reportes(){
     }
@@ -140,7 +140,7 @@ class Reportes{
                         tblmeses
                             left join
                         (select 
-                            count(DISTINCT relvaccand.estatus) as contratados,
+                            count(relvaccand.estatus) as contratados,
                                 idmes,
                                 descmes,
                                 idUsuario
@@ -170,7 +170,7 @@ class Reportes{
                         tblmeses
                             left join
                         (select 
-                            count(DISTINCT relvaccand.estatus) as rechazados,
+                            count(relvaccand.estatus) as rechazados,
                                 idmes,
                                 descmes,
                                 idUsuario
@@ -314,7 +314,7 @@ class Reportes{
                         tblmeses
                             left join
                         (select 
-                            count(DISTINCT relvaccand.estatus) as contratados,
+                            count(relvaccand.estatus) as contratados,
                                 idmes,
                                 descmes
 
@@ -327,7 +327,7 @@ class Reportes{
                         left join tblproyecto on tblproyecto.idProyecto = tblsubproyecto.idProyecto
                         where tblproyecto.idProyecto = ".$idProyecto." 
                         and relvaccand.estatus=1
-                        group by idmes) as t1 ON t1.idmes = tblmeses.idmes
+                        group by idmes, relvaccand.idVacCand) as t1 ON t1.idmes = tblmeses.idmes
                     group by tblmeses.idmes";
 //        ChromePhp::log($sql);
         $result = mysql_query($sql) or die(mysql_error());
@@ -348,7 +348,7 @@ class Reportes{
                     tblmeses
                         left join
                     (select 
-                        count(DISTINCT relvaccand.estatus) as rechazados,
+                        count(relvaccand.estatus) as rechazados,
                             idmes,
                             descmes
                     from
@@ -361,7 +361,7 @@ class Reportes{
                     where
                         tblproyecto.idProyecto = ".$idProyecto."
                             and relvaccand.estatus in (2 , 3)
-                    group by idmes) as t1 ON t1.idmes = tblmeses.idmes
+                    group by idmes, relvaccand.idVacCand) as t1 ON t1.idmes = tblmeses.idmes
                 group by tblmeses.idmes";
 //        ChromePhp::log($sql);
         $result = mysql_query($sql) or die(mysql_error());
@@ -480,7 +480,7 @@ class Reportes{
         $funciones = new funciones();
         $funciones->conectar();
         $sql="select 
-                    count(DISTINCT relvaccand.estatus) as contratados,
+                    count(relvaccand.estatus) as contratados,
                     idUsuario
                 from
                     relvaccand
@@ -502,7 +502,7 @@ class Reportes{
         $funciones = new funciones();
         $funciones->conectar();
         $sql="select 
-                    count(DISTINCT relvaccand.estatus) as rechazados,
+                    count(relvaccand.estatus) as rechazados,
                     idUsuario
                 from
                     relvaccand
@@ -604,8 +604,9 @@ class Reportes{
     function contratados_proyectosP($idProyecto,$inicio,$final){
         $funciones = new funciones();
         $funciones->conectar();
-        $sql="select 
-                    count(DISTINCT relvaccand.estatus) as contratados   
+        $sql="select count(t1.estatus) as contratados   from
+                (select 
+                    relvaccand.estatus
                 from
                    relvaccand
                 left join tblvacante ON tblvacante.folSolici = relvaccand.folSolici
@@ -614,8 +615,9 @@ class Reportes{
                 left join tblproyecto on tblproyecto.idProyecto = tblsubproyecto.idProyecto
                 where tblproyecto.idProyecto = ".$idProyecto." and relvaccand.fecbaja between '".date("Y-m-d",strtotime($inicio))."' and '".date("Y-m-d",strtotime($final))."'
                 and relvaccand.estatus=1
+                group by relvaccand.idVacCand)as t1
                        ";
-        //ChromePhp::log($sql);
+        ChromePhp::log($sql);
         $result = mysql_query($sql) or die(mysql_error());
         $datos = array();
         while($fila = mysql_fetch_array($result)){
@@ -628,8 +630,9 @@ class Reportes{
     function rechazados_proyectosP($idProyecto,$inicio,$final){
         $funciones = new funciones();
         $funciones->conectar();
-        $sql="select 
-                    count(DISTINCT relvaccand.estatus) as rechazados
+        $sql=" select count(t1.estatus) as rechazados from
+                (select 
+                    relvaccand.estatus
                 from relvaccand
                 left join tblvacante ON tblvacante.folSolici = relvaccand.folSolici
                 left join tblsolicitud ON tblsolicitud.folSolici = tblvacante.folSolici
@@ -639,6 +642,7 @@ class Reportes{
                     tblproyecto.idProyecto = ".$idProyecto."
                         and relvaccand.fecbaja between '".date("Y-m-d",strtotime($inicio))."' and '".date("Y-m-d",strtotime($final))."'
                         and relvaccand.estatus in (2 , 3)
+                group by relvaccand.idVacCand) as t1
                     ";
        //ChromePhp::log($sql);
         $result = mysql_query($sql) or die(mysql_error());
