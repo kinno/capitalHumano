@@ -4,7 +4,7 @@
 
  	public function conectar()
  	{
-	 	$host = "localhost";
+	 	$host = "UPGENIA2";
 		$user = "root";
 		$passwd ="admin";
 		$db = "bdrh";

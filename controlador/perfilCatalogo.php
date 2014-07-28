@@ -56,8 +56,8 @@ if($permisosEspeciales==1)
 <div id="nuevoUsuario" style="display:none" class="ui-widget">
 
 </div>
-<div id="modificaUsuario" title="Modificar Usuario">
-        <div id="contModifica" class="ui-widget"></div>
+<div id="modificaPerfil" title="Modificar Perfil">
+        <div id="contModificaPerfil" class="ui-widget"></div>
 </div>
 
   

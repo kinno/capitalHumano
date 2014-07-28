@@ -14,7 +14,7 @@ echo "
                 <table class='ui-widget'>
                         <tr>
                                 <td colspan='2' >Nombre</td>
-                                <td ><input type='hidden' id='idUs' name='idUs' value='".$v['idUsuario']."'>
+                                <td ><input type='hidden' id='idUs' name='idUs' value='".$v['id']."'>
                                 <input type='text' name='nombreUs' id='nombreUs' class='texto' value='".$v['nomUsuario']."'>
                                 </td>
                         </tr>

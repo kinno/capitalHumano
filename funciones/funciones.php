@@ -155,6 +155,7 @@ function altaSolicitud($folio, $idSubproyecto,$liderProyecto, $tipoVacante, $ini
         $queryCorreo = mysql_query($sqlCorreorh) or die(mysql_error());
         $correorh=  mysql_fetch_array($queryCorreo);
         
+                
         if($mail->enviarMail($correo, $mensaje, $subject, $correorh['mailUsuario']))
         {
             echo "ok";

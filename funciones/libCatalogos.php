@@ -24,7 +24,7 @@
         function detalle_usuario($idUsuario){
             $funciones=new funciones();
             $funciones->conectar();
-            $query = "SELECT * FROM bdrh.tblusuarios
+            $query = "SELECT *,tblusuarios.idUsuario as id FROM bdrh.tblusuarios
                         left join tblroles on tblroles.idRol = tblusuarios.idRol
                         WHERE tblusuarios.idUsuario=".$idUsuario;
             $result = mysql_query($query) or die(mysql_error());
@@ -114,6 +114,17 @@
             return $datos;
         }
         
+        function detalle_perfiles($idPerfil){
+            $funciones=new funciones();
+            $funciones->conectar();
+            $query = "SELECT * FROM tblperfil WHERE idPerfil=".$idPerfil."";
+            $result = mysql_query($query) or die(mysql_error());
+            $datos=array();
+            while($fila=  mysql_fetch_array($result)){
+                $datos[]=$fila;
+            }
+            return $datos;
+        }
         //-------------------------
         
         function despliega_proyectos(){

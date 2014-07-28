@@ -49,6 +49,7 @@ function despliegaUsuarios(){
                                                duration: 500
                                              }  
                                           });
+            
              
            
               $("#mainContent").toggle("slide");
@@ -94,6 +95,21 @@ function despliegaPerfiles(){
               }});
             },100);
            
+            $("#modificaPerfil").dialog({
+                                            autoOpen: false,
+                                            modal:true,
+                                            width:800,
+                                            height:350,
+                                            resizable:false,
+                                             show: {
+                                               effect: "clip",
+                                               duration: 500
+                                             },
+                                             hide: {
+                                               effect: "clip",
+                                               duration: 500
+                                             }  
+                                          });
           
              
               $("#mainContent").toggle("slide");
@@ -288,3 +304,49 @@ function cancelarUsuario(){
       $("#listado").toggle('slide');
   });
 }
+
+function panelModPerfil(id){
+  var url="../controlador/modPerfilCatalogo.php"
+  $.post(url,{id:id},function(responseText){
+    $("#contModificaPerfil").html(responseText);
+    $("#guardarDatos").button();
+  });
+  
+  $("#modificaPerfil").dialog("open");             
+}
+
+//function modificaUsuario(){
+//  var url="../controlador/actualizaUsuarioCatalogo.php";
+//  $.post(url,$("#formUsr").serialize(),function(responseText){
+//   if(responseText=='ok'){
+//       $("#modificaUsuario").dialog('close');
+//       despliegaUsuarios();
+//       despliegaUsuarios();
+//   }
+//  });
+//}
+//
+//function eliminarUsuario(id){
+//  var url="../controlador/eliminaUsuarioCatalogo.php";
+//  $.post(url,{id:id},function(responseText){
+//   if(responseText=='ok'){
+//       despliegaUsuarios();
+//       despliegaUsuarios();
+//   }
+//  });
+//}
+//function activaUsuario(id){
+//  var url="../controlador/activaUsuarioCatalogo.php";
+//  $.post(url,{id:id},function(responseText){
+//   if(responseText=='ok'){
+//       despliegaUsuarios();
+//       despliegaUsuarios();
+//   }
+//  });
+//}
+//
+//function cancelarUsuario(){
+//  $("#nuevoUsuario").toggle('slide',function(){
+//      $("#listado").toggle('slide');
+//  });
+//}
