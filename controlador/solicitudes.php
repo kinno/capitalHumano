@@ -48,16 +48,16 @@ else
 
 $idiomas="";
     if($solicitud['idioma1']==1){
-        $idiomas=$idiomas."Inglés (Hablado: ".$solicitud['pHablado1']."% , Escrito: ".$solicitud['pEscrito1']."<br>";
+        $idiomas=$idiomas."Inglés (Hablado: ".$solicitud['pHablado1']."% , Escrito: ".$solicitud['pEscrito1']."%)";
     }
     if($solicitud['idioma2']==1){
-        $idiomas=$idiomas."Francés (Hablado: ".$solicitud['pHablado2']."% , Escrito: ".$solicitud['pEscrito2']."<br>";
+        $idiomas=$idiomas."Francés (Hablado: ".$solicitud['pHablado2']."% , Escrito: ".$solicitud['pEscrito2']."%)";
     }
     if($solicitud['idioma3']==1){
-        $idiomas=$idiomas."Inglés (Hablado: ".$solicitud['pHablado3']."% , Escrito: ".$solicitud['pEscrito3']."<br>";
+        $idiomas=$idiomas."Inglés (Hablado: ".$solicitud['pHablado3']."% , Escrito: ".$solicitud['pEscrito3']."%)";
     }
     if($solicitud['idioma4']==1){
-        $idiomas=$idiomas."Francés (Hablado: ".$solicitud['pHablado4']."% , Escrito: ".$solicitud['pEscrito4']."<br>";
+        $idiomas=$idiomas."Francés (Hablado: ".$solicitud['pHablado4']."% , Escrito: ".$solicitud['pEscrito4']."%)";
     }
 
     

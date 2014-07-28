@@ -189,14 +189,14 @@ if($_GET['tipo']=='proyecto'){
 }else{
     
     if(count($_SESSION['pAnual'])>0){
-
+        
         $band = false;    
         for($i=0;$i<count($_SESSION['pAnual']);$i++){
             $objWorksheet = new PHPExcel_Worksheet($objPHPExcel);
             $objPHPExcel->addSheet($objWorksheet);
             $objWorksheet->setTitle($_SESSION['pAnual'][$i]['nombreReclutador']);
             $objPHPExcel->setActiveSheetIndex(($i+1));
-
+              
             $num=3;
             $objPHPExcel->getActiveSheet()->mergeCells('A1:M1');
             $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Reporte por reclutador');
@@ -270,7 +270,9 @@ if($_GET['tipo']=='proyecto'){
             $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
         }
     }else{
-
+//        echo '<pre>';
+//        print_r($_SESSION);
+//        echo "</pre>";
         $band = false;    
         for($i=0;$i<count($_SESSION['pPeriodo']);$i++){
             $objWorksheet = new PHPExcel_Worksheet($objPHPExcel);
@@ -280,7 +282,7 @@ if($_GET['tipo']=='proyecto'){
 
             $num=3;
             $objPHPExcel->getActiveSheet()->mergeCells('A1:B1');
-            $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Reporte por proyecto');
+            $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Reporte por reclutador');
             $objPHPExcel->getActiveSheet()->getStyle("A1:B1")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_JUSTIFY);
             cellColor('A1:B1', 'E3F1FD');
 

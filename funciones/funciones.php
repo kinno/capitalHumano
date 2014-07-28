@@ -161,6 +161,8 @@ function altaSolicitud($folio, $idSubproyecto,$liderProyecto, $tipoVacante, $ini
         }else{
         echo "No se envío el correo";
         }
+		
+		 //echo "ok";
         
     }
 }

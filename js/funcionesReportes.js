@@ -123,6 +123,7 @@ function panelReclutador(){
 }
 
 function reporteProyectos(){
+    $("#rProyecto").html('');
    //Validaciones 
     if($(".idProyectos:checked").val()==undefined){
         alert("Seleccione un proyecto");
@@ -168,6 +169,8 @@ function reporteProyectos(){
         nomProyecto.push($(this).next('span').html());
     });
     
+    $("#rProyecto").html('<div class="ui-widget" style="width:200px;margin-left:auto; margin-right:auto;"><center><img src="../images/ajax-loader.gif" style="width:50px;"/><br/><h1>Por favor espere</h1></center></div>');
+    
     var url="../controlador/proyectoReportes.php";
     $.post(url,{idProyecto:idProyecto,nomProyecto:nomProyecto,periodo:periodo,inicio:inicio,final:final},function(data){
         $("#rProyecto").html(data);
@@ -178,7 +181,7 @@ function reporteProyectos(){
 }
 
 function reporteReclutador(){
-    
+    $("#rReclutador").html('');
      if($(".idReclutador:checked").val()==undefined){
         alert("Seleccione un reclutador");
         $("#idReclutador").focus();
@@ -220,6 +223,7 @@ function reporteReclutador(){
     $(".idReclutador:checked").each(function(){
         nomReclutador.push($(this).next("span").html());
     });
+    $("#rReclutador").html('<div class="ui-widget" style="width:200px;margin-left:auto; margin-right:auto;"><center><img src="../images/ajax-loader.gif" style="width:50px;"/><br/><h1>Por favor espere</h1></center></div>');
     var url="../controlador/reclutadorReportes.php";
     $.post(url,{idReclutador:idReclutador,nomReclutador:nomReclutador,periodo:periodo,inicio:inicio,final:final},function(data){
         $("#rReclutador").html(data);

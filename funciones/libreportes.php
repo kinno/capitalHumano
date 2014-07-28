@@ -353,11 +353,10 @@ class Reportes{
                             descmes
                     from
                         tblmeses
-                    left join relvaccand ON month(relvaccand.fecbaja) = tblmeses.idmes
-                    left join tblvacante ON tblvacante.folSolici = relvaccand.folSolici
-                    left join tblsolicitud ON tblsolicitud.folSolici = tblvacante.folSolici
-                    left join tblsubproyecto ON tblsubproyecto.idSubproyecto = tblsolicitud.idSubproyecto
-                    left join tblproyecto ON tblproyecto.idProyecto = tblsubproyecto.idProyecto
+                     join relvaccand ON month(relvaccand.fecbaja) = tblmeses.idmes
+                    join tblsolicitud ON tblsolicitud.folSolici = relvaccand.folSolici
+                    join tblsubproyecto ON tblsubproyecto.idSubproyecto = tblsolicitud.idSubproyecto
+                    join tblproyecto ON tblproyecto.idProyecto = tblsubproyecto.idProyecto
                     where
                         tblproyecto.idProyecto = ".$idProyecto."
                             and relvaccand.estatus in (2 , 3)

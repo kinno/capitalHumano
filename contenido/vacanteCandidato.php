@@ -150,6 +150,10 @@ $datos = $vacantes->obtener_vacantes($_SESSION['id']);
                                         ?>
                                     <tbody>
                                 </table>
+                        <script>
+                            $(".asignarCandidato").button({icons:{primary:"ui-icon-person"}});
+                            $(".detalleCandidato").button({icons:{primary:"ui-icon-clipboard"}});
+                            $(".btnsDA").buttonset();</script>
                     </article>
         
     </div>

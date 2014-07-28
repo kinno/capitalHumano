@@ -1,6 +1,7 @@
 <?php
  include"PHPMailer/class.phpmailer.php";
  include"PHPMailer/class.smtp.php";
+ include"../funciones/ChromePhp.php";
 
  class mail{
      function mail(){
@@ -54,7 +55,7 @@
                             </body>
                             </table>
                             ';
-                
+                ChromePhp::log(mail($correo, $asunto, $cuerpo, $cabeceras));
                 if(mail($correo, $asunto, $cuerpo, $cabeceras)){
                     //echo "enviado";
                     return true;

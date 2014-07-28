@@ -363,7 +363,7 @@ var IDPERFIL=0;
                             var frecuViaje=0;
                             //campos no obligatorios 
                             var otrasPercep=0;
-                            var comentarios=0;
+                            var comentarios="";
                             
                             //validaciones
                             if (idProyecto=="vacio") {

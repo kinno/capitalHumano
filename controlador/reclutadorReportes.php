@@ -102,7 +102,7 @@ $dato6 = $reportes->rechazados_reclutador($_POST['idReclutador'][$i]);
             foreach ($dato2 as $k => $v2) {
                echo '<td>'.$v2['total'].'</td>';
                $_SESSION['pPeriodo'][$i]['vacantesProyecto'][$key]['nombreProyecto']=$value['nomProyecto'];
-               $_SESSION['pPeriodo'][$i]['vacantesProyecto'][$key]['total']=$v['total'];
+               $_SESSION['pPeriodo'][$i]['vacantesProyecto'][$key]['total']=$v2['total'];
             }
             echo '</tr>';
         }

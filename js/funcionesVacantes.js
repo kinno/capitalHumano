@@ -66,9 +66,9 @@ $(document).tooltip().ready(function(){
   });
    
     $(".guardar").button();
-    $(".asignarCandidato").button({icons:{primary:"ui-icon-person"}});
-    $(".detalleCandidato").button({icons:{primary:"ui-icon-clipboard"}});
-    $(".btnsDA").buttonset();
+//    $(".asignarCandidato").button({icons:{primary:"ui-icon-person"}});
+//    $(".detalleCandidato").button({icons:{primary:"ui-icon-clipboard"}});
+//    $(".btnsDA").buttonset();
     
     $("#detalleCandidato").dialog({
                                             autoOpen: false,
@@ -284,27 +284,29 @@ function abreVacantes(){
     });
 }
 
-function abreBusqueda(aux){
+function abreBusqueda(folio){
        
         $("#dialog").dialog({
             width:1200,
             height:800
         });
-        $("#vacante").val($("#numVacante"+aux).val());
-        $("#fila").val(aux);
+        
+        //$("#vacante").val($("#numVacante"+aux).val());
+        //$("#fila").val(aux);
         $("#dialog").dialog("open");
      
    
     }
 
 function abrirPanel(obj){
-    
+	
     $(".activo").each(function(){
         $(this).find("div").toggle("blind",function(){$(this).parents(".activo:first").remove();},1000);
     });
    
     $("#vacante"+obj).after("<tr class='activo'><td colspan='9'><input type='hidden' id='idVacante"+obj+"' class='vacante' /><div id='panel"+obj+"' class='ui-corner-all' style='padding-bottom:15px; height:250px;background-color:#FCFDFD;display:none;'></div></td></tr>");
      $("#idVacante"+obj).val($("#folio"+obj).text());
+     
     var url="../controlador/menuCandidatosVC.php";
     $.post(url,{},
             function(responseText){
@@ -322,7 +324,7 @@ function abrirPanel(obj){
 
 function listarCandidatos(){
     folioVacante =$("#menuCandidatos").parent().parent().parent().children("input:first").val();
-     var url="../controlador/buscaCandidatosVC.php";
+        var url="../controlador/buscaCandidatosVC.php";
     $.post(url,{folioVacante:folioVacante},
             function(responseText){
                 $("#containerCandidatos").html(responseText);
@@ -397,6 +399,11 @@ function asignarCandidato(aux){
                     listarCandidatos();
                    setTimeout(function(){$("#dialog").dialog("close")},1000);
                 }
+                
+                if(responseText==='Existente'){
+                    alert("El candidato ya ha sido asigando a esta vacante por otro reclutador");
+                }
+                
             });
 }
 

@@ -62,6 +62,7 @@
                         idRol = ".$rolUs."
                         WHERE tblusuarios.idUsuario=".$idUs;
             
+            ChromePhp::log($query);
             if(mysql_query($query)){
                 return 'ok';
             }else{

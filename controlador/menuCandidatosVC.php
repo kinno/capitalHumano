@@ -1,6 +1,5 @@
 <?php
 
-
 ?>
 <div style='padding-top:15px; height: auto;' class="ui-widget">
     <div id='menuCandidatos' style='width:150px; margin-left:15px; float: left;'>

@@ -32,7 +32,7 @@ class Vacantes{
     function obtener_candidatos(){
         $funciones = new funciones();
         $funciones->conectar();
-        $query="select * from tblcandidato 
+        /*$query="select * from tblcandidato 
                     left join tblcandidatoda on tblcandidatoda.idCandid = tblcandidato.idCandid
                     left join tblcandidatodp on tblcandidatodp.idCandid = tblcandidato.idCandid
                     left join tblcandidatoest on tblcandidatoest.idCandid = tblcandidato.idCandid
@@ -44,6 +44,12 @@ class Vacantes{
                                                 group by tblcandidatorl.idCandid
                                                 ) 
                                                 ";
+		 * */
+		$query="select * from tblcandidato 
+                    left join tblcandidatoda on tblcandidatoda.idCandid = tblcandidato.idCandid
+                    left join tblcandidatodp on tblcandidatodp.idCandid = tblcandidato.idCandid
+                    left join tblcandidatoest on tblcandidatoest.idCandid = tblcandidato.idCandid
+                where tblcandidatoest.estatus not in(1,3)";										
         $result=  mysql_query($query) or die(mysql_error());
         $datos=array();
         while($fila=  mysql_fetch_array($result)){
@@ -387,14 +393,23 @@ class Vacantes{
     function asignar_candidato($idCandid,$folioVacante,$idUsuario){
         $funciones = new funciones();
         $funciones->conectar();
-        $query="insert into relvaccand(folSolici,idCandid,idUsuario,fecalta) values ($folioVacante,$idCandid,$idUsuario,now())";
-        if(mysql_query($query)){
-            $resultado='ok';
-            return $resultado;
-        }
-        else{
-            echo $query;
-            return mysql_error();
+        /* VERIFICAMOS SI EL CANDIDATO YA FUE ASIGANDO A ESA VACANTE POR OTRO RECLUTADOR */
+        $queryVerifiador="SELECT count(idCandid) from relvaccand WHERE idCandid = ".$idCandid." and folSolici=".$folioVacante."";
+        $result = mysql_query($queryVerifiador);
+        $r = mysql_fetch_array($result);
+        if($r[0]==0){
+            $query="insert into relvaccand(folSolici,idCandid,idUsuario,fecalta) values ($folioVacante,$idCandid,$idUsuario,now())";
+            if(mysql_query($query)){
+                $resultado='ok';
+
+                return $resultado;
+            }
+            else{
+                echo $query;
+                return mysql_error();
+            }
+        }else{
+            return "Existente";
         }
     }
     
@@ -499,10 +514,10 @@ class Vacantes{
                 $queryD = "update tblvacante set idCandid= ".$idCandid." where numVacante=".$numVacante;
                 ChromePhp::log($queryD);
                 mysql_query($queryD);
-                
+                }
                 $queryE="update tblcandidatoest set estatus = ".$estado." where idCandid=".$idCandid;
                 mysql_query($queryE);
-            }
+           // }
     }
     
     function obtener_estadoCandidato($folSolici,$idVacCand,$idCandidato){
