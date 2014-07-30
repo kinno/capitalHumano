@@ -211,5 +211,59 @@
  		}
  	}
         
+        //----------------------- Lugares
+        function agrega_lugar($datos){
+            extract($datos);
+            $funciones = new funciones();
+            $funciones->conectar();
+            if(trim($titulolugar) == ""){
+                return "Se debe ingresar el título del lugar";
+            }
+            $query = "insert into tbllugares(titulolugar,direccionlugar,estatus) values ('".trim($titulolugar)."','".trim($direccionlugar)."',1)";
+            if(mysql_query($query)){
+                return 'ok';
+            }else{
+                return mysql_error();
+            }
+        }
+        
+        function actualiza_lugar($datos){
+            extract($datos);
+            $funciones = new funciones();
+            $funciones->conectar();
+            if(trim($titulolugar) == ""){
+                return "Se debe ingresar el título del lugar";
+            }
+            $query = "update tbllugares set titulolugar = '".trim($titulolugar)."', direccionlugar = '".trim($direccionlugar)."' where idlugar = $idlugar";
+            if(mysql_query($query)){
+                return 'ok';
+            }else{
+                return mysql_error();
+            }
+        }
+        
+        function despliega_lugares(){
+            $funciones = new funciones();
+            $funciones->conectar();
+            $query = "select idlugar,titulolugar,direccionlugar from tbllugares where estatus = 1";
+            $lugares = Array();
+            $rs=mysql_query($query) or die(mysql_error());
+            while($row=mysql_fetch_array($rs)){
+                array_push($lugares, array("idlugar"=>$row['idlugar'],"titulolugar"=>$row['titulolugar'],"direccionlugar"=>$row['direccionlugar']));
+            }
+            return $lugares;
+        }
+        
+        function elimina_lugar($idlugar){
+            $funciones = new funciones();
+            $funciones->conectar();            
+            $query = "update tbllugares set estatus = 0 where idlugar = $idlugar";
+            if(mysql_query($query)){
+                return 'ok';
+            }else{
+                return mysql_error();
+            }
+        }
+        
     }
 ?>

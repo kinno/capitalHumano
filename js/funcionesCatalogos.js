@@ -234,7 +234,7 @@ function despliegaLugares(){
 }
 
 function panelNuevoUsuario(){
-  var url="../controlador/agregaUsuarioCatalogo.php"
+  var url="../controlador/agregaUsuarioCatalogo.php";
   $.post(url,{},function(responseText){
     $("#nuevoUsuario").html(responseText);
     $("#btnGuardar").button();
@@ -350,3 +350,144 @@ function panelModPerfil(id){
 //      $("#listado").toggle('slide');
 //  });
 //}
+
+// ----------- lugares
+function despliegaLugares(){
+    if(band){
+        $("#mainContent").html('').toggle('slide');
+    }
+    
+     $("#menu").find(".menuActive").each(function(){
+        $(this).removeClass("menuActive");
+    });
+    $("#catLugares").children().addClass("menuActive");
+     var url="../controlador/listarLugares.php";
+     
+    $.post(url,{},function(data){
+        $("#mainContent").html(data);
+        setTimeout(function(){
+            $("#mainContent").find('#listaLugares').dataTable( { 
+                "sPaginationType": "full_numbers",
+                "bJQueryUI": true,
+                "bAutoWidth": true
+            }); 
+        },100);    
+        $(".btonModLug").button({
+            icons:{ primary:"ui-icon-wrench"},
+            text: false
+        }).height("18px");
+        $(".btonDelLug").button({
+            icons:{ primary:"ui-icon-trash"},
+            text: false
+        }).height("18px"); 
+        $("#btonAddLug").button({
+            icons:{ primary:"ui-icon-plus"},
+            text: true
+        }); 
+        
+        $("#mainContent").toggle("slide");     
+        $("#dialogSetLugar").dialog({
+            autoOpen: false,
+            modal:true,
+            width:800,
+            height:250,
+            resizable:true,
+             show: {
+               effect: "clip",
+               duration: 500
+             },
+             hide: {
+               effect: "clip",
+               duration: 500
+             },
+             buttons: {
+                "Guardar": function() {
+                  setRegistroLugar();
+                },
+                "Cancelar": function() {
+                  $("#dialogSetLugar").dialog("close");
+                }
+            }
+        });
+        band=true;
+    });
+}
+
+function eliminaLugar(idlugar,boton){
+    if(confirm("\u00BFDesea eliminar el lugar?")){
+        var url="../controlador/eliminaLugar.php";
+        $.post(url,{idlugar:idlugar},function(data){
+            if(data == "ok"){
+                $(boton).parents("tr").remove();
+                alert("Se ha eliminado el lugar correctamente");                               
+            }else{
+                alert(data);
+            }
+        });
+    }
+}
+
+function agregarLugar(){
+    var url="../controlador/agregaLugar.php";
+  $.post(url,{},function(responseText){      
+    $("#mainContent").toggle("slide",function(){
+        $("#mainContent").html(responseText);        
+        $("#mainContent").toggle("slide",function (){
+            $("#btonGuardar").button();
+            $("#btonCancel").button();
+        });
+    });    
+  });  
+}
+
+function addLugar(){
+    var url="../controlador/registraLugar.php";
+    $.post(url,$("#formLugar").serialize(),function(responseText){
+        if(responseText == "ok"){
+            alert("Se registr\u00f3 el lugar correctamente");
+            $("#mainContent").toggle("slide",function (){  
+                $("#mainContent").html("");
+                $("#mainContent").toggle("slide",function(){
+                    despliegaLugares();
+                });                
+            });             
+        }else{
+            alert(responseText);
+        }
+    });
+}
+
+function setLugar(idlugar,titulo,direccion,boton){    
+    $("#dialogSetLugar").dialog("open");
+    $("#direccionlugar").val(direccion);
+    $("#titulolugar").val(titulo);
+    $("#idlugar").val(idlugar); 
+    
+}
+
+function setRegistroLugar(){
+    var url="../controlador/actualizaLugar.php";
+    $.post(url,$("#formLugar").serialize(),function(responseText){
+        if(responseText == "ok"){
+            alert("Se actualiz\u00f3 el lugar correctamente");
+            $("#dialogSetLugar").dialog("close");
+            $("#mainContent").toggle("slide",function (){  
+                $("#mainContent").html("");
+                $("#mainContent").toggle("slide",function(){
+                    despliegaLugares();
+                });                
+            });             
+        }else{
+            alert(responseText);
+        }
+    });
+}
+
+function cancelAddLugar(){
+    $("#mainContent").toggle("slide",function (){  
+        $("#mainContent").html("");
+        $("#mainContent").toggle("slide",function(){
+            despliegaLugares();
+        });                
+    }); 
+}

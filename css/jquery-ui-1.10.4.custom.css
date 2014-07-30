@@ -787,14 +787,14 @@ body .ui-tooltip {
 	font-size: 11px;
 }
 .ui-widget .ui-widget {
-	font-size: 1em;
+	font-size: 11px;
 }
 .ui-widget input,
 .ui-widget select,
 .ui-widget textarea,
 .ui-widget button {
 	font-family: Arial,sans-serif;
-	font-size: 1em;
+	font-size: 11px;
 }
 .ui-widget-content {
 	border: 1px solid #a6c9e2;
