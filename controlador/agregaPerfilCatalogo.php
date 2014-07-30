@@ -1,27 +1,22 @@
 <?php
-session_start();
-include '../funciones/libCatalogos.php';
-$catalogos=new Catalogos();
-$datos = $catalogos->detalle_perfiles($_POST['id']);
-
-foreach ($datos as $k => $v) {
+//include"../libs/libs.php";
 echo "
     <center>
-    <fieldset>
+    <fieldset class='ui-widget'>
         <legend>Detalle del Perfil</legend>
         <form id='formPerfil'>
                
                 <table class='ui-widget'>
                         <tr>
                                 <td>Descripción de Perfil</td>
-                                <td ><input type='hidden' id='idPerfil' name='idPerfil' value='".$v['idPerfil']."'>
-                                <input type='text' name='descPerfil' id='descPerfil' class='texto' value='".$v['descPerfil']."'>
+                                <td >
+                                <input type='text' name='descPerfil' id='descPerfil' class='texto'>
                                 </td>
                         </tr>
                         <tr>
                                 <td>Complejidad</td>
                                 <td >
-                                <input type='text' name='compPerfil' id='compPerfil' class='texto' value='".$v['compPerfil']."'>
+                                <input type='text' name='compPerfil' id='compPerfil' class='texto'>
                                 </td>
                         </tr>
                  </table>
@@ -30,12 +25,12 @@ echo "
                                 <td>
                                     <fieldset>
                                         <legend>Estudios</legend>
-                                        <textarea style='width:345px; height:100px;' name='perfPerfil' id='perfPerfil' >".$v['perfPerfil']."</textarea></td>
+                                        <textarea style='width:345px; height:100px;' name='perfPerfil' id='perfPerfil' ></textarea></td>
                                     </fieldset>   
                                 <td >
                                     <fieldset>
                                         <legend>Conocimientos</legend>
-                                        <textarea style='width:345px; height:100px;' name='conocPerfil' id='conocPerfil' >".$v['conocPerfil']."</textarea></td>
+                                        <textarea style='width:345px; height:100px;' name='conocPerfil' id='conocPerfil' ></textarea></td>
                                     </fieldset>   
                                 </td>
                         </tr>
@@ -43,12 +38,12 @@ echo "
                                 <td>
                                     <fieldset>
                                         <legend>Habilidades</legend>
-                                        <textarea style='width:345px; height:100px;' name='habPerfil' id='habPerfil' >".$v['habPerfil']."</textarea></td>
+                                        <textarea style='width:345px; height:100px;' name='habPerfil' id='habPerfil' ></textarea></td>
                                     </fieldset>   
                                 <td >
                                     <fieldset>
                                         <legend>Funciones</legend>
-                                        <textarea style='width:345px; height:100px;' name='funcPerfil' id='funcPerfil' >".$v['funcPerfil']."</textarea></td>
+                                        <textarea style='width:345px; height:100px;' name='funcPerfil' id='funcPerfil' ></textarea></td>
                                     </fieldset>   
                                 </td>
                         </tr>
@@ -56,10 +51,7 @@ echo "
                 
         </form>
     </fieldset>
-    <span id='guardarDatos' onclick='modificaPerfil();'>Guardar</span>
+    <span id='guardarDatos' onclick='registrarPerfil();'>Guardar</span>
     </center>
-    ";    
-}
+    "; 
 ?>
-
-

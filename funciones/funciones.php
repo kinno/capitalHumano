@@ -132,7 +132,7 @@ function comboEstatus(){
  *Fecha: 27-05-2013
  */
 function altaSolicitud($folio, $idSubproyecto,$liderProyecto, $tipoVacante, $inicioDSolici, $finDSolici, $idPerfil, $numVacantes, $diasTrabajo,
-                       $horaTrabajo,$fechaRequi, $lugarTrabajo, $salarioMin, $salarioMax, $otrasPercep,$idioma1, $pHablado1, $pEscrito1, $idioma2,$pHablado2,$pEscrito2, $idioma3, $pHablado3,$pEscrito3, $idioma4,$pHablado4,$pEscrito4, $viajar, $frecueViajar,
+                       $horaTrabajo,$fechaSolicitud,$fechaRequerida, $lugarTrabajo, $salarioMin, $salarioMax, $otrasPercep,$idioma1, $pHablado1, $pEscrito1, $idioma2,$pHablado2,$pEscrito2, $idioma3, $pHablado3,$pEscrito3, $idioma4,$pHablado4,$pEscrito4, $viajar, $frecueViajar,
                        $comentario,$descActividades,$estatus,$usuario)
 {
     include_once("../libs/mail.php");
@@ -140,8 +140,9 @@ function altaSolicitud($folio, $idSubproyecto,$liderProyecto, $tipoVacante, $ini
   
     mysql_query("SET NAMES 'utf8'");
     $query="INSERT INTO tblsolicitud values($folio, $idSubproyecto,'$liderProyecto', $tipoVacante, $inicioDSolici, $finDSolici, $idPerfil, $numVacantes, $diasTrabajo,
-                       $horaTrabajo,$fechaRequi, $lugarTrabajo, $salarioMin, $salarioMax, $otrasPercep,$idioma1, $pHablado1, $pEscrito1, $idioma2,$pHablado2,$pEscrito2, $idioma3, $pHablado3,$pEscrito3, $idioma4,$pHablado4,$pEscrito4, $viajar, $frecueViajar,
+                       $horaTrabajo,'$fechaSolicitud','$fechaRequerida', $lugarTrabajo, $salarioMin, $salarioMax, $otrasPercep,$idioma1, $pHablado1, $pEscrito1, $idioma2,$pHablado2,$pEscrito2, $idioma3, $pHablado3,$pEscrito3, $idioma4,$pHablado4,$pEscrito4, $viajar, $frecueViajar,
                        $comentario,'$descActividades',$estatus,$usuario,now(),null)";
+    //echo $query;
     $result=mysql_query($query)or die(mysql_error());
     if($result){
         

@@ -158,7 +158,7 @@ if($_SESSION['rol']==1||$_SESSION['rol']==2){
                                 <table>
                                     <tr>
                                         <td>
-                                            Fecha de Requisición:
+                                            Fecha en que se requiere:
                                         </td>
                                         <td>
                                             <?php
@@ -179,7 +179,8 @@ if($_SESSION['rol']==1||$_SESSION['rol']==2){
                                                 $fechaValida = date("d-m-Y");
                                             }
                                             ?>
-                                            <input type="text" id="fechaRequi" readonly="readonly" value="<?php echo $fechaValida; ?>"/>
+                                            <input type="hidden" id="fechaSolicitud" readonly="readonly" value="<?php echo $fechaValida; ?>"/>
+                                            <input type="fecha" id="fechaRequiere"/>
                                         </td>
                                     </tr>
                                     <tr>

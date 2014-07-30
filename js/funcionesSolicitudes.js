@@ -11,6 +11,7 @@ $(document).tooltip().ready(function(){
                             onClose: function( selectedDate ) {
                             $( "#inicioD" ).datepicker( "option", "maxDate", selectedDate );
       }});  
+    $("#fechaRequiere").datepicker({dateFormat:'dd-mm-yy'});
     $('#acordeon').accordion({
          heightStyle: "content"
         });
@@ -346,6 +347,8 @@ var IDPERFIL=0;
                             var numVacantes=$("#nVacante").val();
                             var diasTrabajo=$("#diasTrabajo").val();
                             var horaTrabajo=$("#horario").val();
+                            var fechaSolicitud=$("#fechaSolicitud").val();
+                            var fechaRequisicion=$("#fechaRequiere").val();
                             var lugarTrabajo=$("#lugarTrabajo").val();
                             var salMin=$("#salarioMin").val();
                             var salMax=$("#salarioMax").val();
@@ -396,6 +399,11 @@ var IDPERFIL=0;
                                 enviar=false;
                             }else if(diasTrabajo===''){
                                 $("#res").addClass('ui-state-error ui-corner-all').html(iconoError+'<strong>Error:</strong>Elija los días laborales en Descripción del Puesto');
+                                //$("#catperf").focus();
+                               // $("#descPuesto").show();
+                                enviar=false;
+                            }else if(fechaRequisicion==''){
+                                $("#res").addClass('ui-state-error ui-corner-all').html(iconoError+'<strong>Error:</strong>Elija la fecha requerida');
                                 //$("#catperf").focus();
                                // $("#descPuesto").show();
                                 enviar=false;
@@ -597,6 +605,8 @@ var IDPERFIL=0;
                                  nVacantes:numVacantes,
                                  dTrabajo:diasTrabajo,
                                  hTrabajo:horaTrabajo,
+                                 fecSolicitud:fechaSolicitud,
+                                 fecReq:fechaRequisicion,
                                  lTrabajo:lugarTrabajo,
                                  sMin:salMin,
                                  sMax:salMax,
@@ -621,7 +631,7 @@ var IDPERFIL=0;
                                  };
                             if (enviar===true)
                             {
-                                console.log(data);
+                                
                                 $("#res").text("Porcesando Solicitud...");
                                 //$('#enviar').attr("disabled", true);
                                 //$('#restablecer').attr("disabled", true);
@@ -635,6 +645,7 @@ var IDPERFIL=0;
 			         data:data
 				 ,
                                   success:function(data){
+                                      //$("#res").html(data);
                                             if(data=='ok'){
                                                   $("#panelResp").html('<div style="font-size: 45px; text-align: center; padding-top:200px;"><img style="width:100px;" src="../img/paloma.png" /> ¡Solicitud registrada!</div>');
                                                   $("#panelRequisicion").toggle('slide',function(){$("#panelResp").toggle('slide');});
@@ -658,7 +669,7 @@ var IDPERFIL=0;
                                                       $("#panelResp").toggle('slide');
                                                       $("#panelRequisicion").toggle('slide');
                                                   },4000);
-                                                  setTimeout(function(){location.reload();},3000);
+//                                                  setTimeout(function(){location.reload();},3000);
                                               }
                                   },
                                   error:function(){

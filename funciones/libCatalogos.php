@@ -1,6 +1,6 @@
 <?php
     include '../libs/libs.php';
-    include '../funciones/ChromePhp.php';
+    include_once '../funciones/ChromePhp.php';
     
     class Catalogos{
         
@@ -124,6 +124,41 @@
                 $datos[]=$fila;
             }
             return $datos;
+        }
+        
+        function agrega_perfil($datos,$idUsuario){
+             extract($datos);
+            $funciones=new funciones();
+            $funciones->conectar();
+            $query="insert into tblperfil values
+                        (null,'".$descPerfil."','".$compPerfil."','".$funcPerfil."','".$perfPerfil."','".$habPerfil."','".$conocPerfil."',".$idUsuario.",now(),null)";
+            ChromePhp::log($query);
+            if(mysql_query($query)){
+                return 'ok';
+            }else{
+                return mysql_error();
+            }
+        }
+        
+        function actualiza_perfil($datos){
+            extract($datos);
+            $funciones=new funciones();
+            $funciones->conectar();
+            $query = "update tblperfil set
+                        descPerfil = '".$descPerfil."',
+                        compPerfil = '".$compPerfil."',
+                        perfPerfil = '".$perfPerfil."',
+                        conocPerfil = '".$conocPerfil."',
+                        habPerfil = '".$habPerfil."',
+                        funcPerfil = '".$funcPerfil."'
+                        WHERE idPerfil=".$idPerfil;
+            
+            ChromePhp::log($query);
+            if(mysql_query($query)){
+                return 'ok';
+            }else{
+                return mysql_error();
+            }
         }
         //-------------------------
         

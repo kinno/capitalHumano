@@ -13,7 +13,7 @@ if($_SESSION['rol']==1||$_SESSION['rol']==2){
 <?php
 echo '<div id="listado">';
 if($permisosEspeciales==1)
-    echo '<span class="nvoUsuario" onclick="panelNuevoUsuario();">Nuevo Perfil</span>';
+    echo '<span class="nvoPerfil" onclick="panelNuevoPerfil();">Nuevo Perfil</span>';
 ?>
 <table cellpadding="0" cellspacing="0" border="0" class="ui-widget solicitudes" id="listaPerfil">
 <thead>
@@ -50,10 +50,22 @@ if($permisosEspeciales==1)
                echo '</tr>';
     }
     ?>
+  <script>
+      $(".modPerfil").button({icons: {
+                primary: "ui-icon-wrench"
+              }});
+             $(".elimPerfil").button({icons: {
+                primary: "ui-icon-cancel"
+              }});
+             $(".activaPerfil").button({icons: {
+                primary: "ui-icon-check"
+              }});
+          
+  </script>
 </tbody>
 </table>  
 </div>    
-<div id="nuevoUsuario" style="display:none" class="ui-widget">
+<div id="nuevoPerfil" style="display:none" class="ui-widget">
 
 </div>
 <div id="modificaPerfil" title="Modificar Perfil">

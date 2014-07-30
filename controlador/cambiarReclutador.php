@@ -5,13 +5,18 @@ $folSolici = $_POST['folSolici'];
 $reclutadorAnterior = $_POST['reclutadorAnterior'];
 $reclutadorNuevo = $_POST['reclutadorNuevo'];
 $dato = $vacantes->cambiar_reclutador($folSolici, $reclutadorAnterior, $reclutadorNuevo);
-if($dato=='ok')
+if($dato=='ok'){
         $ban=true;
-    else
+}else{
         $ban=false;
+}
 if($ban==true){
-    $vacantes->enviar_correo($reclutadorNuevo,$folSolici);
-    echo 'ok';
+    $respCorreo=$vacantes->enviar_correo($reclutadorNuevo,$folSolici);
+    if($respCorreo){
+        echo $respCorreo;
+    }else{
+        echo 'No se Envio el correo';
+    }
 }
 
 ?>

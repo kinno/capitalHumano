@@ -1,6 +1,6 @@
 <?php
 include_once '../libs/libs.php';
-include '../funciones/ChromePhp.php';
+include_once '../funciones/ChromePhp.php';
 class Reportes{
     function Reportes(){
     }

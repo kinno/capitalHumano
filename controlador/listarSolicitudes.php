@@ -50,6 +50,7 @@ $queryB=mysql_query($sqlB) or die(mysql_error()); //SE EJECUTA LA CONSULTA
                         <th>Folio</th>
 			<th>Proyecto</th>
                         <th>Perfil que se Solicita</th>
+			<th>Fecha de solicitud</th>
 			<th>Fecha en que se requiere</th>
                         <?php echo $cabecera2 ?>
                         <th><?php echo $cabecera ?></th>
@@ -88,6 +89,7 @@ $queryB=mysql_query($sqlB) or die(mysql_error()); //SE EJECUTA LA CONSULTA
                                $resul2=mysql_fetch_array($query2);
                                echo '<td><center>'.$resul2['descPerfil'].'</center></td>';
 			       echo '<td align=center>'.date('d-m-Y',  strtotime($reg['iniSolici'])).'</td>';
+			       echo '<td align=center>'.date('d-m-Y',  strtotime($reg['fecReq'])).'</td>';
 			       if($SESION==4||$SESION==5||$SESION==2) //recursos humanos
 			       {
 				 $rh=2;

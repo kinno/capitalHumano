@@ -82,16 +82,18 @@ class Vacantes{
         return $datos;
     }
     
-    function asignar_reclutadores($folSolici,$idReclutador,$statVacante){
+    function asignar_reclutadores($folSolici,$idReclutador,$compPerfil,$statVacante){
          
         $funciones = new funciones();
         $funciones->conectar();
-        $query = "insert into tblvacante (folSolici,idReclutador,statVacante,fecalta)
-                    values ('$folSolici',$idReclutador,$statVacante,now())";
+        $query = "insert into tblvacante (folSolici,idReclutador,compPerfil,statVacante,fecalta)
+                    values ('$folSolici',$idReclutador,$compPerfil,$statVacante,now())";
         ChromePhp::log($query);
         if(mysql_query($query)){
             $resultado='ok';
+            ChromePhp::log($resultado);
             return $resultado;
+            
         }
         else{
             echo $query;
@@ -99,16 +101,17 @@ class Vacantes{
         }
     }
     
-    function enviar_correo($idReclutador,$folColici){
+    function enviar_correo($idReclutador,$folSolici){
         include_once("../libs/mail.php");
         $mail=new mail();
         $mailReclutador="SELECT mailUsuario FROM tblusuarios WHERE idUsuario=".$idReclutador;
         $result=mysql_query($mailReclutador) or die(mysql_error());
         $correo=mysql_result($result,0,'mailUsuario');
-        $mensaje="Se le ha asignado una nueva vacante, con el folio $folColici, para más detalles por favor ingrese al Sistema de Capital Humano";
+        $mensaje="Se le ha asignado una nueva vacante, con el folio $folSolici, para más detalles por favor ingrese al Sistema de Capital Humano";
         $subject="Nueva asignación de vacante";
         $correorh='';
-        $mail->enviarMail($correo, $mensaje, $subject, $correorh);
+        $resp=$mail->enviarMail($correo, $mensaje, $subject, $correorh);
+        return $resp;
     }
     
     function obtener_vacantes($idUsuario){
@@ -266,7 +269,7 @@ class Vacantes{
                 
                  //OBTENEMOS EL ID DE LA RELACION VACANTE CANDIDATO PARA ESA VACANTE
                 $queryB="select idVacCand from relvaccand where folSolici=".$folio." and idUsuario=".$reclutadorAnterior;
-                ChromePhp::log($queryB);
+                //ChromePhp::log($queryB);
                 $idVacCand = '';
                 if($result = mysql_query($queryB)){
                     
@@ -277,13 +280,13 @@ class Vacantes{
                    
                     //ACTUALIZAMOS RECLUTADOR EN TABLA RELACION VACANTE CANDIDATO
                     $queryC="update relvaccand set idUsuario = ".$reclutadorNuevo." where idVacCand in (".$idVacCand.")" ;
-                     ChromePhp::log($queryC);
+                     //ChromePhp::log($queryC);
                     if(mysql_query($queryC)){
                         //CAMBIAMOS LAS ENTREVISTAS DE RECLUTADOR A RECLUTADOR
                          $queryD="update tblentrevista set idUsuario = ".$reclutadorNuevo." where idVacCand in (".$idVacCand.")";
-                          ChromePhp::log($queryD);
+                          //ChromePhp::log($queryD);
                          if(mysql_query($queryD)){
-                             echo 'ok';
+                             return 'ok';
                          }else{
                              return mysql_error();
                          }

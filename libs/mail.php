@@ -2,7 +2,7 @@
 // include"PHPMailer/class.phpmailer.php";
 // include"PHPMailer/class.smtp.php";
 require 'PHPMailer/PHPMailerAutoload.php';
- include"../funciones/ChromePhp.php";
+ include_once "../funciones/ChromePhp.php";
 
  class mail{
      function mail(){
@@ -10,7 +10,7 @@ require 'PHPMailer/PHPMailerAutoload.php';
      }
      
      function enviarMail($correo,$mensaje,$subject,$correorh){
-                
+                ChromePhp::log('entra');
                 $mensaje = $mensaje;
                 $asunto = $subject;
 //                
@@ -105,28 +105,33 @@ require 'PHPMailer/PHPMailerAutoload.php';
                             ';
                     //Create a new PHPMailer instance
                 
-                
+                    
                   $mail = new PHPMailer();
 		  $mail->IsSMTP();
 		  $mail->SMTPAuth = true;
-		  //$mail->SMTPSecure = "ssl";
+		  //$mail->SMTPSecure = "tls";
 		  $mail->Host = "imap.upgenia.com";
 		  $mail->Port = 25;
 		  $mail->Username = "no.reply";
 		  $mail->Password = "Upg3n14mail";
 		  $mail->SMTPDebug = 0; //a�adido para mostrar informaci�n detallada de error en caso de producirse
-                  $mail->From = "no.reply@upgenia.com";
-		  $mail->FromName = "Avisos Sistema Capital Humano"; //nombre de quien lo mando
+                  $mail->From = "capitalHumano@upgenia.com";
+		  $mail->FromName = "Sistema Capital Humano"; //nombre de quien lo mando
 		  $mail->Subject = utf8_decode($asunto);  //subjet de mail
 		  $mail->MsgHTML(utf8_decode($cuerpo));//body del mail
 		  $mail->AddAddress($correo, "Destinatario"); //a quien va dirijida
+                  if($correorh!=''){
 		  $mail->AddAddress($correorh, "Destinatario"); //a quien va dirijida
+                  }
 		  $mail->IsHTML(true);
-		 	 
+		  
 		  if(!$mail->Send()) {
+                      ChromePhp::log("no envia");  
 		   return false;
-		  }
+		  }else{
+                      ChromePhp::log("si envia");  
                   return true;
+                  }
                       
                     
      }

@@ -306,7 +306,7 @@ $.ajax({
                         <button id="inicio" style="margin-right: -.3em;">Inicio</button>
                         <button id="solicitudes" style="margin-right: -.3em;">Solicitudes</button>
                         <button id="vacantes" style="margin-right: -.3em;">Vacantes</button>
-                        <button id="candidatos" style="margin-right: -.3em;">Candidatos</button>
+                        <button id="candidatos" onClick="menu('cand');" style="margin-right: -.3em;">Candidatos</button>
                         <button id="catalogos" onClick="menu('catalogos');" style="margin-right: -.3em;">Catálogos</button>
                         <button id="agenda" onClick="menu('agenda');" style="margin-right: -.3em;">Agenda</button>
                         <button id="reportes" onClick="menu('reportes');" style="margin-right: -.3em;" onclick="cambiaHtml('reportesView.php');">Reportes</button>
@@ -324,7 +324,7 @@ $.ajax({
 
                         <li onClick="menu('rCan')"><a href="#"><span class="ui-icon ui-icon-wrench"></span>Registrar Candidato</a></li>
                     </ul>
-                    <ul style="width: 150px;text-align: left;position: absolute;">
+<!--                    <ul style="width: 150px;text-align: left;position: absolute;">
 
                         <li onClick="menu('cand')"><a href="#"><span class="ui-icon ui-icon-plus"></span>Candidatos</a></li>
 
@@ -340,7 +340,7 @@ $.ajax({
                         <li onClick="menu('esc')"><a href="#"><span class="ui-icon ui-icon-plus"></span>Escolaridad</a></li>
                         <li onClick="menu('pry')"><a href="#"><span class="ui-icon ui-icon-wrench"></span>Proyectos</a></li>
 
-                    </ul>
+                    </ul>-->
                 </div>
             </td>
         </tr>

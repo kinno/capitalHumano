@@ -16,11 +16,12 @@ $idPerfil=$_POST["perfil"];
 $numVacantes=$_POST["nVacantes"];
 $diasTrabajo=$_POST["dTrabajo"];
 $horaTrabajo=$_POST["hTrabajo"];
+$fechaSolicitud=date('Y-m-d',  strtotime($_POST['fecSolicitud']));
+$fechaRequerida=date('Y-m-d',  strtotime($_POST['fecReq']));
 $lugarTrabajo=$_POST["lTrabajo"];
 $salarioMin=$_POST["sMin"];
 $salarioMax=$_POST["sMax"];
 $otrasPercep=$_POST["oPercep"];
-$fechaRequi=date("Y-m-d");
 $idioma1=$_POST["idio1"];
 $pHablado1=$_POST["pHablado1"];
 $pEscrito1=$_POST["pEscrito1"];
@@ -57,7 +58,7 @@ $finDSolici="'$finDSolici'";
 if($acciones=='A') //si la acci�n es iguala a A
 {
    altaSolicitud($folio, $idSubproyecto,$liderProyecto, $tipoVacante, $inicioDSolici, $finDSolici, $idPerfil, $numVacantes, $diasTrabajo,
-                       $horaTrabajo,$fechaRequi, $lugarTrabajo, $salarioMin, $salarioMax, $otrasPercep,$idioma1, $pHablado1, $pEscrito1,
+                       $horaTrabajo,$fechaSolicitud,$fechaRequerida, $lugarTrabajo, $salarioMin, $salarioMax, $otrasPercep,$idioma1, $pHablado1, $pEscrito1,
                         $idioma2,$pHablado2,$pEscrito2, $idioma3, $pHablado3,$pEscrito3, $idioma4,$pHablado4,$pEscrito4, $viajar, $frecueViajar,
                        $comentario,$descActividades,$estatus,$usuario);//le enviamos los datos a una funci�n que de de alta la solicitud en la BD
    

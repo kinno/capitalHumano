@@ -84,22 +84,22 @@ function despliegaPerfiles(){
              $(".nvoPerfil").button({icons: {
                 primary: "ui-icon-plus"
               }});
-             $(".modPerfil").button({icons: {
-                primary: "ui-icon-wrench"
-              }});
-             $(".elimPerfil").button({icons: {
-                primary: "ui-icon-cancel"
-              }});
-             $(".activaPerfil").button({icons: {
-                primary: "ui-icon-check"
-              }});
+//             $(".modPerfil").button({icons: {
+//                primary: "ui-icon-wrench"
+//              }});
+//             $(".elimPerfil").button({icons: {
+//                primary: "ui-icon-cancel"
+//              }});
+//             $(".activaPerfil").button({icons: {
+//                primary: "ui-icon-check"
+//              }});
             },100);
            
             $("#modificaPerfil").dialog({
                                             autoOpen: false,
                                             modal:true,
                                             width:800,
-                                            height:350,
+                                            height:450,
                                             resizable:false,
                                              show: {
                                                effect: "clip",
@@ -315,17 +315,40 @@ function panelModPerfil(id){
   $("#modificaPerfil").dialog("open");             
 }
 
-//function modificaUsuario(){
-//  var url="../controlador/actualizaUsuarioCatalogo.php";
-//  $.post(url,$("#formUsr").serialize(),function(responseText){
-//   if(responseText=='ok'){
-//       $("#modificaUsuario").dialog('close');
-//       despliegaUsuarios();
-//       despliegaUsuarios();
-//   }
-//  });
-//}
-//
+function modificaPerfil(){
+  var url="../controlador/actualizaPerfilCatalogo.php";
+  $.post(url,$("#formPerfil").serialize(),function(responseText){
+   if(responseText=='ok'){
+       $("#modificaPerfil").dialog('close');
+            despliegaPerfiles();
+          //despliegaPerfiles();
+   }
+  });
+}
+function panelNuevoPerfil(){
+  var url="../controlador/agregaPerfilCatalogo.php";
+  $.post(url,{},function(responseText){
+    $("#nuevoPerfil").html(responseText);
+    $("#guardarDatos").button();
+  });
+  $("#listado").toggle('slide',function(){
+      $("#nuevoPerfil").toggle('slide');
+  });
+ }
+ 
+ function registrarPerfil(){
+   
+  var url="../controlador/registraPerfilCatalogo.php";
+  $.post(url,$("#formPerfil").serialize(),function(responseText){
+   if(responseText=='ok'){
+        $("#nuevoPerfil").toggle('slide',function(){
+                despliegaPerfiles();
+                //despliegaPerfiles();
+        });
+   }
+   
+  });
+}
 //function eliminarUsuario(id){
 //  var url="../controlador/eliminaUsuarioCatalogo.php";
 //  $.post(url,{id:id},function(responseText){

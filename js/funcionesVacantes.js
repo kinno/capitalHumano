@@ -127,27 +127,27 @@ function abreDialog(aux){
            ).css("width",'20px');
    $("button").button();            
    $("#dialog").dialog("open");
-   $("#asigna").attr("onclick","asignaRecluta("+aux+")");
+   $("#asigna").attr("onclick","asignaRecluta("+aux+","+$("#comp"+aux).val()+")");
   
 }
 
-function asignaRecluta(fila){
+function asignaRecluta(fila,comp){
     if(confirm("¿Deseas asignar estas vacantes al reclutador?")){
         
         var folSolici = $("#folioVacante").html();
         var idReclutador = $("#reclutador").val();
         var puestos = $("#spinner").val();
-        var compPerfil = $("#complejidad").val();
+        var compPerfil = comp;
         var statVacante = 2;
-        
+        //alert(compPerfil);
         var url="../controlador/asignarReclutador.php";
         $.post(url,{folSolici:folSolici,idReclutador:idReclutador,puestos:puestos,compPerfil:compPerfil,statVacante:statVacante},
             function(responseText){
                 if(responseText==='ok'){
                     var actuales=parseInt($("#numFaltantes"+fila).html())+parseInt(puestos);
                     $("#numFaltantes"+fila).html(actuales);
-                    $("#content").append("Datos guardados");
-                    //$("#dialog").dialog("close");
+                    //$("#content").append("Datos guardados!");
+                    $("#dialog").dialog("close");
                     window.setTimeout(function()
 			{
 			location.reload()
